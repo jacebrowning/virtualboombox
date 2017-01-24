@@ -1,0 +1,16 @@
+{
+    "_meta": {
+        "sources": [
+            {
+                "url": "https://pypi.python.org/simple",
+                "verify_ssl": true
+            }
+        ],
+        "requires": {},
+        "Pipfile-sha256": "91a6da8c29d18c886d4696ae3751a25ceffae89ca3887ab2afccd9ac7ef9ba9b"
+    },
+    "default": {
+        "django": "=1.10.0"
+    },
+    "develop": {}
+}
