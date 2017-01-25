@@ -1,1 +1,1 @@
-web: gunicorn virtualboombox/wsgi.py --log-file -
+web: gunicorn virtualboombox/wsgi:application --log-file -
