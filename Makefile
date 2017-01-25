@@ -5,11 +5,13 @@ all: install
 
 .PHONY: setup
 setup:
-	python -m pip install verchew==1.1b.1
-	python -m pip install pipenv==3.1.9
+	python -m pip install --upgrade verchew pipenv
 	python -m verchew
 
 # PROJECT DEPENDENCIES #########################################################
+
+ENV := .venv
+BIN := $(ENV)/bin
 
 .PHONY: install
 install:
@@ -17,7 +19,7 @@ install:
 
 .PHONY: clean
 clean:
-	rm -rf .venv
+	rm -rf $(ENV)
 
 # RUNTIME DEPENDENCIES #########################################################
 
@@ -33,6 +35,8 @@ test: install
 
 # DEVELOPMENT TARGETS ##########################################################
 
+ACIVATE := . $(BIN)/activate
+
 .PHONY: run
 run: install
-	heroku local
+	$(ACIVATE) && heroku local
