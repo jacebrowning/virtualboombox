@@ -14,8 +14,10 @@ ENV := .venv
 BIN := $(ENV)/bin
 
 .PHONY: install
-install:
+install: $(ENV)
+$(ENV): Pipfile Pipfile.lock
 	pipenv install --dev
+	@ touch $@
 
 .PHONY: clean
 clean:
