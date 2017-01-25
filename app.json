@@ -12,7 +12,9 @@
     }
   },
   "buildpacks": [
-    "https://github.com/kennethreitz/heroku-buildpack-pipenv"
+    {
+      "url": "https://github.com/kennethreitz/heroku-buildpack-pipenv"
+    }
   ],
   "addons": [
     "heroku-postgresql"
