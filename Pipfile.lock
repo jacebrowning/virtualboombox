@@ -10,7 +10,6 @@
         "Pipfile-sha256": "606fa2dac734d7717843f869891ad654cc99d339616003d3a531b2913cde0479"
     },
     "default": {
-        "django": "*",
         "gunicorn": {
             "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
             "version": "==19.6.0"
