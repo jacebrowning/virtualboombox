@@ -5,3 +5,6 @@ verify_ssl = true
 [packages]
 django = "=1.10.0"
 gunicorn = "*"
+
+[dev-packages]
+pytest = "*"
