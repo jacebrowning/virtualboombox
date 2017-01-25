@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test-setup": "make install",
+    "test-setup": "pip install pipenv && make install",
     "test": "make test"
   }
 }
