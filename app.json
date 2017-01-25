@@ -1,0 +1,21 @@
+{
+  "name": "VirtualBoomBox",
+  "scripts": {
+    "postdeploy": "make data"
+  },
+  "env": {
+    "SECRET_KEY": {
+      "generator": "secret"
+    },
+    "WEB_CONCURRENCY": {
+      "value": "4"
+    }
+  },
+  "buildpacks": [
+    "https://github.com/kennethreitz/heroku-buildpack-pipenv"
+  ],
+  "addons": [
+    "postgres",
+    "papertrail"
+  ]
+}

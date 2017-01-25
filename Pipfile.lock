@@ -7,10 +7,14 @@
             }
         ],
         "requires": {},
-        "Pipfile-sha256": "91a6da8c29d18c886d4696ae3751a25ceffae89ca3887ab2afccd9ac7ef9ba9b"
+        "Pipfile-sha256": "f479c0cca9486082c69112b76c2be4fdce33e00834d0ec84c9c861658a828494"
     },
     "default": {
-        "django": "=1.10.0"
+        "django": "=1.10.0",
+        "gunicorn": {
+            "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
+            "version": "==19.6.0"
+        }
     },
     "develop": {}
 }
