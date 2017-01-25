@@ -6,6 +6,7 @@ all: install
 .PHONY: setup
 setup:
 	python -m pip install --upgrade verchew pipenv
+	@ touch Pipfile # force reinstall with the newer version of pipenv
 	python -m verchew
 
 # PROJECT DEPENDENCIES #########################################################
