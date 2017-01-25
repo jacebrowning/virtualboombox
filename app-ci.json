@@ -2,5 +2,18 @@
   "scripts": {
     "test-setup": "pip install pipenv && make install",
     "test": "make test"
-  }
+  },
+  "env": {
+    "SECRET_KEY": {
+      "value": "test"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "https://github.com/kennethreitz/heroku-buildpack-pipenv"
+    }
+  ],
+  "addons": [
+    "heroku-postgresql"
+  ]
 }
