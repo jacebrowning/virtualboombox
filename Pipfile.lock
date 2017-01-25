@@ -7,16 +7,16 @@
             }
         ],
         "requires": {},
-        "Pipfile-sha256": "606fa2dac734d7717843f869891ad654cc99d339616003d3a531b2913cde0479"
+        "Pipfile-sha256": "cb1236bdac3d766eebf151955a2818b8b6921c9a3c00da4efc0e50453729593d"
     },
     "default": {
-        "gunicorn": {
-            "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
-            "version": "==19.6.0"
-        },
         "Django": {
             "hash": "sha256:4541a60834f28f308ee7b6e96400feca905fb0de473eb9dad6847e98a36d86d4",
             "version": "==1.10.5"
+        },
+        "gunicorn": {
+            "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
+            "version": "==19.6.0"
         }
     },
     "develop": {
