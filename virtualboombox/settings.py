@@ -25,7 +25,7 @@ SECRET_KEY = 't+gmt-29_e6(n4)$j_1120@app=1_!+%-po5i+@^1c##-va*9r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'virtualboombox.com']
 
 
 # Application definition
