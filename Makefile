@@ -3,7 +3,7 @@ all: install
 
 .PHONY: install
 install:
-	pipenv install
+	pipenv install --dev
 
 .PHONY: data
 data:
