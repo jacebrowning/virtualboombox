@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test-setup": "make setup install",
+    "test-setup": "make install",
     "test": "make test"
   },
   "env": {
