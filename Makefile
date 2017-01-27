@@ -33,12 +33,19 @@ clean:
 MANAGE := $(PYTHON) manage.py
 
 .PHONY: data
-data:
+data: db db-migrate db-superuser
+
+.PHONY: db
+db:
 	- createdb virtualboombox_dev
 
-.PHONY: migrate
-migrate: install
+.PHONY: db-migrate
+db-migrate: install
 	$(MANAGE) migrate
+
+.PHONY: db-superuser
+db-superuser: install
+	- echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', 'password')" | $(MANAGE) shell
 
 # VALIDATION TARGETS ###########################################################
 
@@ -53,11 +60,11 @@ test: install
 ACIVATE := . $(BIN)/activate
 
 .PHONY: run
-run: install data migrate
+run: install data
 	$(MANAGE) runserver
 
 .PHONY: run-prod
-run-prod: .env install data
+run-prod: .env install db
 	$(ACIVATE) && bin/post_compile
 	$(ACIVATE) && heroku local
 
