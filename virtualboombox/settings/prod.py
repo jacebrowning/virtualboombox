@@ -6,7 +6,12 @@ from .base import *
 
 
 SECRET_KEY = os.environ['SECRET_KEY']
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'virtualboombox.com']
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '.herokuapp.com',
+    'virtualboombox.com',
+]
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config()
