@@ -7,7 +7,9 @@
             }
         ],
         "requires": {},
-        "Pipfile-sha256": "04802e9ed5c521e48a8692a0c023bbcd6eac853f6924f4d8f0ca9144f2082a97"
+        "hash": {
+            "sha256": "01fc793314d9a04e4704440fad7e7c8be3a15444c7bbc5ca7705176855f123d6"
+        }
     },
     "default": {
         "gunicorn": {
@@ -27,8 +29,8 @@
             "version": "==2.6.2"
         },
         "whitenoise": {
-            "hash": "sha256:e76bf2d44158ed2e85c512cec1595b34680ea76337f77ea635da3668b852d7fd",
-            "version": "==3.2.3"
+            "hash": "sha256:1d62a003a0ab747de96da45c831cbb512dcb7f69c1ef0bd20b1cd4ae45d8a0c4",
+            "version": "==3.3.0"
         }
     },
     "develop": {

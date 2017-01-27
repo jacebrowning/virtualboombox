@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test-setup": "make install",
+    "test-setup": "make doctor install",
     "test": "make test"
   },
   "env": {
