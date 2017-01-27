@@ -34,8 +34,7 @@ clean:
 MANAGE := $(PYTHON) manage.py
 
 .PHONY: data
-data:
-	@ echo "TODO: generate sample data"
+data: db-superuser
 
 .PHONY: db
 db:
