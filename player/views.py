@@ -29,15 +29,15 @@ def login(request):
         api_key=settings.LASTFM_API_KEY,
         api_secret=settings.LASTFM_API_SECRET,
     )
-    request = pylast._Request(network, 'auth.getSession', {'token': token})
-    request.sign_it()
+    call = pylast._Request(network, 'auth.getSession', {'token': token})
+    call.sign_it()
     try:
-        doc = request.execute()
+        xml = call.execute()
     except pylast.WSError as exc:
         log.error(exc)
         # TODO: show error message
     else:
-        username = doc.getElementsByTagName('name')[0].firstChild.data
+        username = xml.getElementsByTagName('name')[0].firstChild.data
         log.info("Last.fm username: %s", username)
         request.session['username'] = username
 
