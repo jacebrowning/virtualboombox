@@ -3,6 +3,15 @@
     "postdeploy": "make data"
   },
   "env": {
+    "DJANGO_SETTINGS_MODULE": {
+      "required": true
+    },
+    "LASTFM_API_KEY": {
+      "required": true
+    },
+    "LASTFM_API_SECRET": {
+      "required": true
+    },
     "SECRET_KEY": {
       "generator": "secret"
     },
