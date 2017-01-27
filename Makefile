@@ -18,16 +18,19 @@ ENV := .venv
 BIN := $(ENV)/bin
 PYTHON := $(BIN)/python
 ACIVATE := . $(BIN)/activate &&
+TMP := tmp
 
 .PHONY: install
 install: $(ENV)
 $(ENV): Pipfile Pipfile.lock
 	pipenv install --dev
+	@ mkdir -p tmp
 	@ touch $@
 
 .PHONY: clean
 clean:
 	rm -rf $(ENV)
+	rm -rf $(TMP)
 
 # RUNTIME DEPENDENCIES #########################################################
 
@@ -46,7 +49,8 @@ db-migrate: install
 
 .PHONY: db-superuser
 db-superuser: install
-	- echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', 'password')" | $(MANAGE) shell
+	@ echo "Creating the default superuser..."
+	@- echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', 'password')" | $(MANAGE) shell >> tmp/manage.log 2>&1
 
 # VALIDATION TARGETS ###########################################################
 
