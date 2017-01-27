@@ -10,8 +10,7 @@ setup:
 
 .PHONY: doctor
 doctor:
-	@ python -m pip install verchew > /dev/null
-	python -m verchew
+	bin/verchew
 
 # PROJECT DEPENDENCIES #########################################################
 
