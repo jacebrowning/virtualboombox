@@ -34,7 +34,7 @@ clean:
 MANAGE := $(PYTHON) manage.py
 
 .PHONY: data
-data: db db-migrate db-superuser
+data: db-superuser
 
 .PHONY: db
 db:
@@ -64,7 +64,7 @@ watch: install
 # SERVER TARGETS ###############################################################
 
 .PHONY: run
-run: install data
+run: install db db-migrate db-superuser
 	$(MANAGE) runserver
 
 .PHONY: run-prod
