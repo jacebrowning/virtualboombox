@@ -3,11 +3,17 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 
 [packages]
-gunicorn = "*"
-dj_database_url = "*"
 Django = "*"
+dj_database_url = "*"
 psycopg2 = "*"
 whitenoise = "*"
+gunicorn = "*"
 
 [dev-packages]
 pytest = "*"
+pytest-django = "*"
+pytest-describe = "*"
+pytest_expecter = "*"
+pytest-watch = "*"
+pytest_cov = "*"
+"coverage.space" = "*"

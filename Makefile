@@ -17,6 +17,7 @@ doctor:
 ENV := .venv
 BIN := $(ENV)/bin
 PYTHON := $(BIN)/python
+ACIVATE := . $(BIN)/activate &&
 
 .PHONY: install
 install: $(ENV)
@@ -50,14 +51,17 @@ db-superuser: install
 # VALIDATION TARGETS ###########################################################
 
 PYTEST := $(BIN)/pytest
+PYTEST_WATCH := $(BIN)/ptw
 
 .PHONY: test
 test: install
 	$(PYTEST)
 
-# DEVELOPMENT TARGETS ##########################################################
+.PHONY: watch
+watch: install
+	$(ACIVATE) $(PYTEST_WATCH)
 
-ACIVATE := . $(BIN)/activate
+# SERVER TARGETS ###############################################################
 
 .PHONY: run
 run: install data
@@ -65,8 +69,8 @@ run: install data
 
 .PHONY: run-prod
 run-prod: .env install db
-	$(ACIVATE) && bin/post_compile
-	$(ACIVATE) && heroku local
+	$(ACIVATE) bin/post_compile
+	$(ACIVATE) heroku local
 
 .env:
 	echo SECRET_KEY=prod >> $@

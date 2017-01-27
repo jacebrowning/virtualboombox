@@ -7,4 +7,8 @@ __pycache__
 /.venv/
 /.env
 
+/.cache/
+/.coverage*
+/htmlcov/
+
 /static/
