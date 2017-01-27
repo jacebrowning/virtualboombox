@@ -57,8 +57,8 @@ run: install data migrate
 	$(MANAGE) runserver
 
 .PHONY: run-prod
-run-prod: .env install data migrate
-	$(MANAGE) collectstatic --no-input
+run-prod: .env install data
+	$(ACIVATE) && bin/post_compile
 	$(ACIVATE) && heroku local
 
 .env:

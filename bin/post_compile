@@ -12,3 +12,6 @@ puts-step() {
 
 puts-step "Running migrations..."
 python manage.py migrate 2>&1 | indent
+
+puts-step "Collecting static files..."
+python manage.py collectstatic --no-input 2>&1 | indent
