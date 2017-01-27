@@ -10,7 +10,7 @@ whitenoise = "*"
 gunicorn = "*"
 
 [dev-packages]
-pytest = "*"
+pytest = "==2.9.2"
 pytest-django = "*"
 pytest-describe = "*"
 pytest_expecter = "*"
