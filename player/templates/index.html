@@ -2,10 +2,28 @@
 <html>
     <head>
         <title>Virtual Boombox</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     </head>
     <body>
-        {% for song in songs %}
-            {{ song }}
-        {% endfor %}
+
+        <nav class="navbar navbar-inverse">
+            <div class="navbar-right">
+            {% if username %}
+                <p class="navbar-text">Logged in as {{ username }}</p>
+            {% else %}
+                <a href="http://www.last.fm/api/auth/?api_key={{ api_key }}" class="btn btn-default navbar-btn" role="button">Last.fm Login</a>
+            {% endif %}
+            </div>
+        </nav>
+
+        <div class="content">
+            {% for song in songs %}
+                {{ song }}
+            {% endfor %}
+        </div>
+
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     </body>
 </html>

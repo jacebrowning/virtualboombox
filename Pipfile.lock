@@ -8,7 +8,7 @@
         ],
         "requires": {},
         "hash": {
-            "sha256": "b18e01a844f3b34f869f2947fda854a97d98ed3d906f162fc04d0c2bb10e7a73"
+            "sha256": "88a584719854023cb25c65a27164c9f7d848cf8f8a6c0d1d2e27730a46d11a3e"
         }
     },
     "default": {
@@ -24,6 +24,10 @@
             "hash": "sha256:70490e12ed9c5c818ecd85d185d363335cc8a8cbf7212e3c185431c79ff8c05c",
             "version": "==2.6.2"
         },
+        "pylast": {
+            "hash": "sha256:a482a769b6a037e2e9b78433de91a287eaf6aacff60bbb2f4562c3c7ece10430",
+            "version": "==1.7.0"
+        },
         "whitenoise": {
             "hash": "sha256:1d62a003a0ab747de96da45c831cbb512dcb7f69c1ef0bd20b1cd4ae45d8a0c4",
             "version": "==3.3.0"
@@ -31,6 +35,14 @@
         "gunicorn": {
             "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
             "version": "==19.6.0"
+        },
+        "django_dotenv": {
+            "hash": "sha256:2930f6b0c0955ac150e1ca9ac01e84afa71efdbb544dea7155f026e20e401305",
+            "version": "==1.4.1"
+        },
+        "six": {
+            "hash": "sha256:0ff78c403d9bccf5a425a6d31a12aa6b47f1c21ca4dc2573a7e2f32a97335eb1",
+            "version": "==1.10.0"
         }
     },
     "develop": {

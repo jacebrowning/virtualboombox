@@ -68,14 +68,16 @@ watch: install
 # SERVER TARGETS ###############################################################
 
 .PHONY: run
-run: install db db-migrate db-superuser
+run: .env install db db-migrate db-superuser
 	$(MANAGE) runserver
 
 .PHONY: run-prod
 run-prod: .env install db
 	$(ACIVATE) bin/post_compile
-	$(ACIVATE) heroku local
+	$(ACIVATE) heroku local --port=8000
 
 .env:
 	echo SECRET_KEY=prod >> $@
 	echo DATABASE_URL=postgresql://localhost/virtualboombox_dev >> $@
+	echo LASTFM_API_KEY= >> $@
+	echo LASTFM_API_SECRET= >> $@
