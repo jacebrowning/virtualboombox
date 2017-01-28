@@ -4,15 +4,20 @@
         <title>Virtual Boombox</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
     </head>
     <body>
 
         <nav class="navbar navbar-inverse">
-            <div class="navbar-right">
+            <div class="navbar-nav navbar-right">
             {% if username %}
-                <p class="navbar-text">Logged in as {{ username }}</p>
+                <p class="navbar-text">
+                    Last.fm username: {{ username }}
+                </p>
             {% else %}
-                <a href="http://www.last.fm/api/auth/?api_key={{ api_key }}" class="btn btn-default navbar-btn" role="button">Last.fm Login</a>
+                <a href="http://www.last.fm/api/auth/?api_key={{ api_key }}" class="btn btn-login navbar-btn" role="button">
+                    Login with Last.fm
+                </a>
             {% endif %}
             </div>
         </nav>
