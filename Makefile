@@ -21,7 +21,7 @@ TMP := tmp
 
 .PHONY: install
 install: $(ENV)
-$(ENV): Pipfile Pipfile.lock
+$(ENV): Pipfile*
 	pipenv install --dev
 	@ mkdir -p tmp
 	@ touch $@
