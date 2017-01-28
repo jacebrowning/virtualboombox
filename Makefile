@@ -5,7 +5,7 @@ all: install
 
 .PHONY: setup
 setup:
-	python -m pip install --upgrade  pipenv
+	python -m pip install pipenv==3.2.10
 	@ touch Pipfile # force reinstall with the newer version of pipenv
 
 .PHONY: doctor
@@ -55,7 +55,7 @@ db-superuser: install
 
 .PHONY: test
 test: install
-	pipenv run pytest
+	pipenv run py.test
 
 .PHONY: watch
 watch: install

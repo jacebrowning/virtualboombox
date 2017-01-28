@@ -8,17 +8,17 @@
         ],
         "requires": {},
         "hash": {
-            "sha256": "88a584719854023cb25c65a27164c9f7d848cf8f8a6c0d1d2e27730a46d11a3e"
+            "sha256": "e832b3da3c68db18d360ac3a8ffeac140b5bdbc9d01adea4a7e3acd675832af5"
         }
     },
     "default": {
-        "Django": {
+        "django": {
             "hash": "sha256:4541a60834f28f308ee7b6e96400feca905fb0de473eb9dad6847e98a36d86d4",
             "version": "==1.10.5"
         },
-        "dj_database_url": {
-            "hash": "sha256:e16d94c382ea0564c48038fa7fe8d9c890ef1ab1a8ec4cb48e732c124b9482fd",
-            "version": "==0.4.2"
+        "django-dotenv": {
+            "hash": "sha256:2930f6b0c0955ac150e1ca9ac01e84afa71efdbb544dea7155f026e20e401305",
+            "version": "==1.4.1"
         },
         "psycopg2": {
             "hash": "sha256:70490e12ed9c5c818ecd85d185d363335cc8a8cbf7212e3c185431c79ff8c05c",
@@ -36,9 +36,9 @@
             "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
             "version": "==19.6.0"
         },
-        "django_dotenv": {
-            "hash": "sha256:2930f6b0c0955ac150e1ca9ac01e84afa71efdbb544dea7155f026e20e401305",
-            "version": "==1.4.1"
+        "dj-database-url": {
+            "hash": "sha256:e16d94c382ea0564c48038fa7fe8d9c890ef1ab1a8ec4cb48e732c124b9482fd",
+            "version": "==0.4.2"
         },
         "six": {
             "hash": "sha256:0ff78c403d9bccf5a425a6d31a12aa6b47f1c21ca4dc2573a7e2f32a97335eb1",
@@ -50,25 +50,29 @@
             "hash": "sha256:da0ab50c7eec0683bc24f1c1137db1f4111752054ecdad63125e7ec71316b813",
             "version": "==3.0.6"
         },
+        "pytest-django": {
+            "hash": "sha256:00995c2999b884a38ae9cd30a8c00ed32b3d38c1041250ea84caf18085589662",
+            "version": "==3.1.2"
+        },
         "pytest-describe": {
             "hash": "sha256:c592f1294e4455cebe88f162a1475e347c0668ce256c4d1a4ccd21d6c5f51827",
             "version": "==0.11.0"
-        },
-        "pytest_expecter": {
-            "hash": "sha256:9c6ed4d26df0e80a31b2c6ad86a959593f0c5b2459ea366496c45d9bbd9d358a",
-            "version": "==0.2.2.post3"
         },
         "pytest-watch": {
             "hash": "sha256:29941f6ff74e6d85cc0796434a5cbc27ebe51e91ed24fd0757fad5cc6fd3d491",
             "version": "==4.1.0"
         },
-        "pytest_cov": {
-            "hash": "sha256:10e37e876f49ddec80d6c83a54b657157f1387ebc0f7755285f8c156130014a1",
-            "version": "==2.4.0"
-        },
         "coverage.space": {
             "hash": "sha256:1d297155549ecbc1c8ec853c13e478171be514732aba77663f37592bba291c33",
             "version": "==0.6.3"
+        },
+        "pytest-expecter": {
+            "hash": "sha256:9c6ed4d26df0e80a31b2c6ad86a959593f0c5b2459ea366496c45d9bbd9d358a",
+            "version": "==0.2.2.post3"
+        },
+        "pytest-cov": {
+            "hash": "sha256:10e37e876f49ddec80d6c83a54b657157f1387ebc0f7755285f8c156130014a1",
+            "version": "==2.4.0"
         },
         "appdirs": {
             "hash": "sha256:85e58578db8f29538f3109c11250c2a5514a2fcdc9890d9b2fe777eb55517736",
@@ -78,7 +82,7 @@
             "hash": "sha256:a9b3aaa1904eeb78e32394cd46c6f37ac0fb4af6dc488daa58971bdc7d7fcaf3",
             "version": "==0.26.2"
         },
-        "backports.shutil_get_terminal_size": {
+        "backports.shutil-get-terminal-size": {
             "hash": "sha256:0975ba55054c15e346944b38956a4c9cbee9009391e41b86c68990effb8c1f64",
             "version": "==1.0.0"
         },
@@ -110,10 +114,6 @@
             "hash": "sha256:67101d7acee692962f33dd30b5dce079ff532dd9aa99ff48d52a3dad51d2fe84",
             "version": "==2.1.10"
         },
-        "pytest_django": {
-            "hash": "sha256:00995c2999b884a38ae9cd30a8c00ed32b3d38c1041250ea84caf18085589662",
-            "version": "==3.1.2"
-        },
         "PyYAML": {
             "hash": "sha256:592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab",
             "version": "==3.12"
@@ -123,8 +123,8 @@
             "version": "==2.13.0"
         },
         "setuptools": {
-            "hash": "sha256:f9ac44de8b36a13ce35d2989052a295a548c9fe5a161fb066dff53592200aa12",
-            "version": "==34.0.2"
+            "hash": "sha256:0af5ba75a129cf082d629d074fb7bf3c8391b62fdfa7b0cff2b6ef5563a15605",
+            "version": "==34.0.3"
         },
         "six": {
             "hash": "sha256:0ff78c403d9bccf5a425a6d31a12aa6b47f1c21ca4dc2573a7e2f32a97335eb1",

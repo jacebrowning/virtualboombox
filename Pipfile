@@ -3,19 +3,19 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 
 [packages]
-Django = "~=1.10"
-django-dotenv = "~=1.4"
-dj_database_url = "==0.4.2"
+django = "~=1.10"
+django-dotenv = "~=1.4.1"
+dj-database-url = "==0.4.2"
 psycopg2 = "~=2.6"
 pylast = "~=1.7"
 whitenoise = "~=3.3"
 gunicorn = "~=19.6"
 
 [dev-packages]
-pytest = "~=2.9"
+pytest = "~=2.9.2"
 pytest-django = "*"
 pytest-describe = "*"
-pytest_expecter = "*"
 pytest-watch = "*"
-pytest_cov = "*"
 "coverage.space" = "*"
+pytest-expecter = "*"
+pytest-cov = "*"
