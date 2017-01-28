@@ -15,9 +15,8 @@ doctor:
 # PROJECT DEPENDENCIES #########################################################
 
 ENV := .venv
-BIN := $(ENV)/bin
-PYTHON := $(BIN)/python
-ACIVATE := . $(BIN)/activate &&
+# TODO: replace this with 'pipenv shell' when it accepts arguments
+ACIVATE := . $(ENV)/bin/activate &&
 TMP := tmp
 
 .PHONY: install
@@ -34,7 +33,7 @@ clean:
 
 # RUNTIME DEPENDENCIES #########################################################
 
-MANAGE := $(PYTHON) manage.py
+MANAGE := pipenv run python manage.py
 
 .PHONY: data
 data: db-superuser
@@ -54,16 +53,13 @@ db-superuser: install
 
 # VALIDATION TARGETS ###########################################################
 
-PYTEST := $(BIN)/pytest
-PYTEST_WATCH := $(BIN)/ptw
-
 .PHONY: test
 test: install
-	$(PYTEST)
+	pipenv run pytest
 
 .PHONY: watch
 watch: install
-	$(ACIVATE) $(PYTEST_WATCH)
+	pipenv run ptw
 
 # SERVER TARGETS ###############################################################
 
