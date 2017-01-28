@@ -1,3 +1,7 @@
+.navbar {
+    border-radius: 0px;
+}
+
 .navbar-nav {
   padding-right: 20px;
 }
