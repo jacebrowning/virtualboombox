@@ -1,20 +1,21 @@
 import logging
 
-from django.shortcuts import render, redirect
+from django.shortcuts import reverse, render, redirect
 from django.conf import settings
 
 import pylast
 
-from .models import Song
+from .models import Account, Song
 
 
 log = logging.getLogger(__name__)
 
 
-def index(request,):
+def index(request):
     context = dict(
         username=request.session.get('username'),
-        api_key=settings.LASTFM_API_KEY,
+        lastfm_api_key=settings.LASTFM_API_KEY,
+        lastfm_callback_url=request.build_absolute_uri(reverse('login')),
         songs=Song.objects.order_by('date'),
     )
 
@@ -23,22 +24,11 @@ def index(request,):
 
 def login(request):
     token = request.GET.get('token')
-    log.info("Last.fm token: %s", token)
 
-    network = pylast.LastFMNetwork(
-        api_key=settings.LASTFM_API_KEY,
-        api_secret=settings.LASTFM_API_SECRET,
-    )
-    call = pylast._Request(network, 'auth.getSession', {'token': token})
-    call.sign_it()
-    try:
-        xml = call.execute()
-    except pylast.WSError as exc:
-        log.error(exc)
-        # TODO: show error message
+    account = Account.from_token(token)
+    if account:
+        request.session['username'] = account.username
     else:
-        username = xml.getElementsByTagName('name')[0].firstChild.data
-        log.info("Last.fm username: %s", username)
-        request.session['username'] = username
+        log.critical("TODO: show error message")
 
     return redirect('index')

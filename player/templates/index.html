@@ -15,7 +15,7 @@
                     Last.fm username: {{ username }}
                 </p>
             {% else %}
-                <a href="http://www.last.fm/api/auth/?api_key={{ api_key }}" class="btn btn-login navbar-btn" role="button">
+                <a href="http://www.last.fm/api/auth/?api_key={{ lastfm_api_key }}&&cb={{ lastfm_callback_url }}" class="btn btn-login navbar-btn" role="button">
                     Login with Last.fm
                 </a>
             {% endif %}

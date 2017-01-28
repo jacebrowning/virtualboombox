@@ -1,12 +1,81 @@
+import logging
+
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 
+import pylast
 
-class Song(models.Model):
+
+DEFAULT_LOCATION = (42.9634, 85.6681)  # Grand Rapids, MI
+
+log = logging.getLogger(__name__)
+
+
+class LocationMixin(models.Model):
+    """Geographic coordinates."""
+
+    latitude = models.DecimalField(max_digits=9, decimal_places=6,
+                                   default=DEFAULT_LOCATION[0])
+    longitude = models.DecimalField(max_digits=9, decimal_places=6,
+                                    default=DEFAULT_LOCATION[1])
+
+    def __str__(self):
+        return f"({self.latitude}, {self.longitude})"
+
+    class Meta:
+        abstract = True
+
+
+class Account(LocationMixin):
+    """Last.fm account information and metadata."""
+
+    username = models.CharField(max_length=50)
+
+    @classmethod
+    def from_token(cls, token):
+        log.info("Last.fm token: %s", token)
+        username = cls._get_username_from_token(token)
+
+        account, created = cls.objects.get_or_create(username=username)
+
+        if created:
+            log.info("Added account: %s", account)
+        else:
+            log.info("Found account: %s", account)
+
+        return account
+
+    @staticmethod
+    def _get_username_from_token(token):
+        network = pylast.LastFMNetwork(
+            api_key=settings.LASTFM_API_KEY,
+            api_secret=settings.LASTFM_API_SECRET,
+        )
+
+        call = pylast._Request(network, 'auth.getSession', {'token': token})
+        call.sign_it()
+
+        try:
+            xml = call.execute()
+        except pylast.WSError as exc:
+            log.error(exc)
+            username = None
+        else:
+            username = xml.getElementsByTagName('name')[0].firstChild.data
+
+        return username
+
+    def __str__(self):
+        location = super().__str__()
+        return f"{self.username} @ {location}"
+
+
+class Song(LocationMixin):
+    """Played song with location information."""
+
     artist = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
-    latitude = models.DecimalField(max_digits=9, decimal_places=6)
-    longitude = models.DecimalField(max_digits=9, decimal_places=6)
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
