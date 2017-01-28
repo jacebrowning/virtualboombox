@@ -12,11 +12,11 @@
             <div class="navbar-nav navbar-right">
             {% if username %}
                 <p class="navbar-text">
-                    Sharing plays from Last.fm as {{ username }}
+                    Sharing from Last.fm as {{ username }}
                 </p>
             {% else %}
                 <a href="https://www.last.fm/api/auth/?api_key={{ lastfm_api_key }}&&cb={{ lastfm_callback_url }}" class="btn btn-login navbar-btn fa fa-lastfm" role="button">
-                    Share your plays from Last.fm
+                    Share your Last.fm
                 </a>
             {% endif %}
             </div>
