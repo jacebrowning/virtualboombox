@@ -23,9 +23,13 @@
         </nav>
 
         <div class="content">
+            <div class="col-xs-offset-1 col-xs-10">
             {% for song in songs %}
-                {{ song }}
+                <div class="row">
+                    {{ song }}
+                </div>
             {% endfor %}
+            </div>
         </div>
 
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
