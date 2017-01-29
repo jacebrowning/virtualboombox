@@ -7,7 +7,7 @@ from django.utils import timezone
 import pylast
 
 
-DEFAULT_LOCATION = (42.9634, -85.6681)  # Grand Rapids, MI
+DEFAULT_LOCATION = (-48.876667, -123.393333)  # Oceanic Pole of Inaccessibility
 
 log = logging.getLogger(__name__)
 

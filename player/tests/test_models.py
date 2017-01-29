@@ -13,7 +13,7 @@ def describe_account():
     def describe_str():
 
         def with_default_location(account):
-            expect(str(account)) == "foobar @ (42.9634, 85.6681)"
+            expect(str(account)) == "foobar @ (-48.876667, -123.393333)"
 
         def with_updated_location(account):
             account.latitude = 1.2
