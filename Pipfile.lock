@@ -55,8 +55,8 @@
             "version": "==2.2.0"
         },
         "pytest": {
-            "hash": "sha256:da0ab50c7eec0683bc24f1c1137db1f4111752054ecdad63125e7ec71316b813",
-            "version": "==3.0.6"
+            "hash": "sha256:ccc23b4aab3ef3e19e731de9baca73f3b1a7e610d9ec65b28c36a5a3305f0349",
+            "version": "==2.9.2"
         },
         "pytest-django": {
             "hash": "sha256:00995c2999b884a38ae9cd30a8c00ed32b3d38c1041250ea84caf18085589662",

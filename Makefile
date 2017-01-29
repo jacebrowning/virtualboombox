@@ -5,7 +5,7 @@ all: install
 
 .PHONY: setup
 setup:
-	python -m pip install pipenv==3.2.10
+	python -m pip install pipenv==3.2.11
 	@ touch Pipfile # force reinstall with the newer version of pipenv
 
 .PHONY: doctor
