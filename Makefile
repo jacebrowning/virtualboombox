@@ -33,8 +33,6 @@ clean:
 
 # RUNTIME DEPENDENCIES #########################################################
 
-MANAGE := pipenv run python manage.py
-
 .PHONY: data
 data: db-superuser
 
@@ -44,12 +42,12 @@ db:
 
 .PHONY: db-migrate
 db-migrate: install
-	$(MANAGE) migrate
+	./manage.py migrate
 
 .PHONY: db-superuser
 db-superuser: install
 	@ echo "Creating the default superuser..."
-	@- echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', 'password')" | $(MANAGE) shell >> tmp/manage.log 2>&1
+	@- echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', 'password')" | ./manage.py shell >> tmp/manage.log 2>&1
 
 # VALIDATION TARGETS ###########################################################
 
@@ -65,7 +63,7 @@ watch: install
 
 .PHONY: run
 run: .env install db db-migrate db-superuser
-	$(MANAGE) runserver
+	./manage.py runserver
 
 .PHONY: run-prod
 run-prod: .env install db
