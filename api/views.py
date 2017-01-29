@@ -1,15 +1,10 @@
-from rest_framework import generics
+from rest_framework import viewsets
 
 from player.models import Song
 
 from .serializers import SongSerializer
 
 
-class SongList(generics.ListCreateAPIView):
-    queryset = Song.objects.all()
-    serializer_class = SongSerializer
-
-
-class SongDetail(generics.RetrieveUpdateDestroyAPIView):
+class SongViewSet(viewsets.ModelViewSet):
     queryset = Song.objects.all()
     serializer_class = SongSerializer
