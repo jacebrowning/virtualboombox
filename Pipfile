@@ -10,7 +10,7 @@ psycopg2 = "~=2.6"
 pylast = "~=1.7"
 whitenoise = "~=3.3"
 gunicorn = "~=19.6"
-djangorestframework = "=3.5.3"
+djangorestframework = "~=3.5.3"
 markdown = "*"
 django-filter = "*"
 
