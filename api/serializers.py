@@ -7,4 +7,4 @@ class SongSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Song
-        fields = ('artist', 'title', 'latitude', 'longitude', 'date')
+        fields = ('url', 'artist', 'title', 'latitude', 'longitude', 'date')

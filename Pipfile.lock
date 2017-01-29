@@ -8,7 +8,7 @@
         ],
         "requires": {},
         "hash": {
-            "sha256": "66fd04fb75479fb13caeaa3d9dab6188f1f8c9d9fa0d2ebafaa481cdcf70bcf3"
+            "sha256": "4e51fc951e85e645ac83dbea552dbb43fdf685e61fb60bcd6b92fb0c941bd7b2"
         }
     },
     "default": {
@@ -19,6 +19,10 @@
         "django-dotenv": {
             "hash": "sha256:2930f6b0c0955ac150e1ca9ac01e84afa71efdbb544dea7155f026e20e401305",
             "version": "==1.4.1"
+        },
+        "djangorestframework": {
+            "hash": "sha256:f446041a944723e14502a0a5880d0bc74a499ac1075781177f2fa6d7fe7b415d",
+            "version": "==3.5.3"
         },
         "dj-database-url": {
             "hash": "sha256:e16d94c382ea0564c48038fa7fe8d9c890ef1ab1a8ec4cb48e732c124b9482fd",
@@ -39,18 +43,6 @@
         "gunicorn": {
             "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
             "version": "==19.6.0"
-        },
-        "djangorestframework": {
-            "hash": "sha256:f446041a944723e14502a0a5880d0bc74a499ac1075781177f2fa6d7fe7b415d",
-            "version": "==3.5.3"
-        },
-        "markdown": {
-            "hash": "sha256:0ac8a81e658167da95d063a9279c9c1b2699f37c7c4153256a458b3a43860e33",
-            "version": "==2.6.8"
-        },
-        "django-filter": {
-            "hash": "sha256:7cca9dab22c72df734ba24fb81ca018fdb6d2020c840e758d473dcedd341aa7b",
-            "version": "==1.0.1"
         },
         "six": {
             "hash": "sha256:0ff78c403d9bccf5a425a6d31a12aa6b47f1c21ca4dc2573a7e2f32a97335eb1",
