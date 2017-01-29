@@ -56,14 +56,28 @@ WSGI_APPLICATION = 'virtualboombox.wsgi.application'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '%(asctime)s [%(process)d] [%(levelname)s] %(message)s'
+        },
+    },
     'handlers': {
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
+            'formatter': 'simple',
         },
     },
     'loggers': {
         'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'api': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'player': {
             'handlers': ['console'],
             'level': 'INFO',
         },
