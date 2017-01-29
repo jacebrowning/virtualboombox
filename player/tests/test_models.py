@@ -1,7 +1,20 @@
 import pytest
 from expecter import expect
 
-from ..models import Account, Song
+from ..models import Location, Account, Song
+
+
+def describe_location():
+
+    @pytest.fixture
+    def location():
+        return Location(latitude=1.2, longitude=-3.4)
+
+    def describe_url():
+
+        def it_uses_google_maps(location):
+            expect(location.url) == \
+                "https://www.google.com/maps/@1.2000,-3.4000,20z"
 
 
 def describe_account():
@@ -22,7 +35,6 @@ def describe_account():
             expect(str(account)) == "foobar @ (1.2, -3.4)"
 
 
-
 def describe_song():
 
     @pytest.fixture
@@ -31,5 +43,10 @@ def describe_song():
 
     def describe_str():
 
-        def with_nominal_values(song):
+        def it_uses_the_name(song):
             expect(str(song)) == '"Foo" by The Bars'
+
+    def describe_name():
+
+        def it_joins_the_artist_and_title(song):
+            expect(song.name) == '"Foo" by The Bars'

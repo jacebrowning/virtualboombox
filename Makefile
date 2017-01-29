@@ -51,6 +51,10 @@ db-superuser: install
 
 # VALIDATION TARGETS ###########################################################
 
+.PHONY: check
+check: install
+	pipenv run pycodestyle --config=.pycodestyle.ini
+
 .PHONY: test
 test: install
 	pipenv run py.test

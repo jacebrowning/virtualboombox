@@ -12,7 +12,7 @@ DEFAULT_LOCATION = (-48.876667, -123.393333)  # Oceanic Pole of Inaccessibility
 log = logging.getLogger(__name__)
 
 
-class LocationMixin(models.Model):
+class Location(models.Model):
     """Geographic coordinates."""
 
     latitude = models.DecimalField(max_digits=9, decimal_places=6,
@@ -23,11 +23,16 @@ class LocationMixin(models.Model):
     def __str__(self):
         return f"({self.latitude}, {self.longitude})"
 
+    @property
+    def url(self):
+        return ("https://www.google.com/maps/"
+                f"@{self.latitude:.4f},{self.longitude:.4f},20z")
+
     class Meta:
         abstract = True
 
 
-class Account(LocationMixin):
+class Account(Location):
     """Last.fm account information and metadata."""
 
     username = models.CharField(max_length=50)
@@ -71,7 +76,7 @@ class Account(LocationMixin):
         return f"{self.username} @ {location}"
 
 
-class Song(LocationMixin):
+class Song(Location):
     """Played song with location information."""
 
     artist = models.CharField(max_length=200)
@@ -79,4 +84,8 @@ class Song(LocationMixin):
     date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
+        return self.name
+
+    @property
+    def name(self):
         return f'"{self.title}" by {self.artist}'

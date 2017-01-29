@@ -13,6 +13,7 @@ whitenoise = "~=3.3"
 gunicorn = "~=19.6"
 
 [dev-packages]
+pycodestyle = "*"
 pytest = "~=2.9.2"
 pytest-django = "*"
 pytest-describe = "*"
