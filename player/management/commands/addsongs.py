@@ -28,4 +28,3 @@ class Command(BaseCommand):
 
             if not options['loop']:
                 break
-
