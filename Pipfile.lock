@@ -8,7 +8,7 @@
         ],
         "requires": {},
         "hash": {
-            "sha256": "2333760ec2c55b2f78f244cfbf1aadbe8084576d703477f81a2e49733181aa0e"
+            "sha256": "49a92ac0d7798a6ccd9e099e4d4b0b7066425c62b514af0bfe57370d8b337990"
         }
     },
     "default": {
@@ -59,8 +59,8 @@
             "version": "==2.2.0"
         },
         "pytest": {
-            "hash": "sha256:da0ab50c7eec0683bc24f1c1137db1f4111752054ecdad63125e7ec71316b813",
-            "version": "==3.0.6"
+            "hash": "sha256:ccc23b4aab3ef3e19e731de9baca73f3b1a7e610d9ec65b28c36a5a3305f0349",
+            "version": "==2.9.2"
         },
         "pytest-django": {
             "hash": "sha256:00995c2999b884a38ae9cd30a8c00ed32b3d38c1041250ea84caf18085589662",
