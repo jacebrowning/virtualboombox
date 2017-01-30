@@ -70,8 +70,8 @@ class NextViewSet(viewsets.ViewSet):
         log.debug("Updating account location...")
         account = Account.objects.filter(username=username).first()
         if account:
-            account.latitude = latitude
-            account.longitude = longitude
+            account.latitude = location[0]
+            account.longitude = location[1]
             account.save()
         else:
             log.warning("No matching account for username: %r", username)
