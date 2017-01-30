@@ -25,9 +25,16 @@ class AccountAdmin(admin.ModelAdmin, ClickableMixin):
 class SongAdmin(admin.ModelAdmin, ClickableMixin):
     list_display = [
         'name',
+        'username',
         'clickable_url',
         'date',
     ]
+
+    def username(self, obj):
+        return obj.account.username if obj.account else ""
+
+    username.short_description = 'Account'
+
 
 
 admin.site.register(Account, AccountAdmin)
