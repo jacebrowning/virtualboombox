@@ -16,7 +16,7 @@ def index(request):
         username=request.session.get('username'),
         lastfm_api_key=settings.LASTFM_API_KEY,
         lastfm_callback_url=request.build_absolute_uri(reverse('login')),
-        songs=Song.objects.order_by('date'),
+        songs=Song.objects.order_by('-date'),
     )
 
     return render(request, 'index.html', context)

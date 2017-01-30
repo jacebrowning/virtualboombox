@@ -9,6 +9,7 @@ djangorestframework = "~=3.5.3"
 dj-database-url = "==0.4.2"
 psycopg2 = "~=2.6"
 pylast = "~=1.7"
+pytz = "*"
 whitenoise = "~=3.3"
 gunicorn = "~=19.6"
 

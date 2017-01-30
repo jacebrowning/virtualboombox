@@ -34,7 +34,9 @@ clean:
 # RUNTIME DEPENDENCIES #########################################################
 
 .PHONY: data
-data: db-superuser
+data: install
+	./manage.py gendata
+	./manage.py addsongs
 
 .PHONY: db
 db:
@@ -67,12 +69,12 @@ watch: install
 
 .PHONY: run
 run: .env install db db-migrate db-superuser
-	./manage.py runserver
+	./manage.py runserver 5000
 
 .PHONY: run-prod
 run-prod: .env install db
 	$(ACIVATE) bin/post_compile
-	$(ACIVATE) heroku local --port=8000
+	$(ACIVATE) heroku local
 
 .env:
 	echo SECRET_KEY=prod >> $@
