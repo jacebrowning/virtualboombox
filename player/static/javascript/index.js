@@ -1,5 +1,12 @@
-function updateLocation() {
+function initCompass() {
+    $("#compass").rotate({
+        angle: -90,
+        animateTo: 270,
+        duration: 20000,
+    });
+}
 
+function updateLocation() {
     navigator.geolocation.getCurrentPosition(function(location) {
         var data = {
             "latitude": location.coords.latitude,
@@ -16,8 +23,13 @@ function updateLocation() {
 }
 
 function showNextSong(event) {
-    // TODO: Update DOM to show next song
     console.log(event);
+    // TODO: Update DOM to show next song
+    $("#compass").stopRotate();
+    // TODO: rotate to new angle
 }
 
-window.load = updateLocation();
+window.onload = function() {
+    initCompass();
+    updateLocation();
+}
