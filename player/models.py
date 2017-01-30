@@ -141,14 +141,16 @@ class Song(Location):
             account=account,
         )
         try:
-            obj = cls.objects.get(**kwargs), False
+            obj = cls.objects.get(**kwargs)
+            created = False
         except cls.DoesNotExist:
-            obj = cls(**kwargs), True
+            obj = cls(**kwargs)
+            created = True
 
         obj.latitude = account.latitude
         obj.longitude = account.longitude
 
-        return obj
+        return obj, created
 
     @staticmethod
     def _timestamp_to_datetime(value):
