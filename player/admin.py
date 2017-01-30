@@ -36,6 +36,5 @@ class SongAdmin(admin.ModelAdmin, ClickableMixin):
     username.short_description = 'Account'
 
 
-
 admin.site.register(Account, AccountAdmin)
 admin.site.register(Song, SongAdmin)

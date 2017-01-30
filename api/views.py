@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from player.models import Account, Song
 
 from .serializers import SongSerializer, NextSerializer
+from .utils import haversine
 
 
 log = logging.getLogger(__name__)
@@ -27,23 +28,46 @@ class NextViewSet(viewsets.ViewSet):
 
     @csrf_exempt
     def create(self, request):
-        log.debug("Updating account location...")
+        username = self._get_username(request)
+        location = self._get_location(request)
 
+        if username:
+            self._update_account(username, location)
+
+        song, distance = self._get_next_song(location)
+        data = dict(
+            artist=song.artist,
+            title=song.title,
+            distance=distance,
+        )
+
+        return Response(data, status=200)
+
+    @staticmethod
+    def _get_username(request):
         username = request.POST.get('username')
         if username:
             log.info("Account specified: %s", username)
-        else:
-            username = request.session.get('username')
-            if username:
-                log.info("Account loaded from session: %s", username)
-            else:
-                log.debug("User is not logged in")
-                return Response({})
+            return username
 
-        latitude = request.POST.get('latitude')
-        longitude = request.POST.get('longitude')
+        username = request.session.get('username')
+        if username:
+            log.info("Account loaded from session: %s", username)
+            return username
+
+        log.debug("User is not logged in")
+        return None
+
+    @staticmethod
+    def _get_location(request):
+        latitude = float(request.POST.get('latitude'))
+        longitude = float(request.POST.get('longitude'))
         log.info("Location specified: %s, %s", latitude, longitude)
+        return latitude, longitude
 
+    @staticmethod
+    def _update_account(username, location):
+        log.debug("Updating account location...")
         account = Account.objects.filter(username=username).first()
         if account:
             account.latitude = latitude
@@ -52,4 +76,10 @@ class NextViewSet(viewsets.ViewSet):
         else:
             log.warning("No matching account for username: %r", username)
 
-        return Response({})
+    @staticmethod
+    def _get_next_song(location):
+        # TODO: find the best matching song
+        for song in Song.objects.all():
+            base = (song.latitude, song.longitude)
+            distance = haversine(location, base)
+            return song, distance
