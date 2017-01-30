@@ -90,7 +90,7 @@ class Song(Location):
     @classmethod
     def from_account(cls, account):
         """Initialize a new song or update an existing song without saving."""
-        log.info(f"Adding songs from '{account.username}'...")
+        log.debug(f"Adding songs from '{account.username}'...")
 
         network = pylast.LastFMNetwork(
             api_key=settings.LASTFM_API_KEY,
@@ -99,18 +99,18 @@ class Song(Location):
 
         user = pylast.User(account.username, network)
         try:
-            user.get_name(properly_capitalized=True)
+            username = user.get_name(properly_capitalized=True)
         except pylast.WSError as exc:
-            log.error(exc)
+            log.debug(exc)
             return None
 
         track = user.get_now_playing()
         if track:
             song, new = cls._get_or_init(track, account)
             if new:
-                log.info(f"Added now playing: {song}")
+                log.info(f"Added now playing from {username}: {song}")
             else:
-                log.info(f"Updated now playing: {song}")
+                log.debug(f"Updated now playing from {username}: {song}")
             song.date = timezone.now()
             return song
 
@@ -118,9 +118,9 @@ class Song(Location):
         if played_tracks:
             song, new = cls._get_or_init(played_tracks[0].track, account)
             if new:
-                log.info(f"Added last track: {song}")
+                log.info(f"Added last track from {username}: {song}")
             else:
-                log.info(f"Updated last track: {song}")
+                log.debug(f"Updated last track from {username}: {song}")
             song.date = cls._timestamp_to_datetime(played_tracks[0].timestamp)
             return song
 

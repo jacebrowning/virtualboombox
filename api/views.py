@@ -27,14 +27,18 @@ class NextViewSet(viewsets.ViewSet):
 
     @csrf_exempt
     def create(self, request):
-        log.info("Updating account location...")
+        log.debug("Updating account location...")
 
         username = request.POST.get('username')
         if username:
             log.info("Account specified: %s", username)
         else:
             username = request.session.get('username')
-            log.info("Account loaded from session: %s", username)
+            if username:
+                log.info("Account loaded from session: %s", username)
+            else:
+                log.debug("User is not logged in")
+                return Response({})
 
         latitude = request.POST.get('latitude')
         longitude = request.POST.get('longitude')
