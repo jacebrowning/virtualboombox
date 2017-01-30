@@ -1,6 +1,14 @@
 .PHONY: all
 all: install
 
+ENV := .venv
+# TODO: replace this with 'pipenv shell' when it accepts arguments
+# https://github.com/kennethreitz/pipenv/issues/162
+ACIVATE := . $(ENV)/bin/activate &&
+TMP := tmp
+
+MANAGE := pipenv run python manage.py
+
 # SYSTEM DEPENDENCIES ##########################################################
 
 .PHONY: setup
@@ -13,11 +21,6 @@ doctor:
 	bin/verchew
 
 # PROJECT DEPENDENCIES #########################################################
-
-ENV := .venv
-# TODO: replace this with 'pipenv shell' when it accepts arguments
-ACIVATE := . $(ENV)/bin/activate &&
-TMP := tmp
 
 .PHONY: install
 install: $(ENV)
@@ -35,8 +38,8 @@ clean:
 
 .PHONY: data
 data: install
-	./manage.py gendata
-	./manage.py addsongs
+	$(MANAGE) gendata
+	$(MANAGE) addsongs
 
 .PHONY: db
 db:
@@ -44,12 +47,12 @@ db:
 
 .PHONY: db-migrate
 db-migrate: install
-	./manage.py migrate
+	$(MANAGE) migrate
 
 .PHONY: db-superuser
 db-superuser: install
 	@ echo "Creating the default superuser..."
-	@- echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', 'password')" | ./manage.py shell >> tmp/manage.log 2>&1
+	@- echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', 'password')" | $(MANAGE) shell >> tmp/manage.log 2>&1
 
 # VALIDATION TARGETS ###########################################################
 
@@ -69,7 +72,7 @@ watch: install
 
 .PHONY: run
 run: .env install db db-migrate db-superuser
-	./manage.py runserver 5000
+	$(MANAGE) runserver 5000
 
 .PHONY: run-prod
 run-prod: .env install db
