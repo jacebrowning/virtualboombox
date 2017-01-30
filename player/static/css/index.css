@@ -1,7 +1,6 @@
 .navbar {
     border-radius: 0px;
 }
-
 .navbar-nav {
   padding-left: 20px;
   padding-right: 20px;
@@ -9,5 +8,20 @@
 
 .btn-login {
     background-color: #B90000;
-    color: #ffffff;
+    color: #FFFFFF;
+}
+
+.compass {
+    position: relative;
+    text-align: center;
+    float: left;
+}
+.compass-image {
+    width: 150px;
+}
+.compass-text {
+    position: absolute;
+    left: 0;
+    top: 55px;
+    width: 100%;
 }

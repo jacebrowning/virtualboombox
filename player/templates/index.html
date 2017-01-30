@@ -23,12 +23,20 @@
         </nav>
 
         <div class="content">
-            <div class="col-xs-offset-1 col-xs-10">
-            {% for song in songs %}
-                <div class="row">
-                    {{ song }}
+            <div class="row">
+                <div class="col-xs-offset-2 col-xs-3">
+                    <div class="compass">
+                        <img class="compass-image" src="{% static 'images/compass.svg' %}">
+                        <div class="compass-text">
+                           5000 <br> miles
+                        </div>
+                    </div>
                 </div>
-            {% endfor %}
+                <div class="col-xs-5">
+                {% for song in songs %}
+                    {{ song }}
+                {% endfor %}
+                </div>
             </div>
         </div>
 
