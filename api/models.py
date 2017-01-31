@@ -34,3 +34,11 @@ class QueuedSong:
     @property
     def distance(self):
         return haversine(self.location, self.base_location)
+
+    @property
+    def data(self):
+        return dict(
+            artist=self.artist,
+            title=self.title,
+            miles=f"{self.distance:.1f}",
+        )

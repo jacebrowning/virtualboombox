@@ -25,9 +25,14 @@ function updateLocation() {
 
 function showNextSong(event) {
     console.log(event);
-    // TODO: Update DOM to show next song
     $("#compass").stopRotate();
     // TODO: rotate to new angle
+
+    var compassText = event.miles + "<br>" + "miles";
+    $("#compass-text").html(compassText);
+
+    var currentSongText = event.title + "<br>" + event.artist;
+    $("#current-song").html(currentSongText);
 }
 
 window.onload = function() {

@@ -7,8 +7,7 @@ from rest_framework.response import Response
 
 from player.models import Account, Song
 
-from .serializers import (SongSerializer,
-                          QueueRequestSerializer, QueuedSongSerializer)
+from .serializers import SongSerializer, QueueRequestSerializer
 from .models import QueuedSong
 
 
@@ -36,9 +35,8 @@ class QueuedSongViewSet(viewsets.ViewSet):
             self._update_account(username, location)
 
         queued_song = self._get_next_song(location)
-        data = QueuedSongSerializer(queued_song).data
 
-        return Response(data, status=200)
+        return Response(queued_song.data, status=200)
 
     @staticmethod
     def _get_username(request):

@@ -15,10 +15,3 @@ class QueueRequestSerializer(serializers.Serializer):
     latitude = serializers.FloatField()
     longitude = serializers.FloatField()
     username = serializers.CharField(required=False)
-
-
-class QueuedSongSerializer(serializers.Serializer):
-
-    artist = serializers.CharField()
-    title = serializers.CharField()
-    distance = serializers.FloatField()

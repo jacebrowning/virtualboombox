@@ -27,17 +27,25 @@
                 <div class="col-xs-offset-2 col-xs-3">
                     <div class="compass">
                         <img id="compass" class="compass-image" src="{% static 'images/compass.svg' %}">
-                        <div class="compass-text">
-                           5000 <br> miles
+                        <div id="compass-text" class="compass-text">
+                           <!-- TODO: add placeholder text -->
                         </div>
                     </div>
                 </div>
                 <div class="col-xs-5">
-                {% for song in songs %}
-                    {{ song }}
-                {% endfor %}
+                    <div id="current-song">
+                        Loading the nearest song...
+                    </div>
                 </div>
             </div>
+            <!-- TODO: show the upcoming songs -->
+<!--             <div class="row">
+                <div class="col-xs-offset-2 col-xs-8">
+                    <ol id="next-songs">
+                        Loading the song queue...
+                    </ol>
+                </div>
+            </div> -->
         </div>
 
         <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>
