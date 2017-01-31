@@ -67,18 +67,16 @@ class Account(Location):
         network = pylast.LastFMNetwork(
             api_key=settings.LASTFM_API_KEY,
             api_secret=settings.LASTFM_API_SECRET,
+            token=token,
         )
 
-        call = pylast._Request(network, 'auth.getSession', {'token': token})
-        call.sign_it()
-
         try:
-            xml = call.execute()
+            user = network.get_authenticated_user()
         except pylast.WSError as exc:
             log.error(exc)
             username = None
         else:
-            username = xml.getElementsByTagName('name')[0].firstChild.data
+            username = user.username
 
         return username
 
