@@ -1,6 +1,9 @@
 .PHONY: all
 all: install
 
+.PHONY: ci
+ci: check test
+
 ENV := .venv
 # TODO: replace this with 'pipenv shell' when it accepts arguments
 # https://github.com/kennethreitz/pipenv/issues/162
@@ -13,7 +16,7 @@ MANAGE := pipenv run python manage.py
 
 .PHONY: setup
 setup:
-	python -m pip install pipenv==3.2.11
+	python -m pip install pipenv==3.2.14
 	@ touch Pipfile # force reinstall with the newer version of pipenv
 
 .PHONY: doctor
@@ -67,6 +70,10 @@ test: install
 .PHONY: watch
 watch: install
 	pipenv run ptw
+
+.PHONY: coverage
+coverage: install
+	pipenv run coverage.space jacebrowning/virtualboombox overall
 
 # SERVER TARGETS ###############################################################
 

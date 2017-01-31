@@ -12,6 +12,10 @@
         }
     },
     "default": {
+        "dj-database-url": {
+            "hash": "sha256:e16d94c382ea0564c48038fa7fe8d9c890ef1ab1a8ec4cb48e732c124b9482fd",
+            "version": "==0.4.2"
+        },
         "django": {
             "hash": "sha256:4541a60834f28f308ee7b6e96400feca905fb0de473eb9dad6847e98a36d86d4",
             "version": "==1.10.5"
@@ -24,9 +28,9 @@
             "hash": "sha256:f446041a944723e14502a0a5880d0bc74a499ac1075781177f2fa6d7fe7b415d",
             "version": "==3.5.3"
         },
-        "dj-database-url": {
-            "hash": "sha256:e16d94c382ea0564c48038fa7fe8d9c890ef1ab1a8ec4cb48e732c124b9482fd",
-            "version": "==0.4.2"
+        "gunicorn": {
+            "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
+            "version": "==19.6.0"
         },
         "psycopg2": {
             "hash": "sha256:70490e12ed9c5c818ecd85d185d363335cc8a8cbf7212e3c185431c79ff8c05c",
@@ -40,52 +44,16 @@
             "hash": "sha256:a1ea35e87a63c7825846d5b5c81d23d668e8a102d3b1b465ce95afe1b3a2e065",
             "version": "==2016.10"
         },
-        "whitenoise": {
-            "hash": "sha256:1d62a003a0ab747de96da45c831cbb512dcb7f69c1ef0bd20b1cd4ae45d8a0c4",
-            "version": "==3.3.0"
-        },
-        "gunicorn": {
-            "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
-            "version": "==19.6.0"
-        },
         "six": {
             "hash": "sha256:0ff78c403d9bccf5a425a6d31a12aa6b47f1c21ca4dc2573a7e2f32a97335eb1",
             "version": "==1.10.0"
+        },
+        "whitenoise": {
+            "hash": "sha256:1d62a003a0ab747de96da45c831cbb512dcb7f69c1ef0bd20b1cd4ae45d8a0c4",
+            "version": "==3.3.0"
         }
     },
     "develop": {
-        "pycodestyle": {
-            "hash": "sha256:6c4245ade1edfad79c3446fadfc96b0de2759662dc29d07d80a6f27ad1ca6ba9",
-            "version": "==2.3.1"
-        },
-        "pytest": {
-            "hash": "sha256:ccc23b4aab3ef3e19e731de9baca73f3b1a7e610d9ec65b28c36a5a3305f0349",
-            "version": "==2.9.2"
-        },
-        "pytest-django": {
-            "hash": "sha256:00995c2999b884a38ae9cd30a8c00ed32b3d38c1041250ea84caf18085589662",
-            "version": "==3.1.2"
-        },
-        "pytest-describe": {
-            "hash": "sha256:c592f1294e4455cebe88f162a1475e347c0668ce256c4d1a4ccd21d6c5f51827",
-            "version": "==0.11.0"
-        },
-        "pytest-watch": {
-            "hash": "sha256:29941f6ff74e6d85cc0796434a5cbc27ebe51e91ed24fd0757fad5cc6fd3d491",
-            "version": "==4.1.0"
-        },
-        "coverage.space": {
-            "hash": "sha256:07d4a01a500f4070597fa3aa4ee3a305abcb02c20ea6d24a09d6fc3ca9a655df",
-            "version": "==0.7"
-        },
-        "pytest-expecter": {
-            "hash": "sha256:9c6ed4d26df0e80a31b2c6ad86a959593f0c5b2459ea366496c45d9bbd9d358a",
-            "version": "==0.2.2.post3"
-        },
-        "pytest-cov": {
-            "hash": "sha256:10e37e876f49ddec80d6c83a54b657157f1387ebc0f7755285f8c156130014a1",
-            "version": "==2.4.0"
-        },
         "appdirs": {
             "hash": "sha256:85e58578db8f29538f3109c11250c2a5514a2fcdc9890d9b2fe777eb55517736",
             "version": "==1.4.0"
@@ -106,6 +74,10 @@
             "hash": "sha256:8b282292973a1dc4eccfcc0776e0fde75b5b3de2e35164c2d854f7dd80149e4b",
             "version": "==4.3.4"
         },
+        "coverage.space": {
+            "hash": "sha256:07d4a01a500f4070597fa3aa4ee3a305abcb02c20ea6d24a09d6fc3ca9a655df",
+            "version": "==0.7"
+        },
         "docopt": {
             "hash": "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491",
             "version": "==0.6.2"
@@ -122,9 +94,37 @@
             "hash": "sha256:2d4bba2e25fff58140e6bdce1e485e89bb59776adbe01d490baa6b1f37a3dd6b",
             "version": "==1.4.32"
         },
+        "pycodestyle": {
+            "hash": "sha256:6c4245ade1edfad79c3446fadfc96b0de2759662dc29d07d80a6f27ad1ca6ba9",
+            "version": "==2.3.1"
+        },
         "pyparsing": {
             "hash": "sha256:67101d7acee692962f33dd30b5dce079ff532dd9aa99ff48d52a3dad51d2fe84",
             "version": "==2.1.10"
+        },
+        "pytest": {
+            "hash": "sha256:ccc23b4aab3ef3e19e731de9baca73f3b1a7e610d9ec65b28c36a5a3305f0349",
+            "version": "==2.9.2"
+        },
+        "pytest-describe": {
+            "hash": "sha256:c592f1294e4455cebe88f162a1475e347c0668ce256c4d1a4ccd21d6c5f51827",
+            "version": "==0.11.0"
+        },
+        "pytest-watch": {
+            "hash": "sha256:29941f6ff74e6d85cc0796434a5cbc27ebe51e91ed24fd0757fad5cc6fd3d491",
+            "version": "==4.1.0"
+        },
+        "pytest-cov": {
+            "hash": "sha256:10e37e876f49ddec80d6c83a54b657157f1387ebc0f7755285f8c156130014a1",
+            "version": "==2.4.0"
+        },
+        "pytest-django": {
+            "hash": "sha256:00995c2999b884a38ae9cd30a8c00ed32b3d38c1041250ea84caf18085589662",
+            "version": "==3.1.2"
+        },
+        "pytest-expecter": {
+            "hash": "sha256:9c6ed4d26df0e80a31b2c6ad86a959593f0c5b2459ea366496c45d9bbd9d358a",
+            "version": "==0.2.2.post3"
         },
         "PyYAML": {
             "hash": "sha256:592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab",
