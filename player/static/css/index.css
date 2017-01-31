@@ -1,14 +1,18 @@
+/* Boostrap */
+
 .navbar {
     border-radius: 0px;
 }
-.navbar-nav {
-    padding-left: 20px;
-    padding-right: 20px;
+.navbar-right {
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
-.buffer {
+.row {
     padding-top: 40px;
 }
+
+/* Custom */
 
 .btn-login {
     background-color: #DB0000;
@@ -22,6 +26,8 @@
 }
 .compass-image {
     height: 150px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 .compass-text {
     position: absolute;
@@ -30,12 +36,11 @@
     width: 100%;
 }
 
-.song-text {
+.song {
     height: 150px;
     display: flex;
-    float: right;
+    justify-content: flex-end;
     text-align: right;
-    flex-wrap: nowrap;
     align-items: center;
     font-size: 16px;
 }

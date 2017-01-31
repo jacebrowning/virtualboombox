@@ -12,7 +12,7 @@
     <body>
 
         <nav class="navbar navbar-inverse">
-            <div class="navbar-nav navbar-right">
+            <div class="navbar-right">
             {% if username %}
                 <p class="navbar-text">
                     Sharing from Last.fm as {{ username }}
@@ -26,42 +26,33 @@
         </nav>
 
         <div class="container">
+
             <div class="row">
-                <div class="col-sm-offset-2 col-sm-3">
+                <div class="col-sm-offset-2 col-sm-3 col-md-offset-3 col-md-2">
                     <div class="compass">
                         <img id="compass" class="compass-image" src="{% static 'images/compass.draw.io.svg' %}">
                         <div id="compass-text" class="compass-text">
-                           <!-- TODO: add placeholder text -->
+                           <!-- distance placeholder -->
                         </div>
                     </div>
                 </div>
 
-                <div class="col-sm-5">
-                    <div class="song-text">
+                <div class="col-sm-5 col-md-4">
+                    <div class="song">
                         <p id="current-song">
-                            Loading the nearest song...
+                            <!-- song placeholder -->
+                            Locating the next nearest song...
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="row buffer">
-                <div class="col-sm-offset-4 col-sm-4 col-lg-offset-5 col-lg-2">
-                    <button id="next-song" type="button" class="btn btn-default center-block">
-                        <span class="glyphicon glyphicon-refresh"></span>
-                        Find Nearest Song
-                    </button>
-                </div>
+            <div class="row">
+                <button id="next-song" type="button" class="btn btn-default center-block">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                    Find Nearest Song
+                </button>
             </div>
-
-            <!-- TODO: show the upcoming songs -->
-<!--             <div class="row">
-                <div class="col-sm-offset-2 col-sm-8">
-                    <ol id="next-songs">
-                        Loading the song queue...
-                    </ol>
-                </div>
-            </div> -->
 
         </div>
 
