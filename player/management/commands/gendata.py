@@ -7,12 +7,21 @@ class Command(BaseCommand):
     help = "Generate data for manual testing"
 
     def handle(self, *args, **kwargs):
-        account = Account.objects.get_or_create(username='justus87')
-        Account.objects.get_or_create(username='aliasguru')
-        Account.objects.get_or_create(username='thecreepr')
+        Account.objects.get_or_create(username='justus87')
+
+        a, _ = Account.objects.get_or_create(username='aliasguru')
+        a.latitude = 33.670348
+        a.longitude = 117.775990
+        a.save()
+
+        a, _ = Account.objects.get_or_create(username='thecreepr')
+        a.latitude = 42.909358
+        a.longitude = -85.753993
+        a.save()
+
         Account.objects.get_or_create(username='_invalid')
 
-        Song.objects.get_or_create(
+        s = Song.objects.get_or_create(
             artist="The Beatles",
             title="Come Together",
         )
