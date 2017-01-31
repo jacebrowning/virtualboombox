@@ -78,8 +78,8 @@ class QueuedSongViewSet(viewsets.ViewSet):
         # TODO: find the best matching song
         for song in (
                 Song.objects
-                    .exclude(account__username=username)
-                    .order_by('-date')
-            ):
+                .exclude(account__username=username)
+                .order_by('-date')
+        ):
             queued_song = QueuedSong(song, location)
             return queued_song

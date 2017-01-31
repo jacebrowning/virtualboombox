@@ -28,11 +28,13 @@ function showNextSong(event) {
     $("#compass").stopRotate();
     $("#compass").rotate(event.degrees);
 
-    var compassText = event.miles + "<br>" + "miles";
-    $("#compass-text").html(compassText);
+    var distance = "<b>" + event.miles + "</b>" + "<br>" + "miles";
+    $("#compass-text").html(distance);
 
-    var currentSongText = event.title + "<br>" + event.artist;
-    $("#current-song").html(currentSongText);
+    var title = "<p><b>" + event.title + "</b></p>";
+    var artist = "<p>" + event.artist + "</p>";
+    var song = title + artist;
+    $("#current-song").html(song);
 
     $("#next-song").prop("disabled", false);
 }

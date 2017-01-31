@@ -34,7 +34,7 @@ def calculate_bearing(point1, point2):
     lat1, long1, lat2, long2 = map(radians, (lat1, long1, lat2, long2))
 
     # Calculate bearing
-    Δlong = (long2 - long1);
+    Δlong = (long2 - long1)
 
     x = sin(Δlong) * cos(lat2)
     y = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(Δlong)

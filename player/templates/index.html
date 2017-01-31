@@ -2,6 +2,9 @@
 <html>
     <head>
         <title>Virtual Boombox</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/index.css' %}">
@@ -22,9 +25,9 @@
             </div>
         </nav>
 
-        <div class="content">
+        <div class="container">
             <div class="row">
-                <div class="col-xs-offset-2 col-xs-3">
+                <div class="col-sm-offset-2 col-sm-3">
                     <div class="compass">
                         <img id="compass" class="compass-image" src="{% static 'images/compass.draw.io.svg' %}">
                         <div id="compass-text" class="compass-text">
@@ -33,16 +36,18 @@
                     </div>
                 </div>
 
-                <div class="col-xs-5">
-                    <div id="current-song">
-                        Loading the nearest song...
+                <div class="col-sm-5">
+                    <div class="song-text">
+                        <p id="current-song">
+                            Loading the nearest song...
+                        </p>
                     </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xs-offset-5 col-xs-2">
-                    <button id="next-song" type="button" class="btn btn-default">
+            <div class="row buffer">
+                <div class="col-sm-offset-4 col-sm-4 col-lg-offset-5 col-lg-2">
+                    <button id="next-song" type="button" class="btn btn-default center-block">
                         <span class="glyphicon glyphicon-refresh"></span>
                         Find Nearest Song
                     </button>
@@ -51,12 +56,13 @@
 
             <!-- TODO: show the upcoming songs -->
 <!--             <div class="row">
-                <div class="col-xs-offset-2 col-xs-8">
+                <div class="col-sm-offset-2 col-sm-8">
                     <ol id="next-songs">
                         Loading the song queue...
                     </ol>
                 </div>
             </div> -->
+
         </div>
 
         <script src="//code.jquery.com/jquery-3.1.1.min.js"></script>

@@ -6,6 +6,10 @@
     padding-right: 20px;
 }
 
+.buffer {
+    padding-top: 40px;
+}
+
 .btn-login {
     background-color: #DB0000;
     color: #FFFFFF;
@@ -17,11 +21,21 @@
     float: left;
 }
 .compass-image {
-    width: 150px;
+    height: 150px;
 }
 .compass-text {
     position: absolute;
     left: 0;
     top: 55px;
     width: 100%;
+}
+
+.song-text {
+    height: 150px;
+    display: flex;
+    float: right;
+    text-align: right;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: 16px;
 }
