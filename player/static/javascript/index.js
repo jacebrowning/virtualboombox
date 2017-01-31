@@ -14,7 +14,6 @@ function updateLocation() {
     $("#messages").empty();
 
     var options = {
-      enableHighAccuracy: true,
       timeout: 10 * 1000,
       maximumAge: 5 * 60 * 1000,
     };
