@@ -34,9 +34,10 @@ class QueuedSongViewSet(viewsets.ViewSet):
         if username:
             self._update_account(username, location)
 
-        queued_song = self._get_next_song(location)
+        song = self._get_next_song(location)
+        log.info("Nearest song: %s @ %s", song.distance, song.angle)
 
-        return Response(queued_song.data, status=200)
+        return Response(song.data, status=200)
 
     @staticmethod
     def _get_username(request):
@@ -75,6 +76,6 @@ class QueuedSongViewSet(viewsets.ViewSet):
     @staticmethod
     def _get_next_song(location):
         # TODO: find the best matching song
-        for song in Song.objects.all():
+        for song in Song.objects.order_by('-date'):
             queued_song = QueuedSong(song, location)
             return queued_song

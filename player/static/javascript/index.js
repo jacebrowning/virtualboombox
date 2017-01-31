@@ -26,7 +26,7 @@ function updateLocation() {
 function showNextSong(event) {
     console.log(event);
     $("#compass").stopRotate();
-    // TODO: rotate to new angle
+    $("#compass").rotate(event.degrees - 90);
 
     var compassText = event.miles + "<br>" + "miles";
     $("#compass-text").html(compassText);

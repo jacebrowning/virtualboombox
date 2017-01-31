@@ -5,7 +5,7 @@ from django.conf import settings
 
 import pylast
 
-from .models import Account, Song
+from .models import Account
 
 
 log = logging.getLogger(__name__)
@@ -16,7 +16,6 @@ def index(request):
         username=request.session.get('username'),
         lastfm_api_key=settings.LASTFM_API_KEY,
         lastfm_callback_url=request.build_absolute_uri(reverse('login')),
-        songs=Song.objects.order_by('-date'),
     )
 
     return render(request, 'index.html', context)

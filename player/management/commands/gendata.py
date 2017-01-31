@@ -9,6 +9,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         account = Account.objects.get_or_create(username='justus87')
         Account.objects.get_or_create(username='aliasguru')
+        Account.objects.get_or_create(username='thecreepr')
         Account.objects.get_or_create(username='_invalid')
 
         Song.objects.get_or_create(
