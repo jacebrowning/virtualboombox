@@ -15,8 +15,8 @@ function updateLocation() {
 
     var options = {
       enableHighAccuracy: true,
-      timeout: 5 * 1000,
-      maximumAge: 10 * 1000,
+      timeout: 10 * 1000,
+      maximumAge: 5 * 60 * 1000,
     };
 
     navigator.geolocation.getCurrentPosition(
