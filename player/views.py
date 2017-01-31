@@ -31,3 +31,9 @@ def login(request):
         log.critical("TODO: show error message")
 
     return redirect('index')
+
+
+def logout(request):
+    request.session.pop('username', None)
+
+    return redirect('index')

@@ -24,8 +24,13 @@
                 <p class="navbar-text">
                     Sharing from Last.fm as {{ username }}
                 </p>
+                <a role="button" href="/logout" class="btn btn-logout navbar-btn" title="Log out from Last.fm">
+                    <span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                </a>
             {% else %}
-                <a href="https://www.last.fm/api/auth/?api_key={{ lastfm_api_key }}&&cb={{ lastfm_callback_url }}" class="btn btn-login navbar-btn fa fa-lastfm" role="button">
+                <a role="button" href="https://www.last.fm/api/auth/?api_key={{ lastfm_api_key }}&&cb={{ lastfm_callback_url }}" class="btn btn-login navbar-btn" title="Log in with Last.fm">
+                    <span class="glyphicon glyphicon-log-in"></span>
+                    &nbsp;
                     Share your Last.fm
                 </a>
             {% endif %}
@@ -63,6 +68,7 @@
             <div class="row">
                 <button id="next-song" type="button" class="btn btn-default center-block">
                     <span class="glyphicon glyphicon-refresh"></span>
+                    &nbsp;
                     Find Nearest Playing Song
                 </button>
             </div>

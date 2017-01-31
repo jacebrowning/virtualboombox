@@ -79,7 +79,7 @@ $(window).ready( function(e) {
     updateLocation();
 });
 
-$("#next-song").on( "click", function() {
+$("#next-song").on("click", function() {
     $("#next-song").prop("disabled", locationAvailable);
     spinCompass();
     updateLocation();
