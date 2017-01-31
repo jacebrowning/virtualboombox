@@ -37,7 +37,7 @@ class Location(models.Model):
 class Account(Location):
     """Last.fm account information and metadata."""
 
-    username = models.CharField(max_length=50)
+    username = models.CharField(max_length=50, unique=True)
 
     @classmethod
     def from_token(cls, token):
@@ -86,6 +86,9 @@ class Song(Location):
     title = models.CharField(max_length=200)
     account = models.ForeignKey(Account, null=True, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = ('artist', 'title', 'account')
 
     @classmethod
     def from_account(cls, account):
