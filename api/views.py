@@ -35,6 +35,7 @@ class QueuedSongViewSet(viewsets.ViewSet):
             self._update_account(username, location)
 
         song = self._get_next_song(location, username)
+        assert song, "No songs available"  # TODO: show a message?
         log.info("Nearest song: %s @ %s", song.distance, song.angle)
 
         return Response(song.data, status=200)

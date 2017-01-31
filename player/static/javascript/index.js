@@ -1,3 +1,5 @@
+var locationAvailable = false;
+
 function spinCompass() {
     var start = $("#compass").getRotateAngle();
     var rotations = 10;
@@ -9,18 +11,31 @@ function spinCompass() {
 }
 
 function updateLocation() {
-    navigator.geolocation.getCurrentPosition(function(location) {
-        var data = {
-            "latitude": location.coords.latitude,
-            "longitude": location.coords.longitude,
-        };
+    $("#messages").empty();
 
-        $.ajax({
-            url: "/api/queue/",
-            type: "post",
-            data: data,
-            success: showNextSong,
-        });
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5 * 1000,
+      maximumAge: 10 * 1000,
+    };
+
+    navigator.geolocation.getCurrentPosition(
+        getNextSong, showLocationWarning, options);
+}
+
+function getNextSong(location) {
+    locationAvailable = true;
+
+    var data = {
+        "latitude": location.coords.latitude,
+        "longitude": location.coords.longitude,
+    };
+
+    $.ajax({
+        url: "/api/queue/",
+        type: "post",
+        data: data,
+        success: showNextSong,
     });
 }
 
@@ -39,8 +54,20 @@ function showNextSong(event) {
     $("#next-song").prop("disabled", false);
 }
 
+function showLocationWarning(error) {
+    if (error.code == error.PERMISSION_DENIED) {
+        locationAvailable = false;
+        $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
+    } else if (error.code == error.POSITION_UNAVAILABLE) {
+        locationAvailable = false;
+        $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
+    }
+
+    $("#next-song").prop("disabled", false);
+}
+
 $(document).ready( function () {
-    $("#next-song").prop("disabled", true);
+    $("#next-song").prop("disabled", locationAvailable);
 });
 
 $(window).ready( function(e) {
@@ -49,7 +76,7 @@ $(window).ready( function(e) {
 });
 
 $("#next-song").on( "click", function() {
-    $("#next-song").prop("disabled", true);
+    $("#next-song").prop("disabled", locationAvailable);
     spinCompass();
     updateLocation();
 });
