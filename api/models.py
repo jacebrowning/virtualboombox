@@ -49,7 +49,7 @@ def calculate_bearing(point1, point2):
 
 class QueuedSong:
 
-    def __init__(self, this_location, song=None, **kwargs):
+    def __init__(self, song=None, this_location=None, **kwargs):
         self.artist = kwargs.get('artist') or song.artist
         self.title = kwargs.get('title') or song.title
         self.that_location = kwargs.get('that_location') or song.location
