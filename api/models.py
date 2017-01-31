@@ -11,13 +11,13 @@ def calculate_haversine(point1, point2):
     lat1, long1 = point1
     lat2, long2 = point2
 
-    # Convert all latitudes/longitudes from decimal degrees to radians
+    # Convert to radians
     lat1, long1, lat2, long2 = map(radians, (lat1, long1, lat2, long2))
 
-    # Calculate haversine
-    lat = lat2 - lat1
-    long = long2 - long1
-    d = sin(lat * 0.5) ** 2 + cos(lat1) * cos(lat2) * sin(long * 0.5) ** 2
+    # Calculate haversine distance
+    Δlat = lat2 - lat1
+    Δlong = long2 - long1
+    d = sin(Δlat * 0.5) ** 2 + cos(lat1) * cos(lat2) * sin(Δlong * 0.5) ** 2
     distance = 2 * AVERAGE_EARTH_RADIUS * asin(sqrt(d))
 
     return distance
@@ -30,31 +30,38 @@ def calculate_bearing(point1, point2):
     lat1, long1 = point1
     lat2, long2 = point2
 
-    delta_long = (long2 - long1);
+    # Convert all latitudes/longitudes from decimal degrees to radians
+    lat1, long1, lat2, long2 = map(radians, (lat1, long1, lat2, long2))
 
-    y = sin(delta_long) * cos(lat2)
-    x = cos(lat2) * sin(lat2) - sin(lat1) * cos(lat2) * cos(delta_long)
+    # Calculate bearing
+    Δlong = (long2 - long1);
 
-    radians = atan2(y, x)
+    x = sin(Δlong) * cos(lat2)
+    y = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(Δlong)
 
-    return degrees(radians)
+    # Normalize and convert to degrees
+    initial_bearing_radians = atan2(x, y)
+    initial_bearing_degrees = degrees(initial_bearing_radians)
+    compass_bearing_degrees = (initial_bearing_degrees + 360) % 360
+
+    return compass_bearing_degrees
 
 
 class QueuedSong:
 
-    def __init__(self, song, base_location):
-        self.artist = song.artist
-        self.title = song.title
-        self.location = float(song.latitude), float(song.longitude)
-        self.base_location = base_location
+    def __init__(self, this_location, song=None, **kwargs):
+        self.artist = kwargs.get('artist') or song.artist
+        self.title = kwargs.get('title') or song.title
+        self.that_location = kwargs.get('that_location') or song.location
+        self.this_location = this_location
 
     @property
     def distance(self):
-        return calculate_haversine(self.base_location, self.location)
+        return calculate_haversine(self.this_location, self.that_location)
 
     @property
     def angle(self):
-        return calculate_bearing(self.base_location, self.location)
+        return calculate_bearing(self.this_location, self.that_location)
 
     @property
     def data(self):

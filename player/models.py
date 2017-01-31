@@ -133,6 +133,10 @@ class Song(Location):
     def name(self):
         return f'"{self.title}" by {self.artist}'
 
+    @property
+    def location(self):
+        return float(self.latitude), float(self.longitude)
+
     @classmethod
     def _get_or_init(cls, track, account):
         kwargs = dict(

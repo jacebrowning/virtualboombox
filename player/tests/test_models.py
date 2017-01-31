@@ -39,7 +39,7 @@ def describe_song():
 
     @pytest.fixture
     def song():
-        return Song(artist="The Bars", title="Foo")
+        return Song(artist="The Bars", title="Foo", latitude=1, longitude=2)
 
     def describe_str():
 
@@ -50,3 +50,8 @@ def describe_song():
 
         def it_joins_the_artist_and_title(song):
             expect(song.name) == '"Foo" by The Bars'
+
+    def describe_location():
+
+        def is_a_tuple(song):
+            expect(song.location) == (1.0, 2.0)
