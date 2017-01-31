@@ -15,7 +15,7 @@ function updateLocation() {
         };
 
         $.ajax({
-            url: "/api/next/",
+            url: "/api/queue/",
             type: "post",
             data: data,
             success: showNextSong,

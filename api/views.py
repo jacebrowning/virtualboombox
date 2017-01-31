@@ -7,8 +7,9 @@ from rest_framework.response import Response
 
 from player.models import Account, Song
 
-from .serializers import SongSerializer, NextSerializer
-from .utils import haversine
+from .serializers import (SongSerializer,
+                          QueueRequestSerializer, QueuedSongSerializer)
+from .models import QueuedSong
 
 
 log = logging.getLogger(__name__)
@@ -20,11 +21,11 @@ class SongViewSet(viewsets.ModelViewSet):
     serializer_class = SongSerializer
 
 
-class NextViewSet(viewsets.ViewSet):
+class QueuedSongViewSet(viewsets.ViewSet):
 
     permission_classes = [AllowAny]
     authentication_classes = []
-    serializer_class = NextSerializer
+    serializer_class = QueueRequestSerializer
 
     @csrf_exempt
     def create(self, request):
@@ -34,12 +35,8 @@ class NextViewSet(viewsets.ViewSet):
         if username:
             self._update_account(username, location)
 
-        song, distance = self._get_next_song(location)
-        data = dict(
-            artist=song.artist,
-            title=song.title,
-            distance=distance,
-        )
+        queued_song = self._get_next_song(location)
+        data = QueuedSongSerializer(queued_song).data
 
         return Response(data, status=200)
 
@@ -60,6 +57,7 @@ class NextViewSet(viewsets.ViewSet):
 
     @staticmethod
     def _get_location(request):
+        # TODO: require latitude and longitude, fail on blanks
         latitude = float(request.POST.get('latitude'))
         longitude = float(request.POST.get('longitude'))
         log.info("Location specified: %s, %s", latitude, longitude)
@@ -80,6 +78,5 @@ class NextViewSet(viewsets.ViewSet):
     def _get_next_song(location):
         # TODO: find the best matching song
         for song in Song.objects.all():
-            base = (song.latitude, song.longitude)
-            distance = haversine(location, base)
-            return song, distance
+            queued_song = QueuedSong(song, location)
+            return queued_song

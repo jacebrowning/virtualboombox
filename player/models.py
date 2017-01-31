@@ -26,7 +26,7 @@ class Location(models.Model):
         return f"({self.latitude}, {self.longitude})"
 
     @property
-    def url(self):
+    def maps_url(self):
         return ("https://www.google.com/maps/"
                 f"@{self.latitude:.4f},{self.longitude:.4f},19z")
 

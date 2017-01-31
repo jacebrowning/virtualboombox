@@ -10,10 +10,10 @@ def describe_location():
     def location():
         return Location(latitude=1.2, longitude=-3.4)
 
-    def describe_url():
+    def describe_maps_url():
 
         def it_uses_google_maps(location):
-            expect(location.url) == \
+            expect(location.maps_url) == \
                 "https://www.google.com/maps/@1.2000,-3.4000,19z"
 
 

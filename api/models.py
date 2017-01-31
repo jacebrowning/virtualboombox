@@ -21,3 +21,16 @@ def haversine(point1, point2):
     distance = 2 * AVERAGE_EARTH_RADIUS * asin(sqrt(d))
 
     return distance
+
+
+class QueuedSong:
+
+    def __init__(self, song, base_location):
+        self.artist = song.artist
+        self.title = song.title
+        self.location = song.latitude, song.longitude
+        self.base_location = base_location
+
+    @property
+    def distance(self):
+        return haversine(self.location, self.base_location)

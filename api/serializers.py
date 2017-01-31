@@ -10,8 +10,15 @@ class SongSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'artist', 'title', 'latitude', 'longitude', 'date')
 
 
-class NextSerializer(serializers.Serializer):
+class QueueRequestSerializer(serializers.Serializer):
 
     latitude = serializers.FloatField()
     longitude = serializers.FloatField()
     username = serializers.CharField(required=False)
+
+
+class QueuedSongSerializer(serializers.Serializer):
+
+    artist = serializers.CharField()
+    title = serializers.CharField()
+    distance = serializers.FloatField()

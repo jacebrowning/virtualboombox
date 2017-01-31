@@ -8,17 +8,17 @@ admin.site.site_header = "Virtual Boombox"
 
 class ClickableMixin:
 
-    def clickable_url(self, obj):
-        return f'<a href="{obj.url}">{obj.url}</a>'
+    def clickable_maps_url(self, obj):
+        return f'<a href="{obj.maps_url}">{obj.maps_url}</a>'
 
-    clickable_url.allow_tags = True
-    clickable_url.short_description = 'Location'
+    clickable_maps_url.allow_tags = True
+    clickable_maps_url.short_description = 'Location'
 
 
 class AccountAdmin(admin.ModelAdmin, ClickableMixin):
     list_display = [
         'username',
-        'clickable_url',
+        'clickable_maps_url',
     ]
 
 
@@ -26,7 +26,7 @@ class SongAdmin(admin.ModelAdmin, ClickableMixin):
     list_display = [
         'name',
         'username',
-        'clickable_url',
+        'clickable_maps_url',
         'date',
     ]
 
