@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.core.management.base import BaseCommand
 
 from player.models import Account, Song
@@ -11,7 +13,7 @@ class Command(BaseCommand):
 
         a, _ = Account.objects.get_or_create(username='aliasguru')
         a.latitude = 33.670348
-        a.longitude = 117.775990
+        a.longitude = -117.775990
         a.save()
 
         a, _ = Account.objects.get_or_create(username='thecreepr')
@@ -24,4 +26,5 @@ class Command(BaseCommand):
         s = Song.objects.get_or_create(
             artist="The Beatles",
             title="Come Together",
+            date=datetime(2017, 1, 30),
         )

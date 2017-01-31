@@ -1,8 +1,8 @@
 function initCompass() {
     var rotations = 10;
     $("#compass").rotate({
-        angle: -90,
-        animateTo: 270 + (360 * rotations),
+        angle: 0,
+        animateTo: 360 * rotations,
         duration: 20000 * rotations,
     });
 }
@@ -26,7 +26,7 @@ function updateLocation() {
 function showNextSong(event) {
     console.log(event);
     $("#compass").stopRotate();
-    $("#compass").rotate(event.degrees - 90);
+    $("#compass").rotate(event.degrees);
 
     var compassText = event.miles + "<br>" + "miles";
     $("#compass-text").html(compassText);
