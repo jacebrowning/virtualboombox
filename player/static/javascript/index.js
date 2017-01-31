@@ -1,12 +1,12 @@
 var locationAvailable = false;
 
 function spinCompass() {
-    var start = $("#compass").getRotateAngle();
+    var start = $("#compass").getRotateAngle() % 360;
     var rotations = 10;
     $("#compass").rotate({
         angle: start,
         animateTo: 360 * rotations,
-        duration: 20000 * rotations,
+        duration: 20 * 1000 * rotations,
     });
 }
 
@@ -40,8 +40,13 @@ function getNextSong(location) {
 }
 
 function showNextSong(event) {
-    $("#compass").stopRotate();
-    $("#compass").rotate(event.degrees);
+    var start = $("#compass").getRotateAngle() % 360;
+    $("#compass").rotate({
+        angle: start,
+        animateTo: event.degrees,
+        duration: 1.5 * 1000,
+        easing: $.easing.easeOutElastic,
+    });
 
     var distance = "<b>" + event.miles + "</b>" + "<br>" + "miles";
     $("#compass-text").html(distance);
