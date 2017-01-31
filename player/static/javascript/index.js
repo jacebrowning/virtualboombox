@@ -1,8 +1,9 @@
 function initCompass() {
+    var rotations = 10;
     $("#compass").rotate({
         angle: -90,
-        animateTo: 270,
-        duration: 20000,
+        animateTo: 270 + (360 * rotations),
+        duration: 20000 * rotations,
     });
 }
 
