@@ -8,7 +8,7 @@
         ],
         "requires": {},
         "hash": {
-            "sha256": "57cbfae88a2d5806006650ca1fa998531ee59b9e7bb16a7329c441b03b81126a"
+            "sha256": "77afd6bc39d1a8ff3572642e942dcf4a58f476b2488b4474461f1867cb4d6b31"
         }
     },
     "default": {
@@ -75,8 +75,8 @@
             "version": "==4.1.0"
         },
         "coverage.space": {
-            "hash": "sha256:1d297155549ecbc1c8ec853c13e478171be514732aba77663f37592bba291c33",
-            "version": "==0.6.3"
+            "hash": "sha256:07d4a01a500f4070597fa3aa4ee3a305abcb02c20ea6d24a09d6fc3ca9a655df",
+            "version": "==0.7"
         },
         "pytest-expecter": {
             "hash": "sha256:9c6ed4d26df0e80a31b2c6ad86a959593f0c5b2459ea366496c45d9bbd9d358a",
