@@ -1,7 +1,8 @@
-function initCompass() {
+function spinCompass() {
+    var start = $("#compass").getRotateAngle();
     var rotations = 10;
     $("#compass").rotate({
-        angle: 0,
+        angle: start,
         animateTo: 360 * rotations,
         duration: 20000 * rotations,
     });
@@ -24,7 +25,6 @@ function updateLocation() {
 }
 
 function showNextSong(event) {
-    console.log(event);
     $("#compass").stopRotate();
     $("#compass").rotate(event.degrees);
 
@@ -33,9 +33,21 @@ function showNextSong(event) {
 
     var currentSongText = event.title + "<br>" + event.artist;
     $("#current-song").html(currentSongText);
+
+    $("#next-song").prop("disabled", false);
 }
 
-window.onload = function() {
-    initCompass();
+$(document).ready( function () {
+    $("#next-song").prop("disabled", true);
+});
+
+$(window).ready( function(e) {
+    spinCompass();
     updateLocation();
-}
+});
+
+$("#next-song").on( "click", function() {
+    $("#next-song").prop("disabled", true);
+    spinCompass();
+    updateLocation();
+});
