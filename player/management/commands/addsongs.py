@@ -22,9 +22,15 @@ class Command(BaseCommand):
             for account in Account.objects.all():
                 song = Song.from_account(account)
                 if song:
+                    song.update_links()
                     song.save()
-
                 time.sleep(1)
+
+            for song in Song.objects.all():
+                updated = song.update_links()
+                if updated:
+                    song.save()
+                    time.sleep(1)
 
             if not options['loop']:
                 break

@@ -8,7 +8,7 @@
         ],
         "requires": {},
         "hash": {
-            "sha256": "a1d0ef3bf58ab1c3fade33509a44ad492ae3c5cbddaffc103156b2241aa54c12"
+            "sha256": "5161f218bd0dcba4e7989b8c8c7e07d83a0f7313d370cb1fbc158b84b4a1c8ec"
         }
     },
     "default": {
@@ -28,13 +28,33 @@
             "hash": "sha256:f446041a944723e14502a0a5880d0bc74a499ac1075781177f2fa6d7fe7b415d",
             "version": "==3.5.3"
         },
+        "google-api-python-client": {
+            "hash": "sha256:2a79be312b7f393d25f5482620a5d4f58479d03931f3470a41f04d10589564ec",
+            "version": "==1.6.1"
+        },
         "gunicorn": {
             "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
             "version": "==19.6.0"
         },
+        "httplib2": {
+            "hash": "sha256:fe187f315336c3daa6616d09f327a6e6560b082fce59723f77336329fdcbfc36",
+            "version": "==0.9.2"
+        },
+        "oauth2client": {
+            "hash": "sha256:f8ff4ad855b8917cdf213a33719e874d0fab1c26d44b2f08c9dfd7a5781889f5",
+            "version": "==4.0.0"
+        },
         "psycopg2": {
             "hash": "sha256:70490e12ed9c5c818ecd85d185d363335cc8a8cbf7212e3c185431c79ff8c05c",
             "version": "==2.6.2"
+        },
+        "pyasn1": {
+            "hash": "sha256:28fee44217991cfad9e6a0b9f7e3f26041e21ebc96629e94e585ccd05d49fa65",
+            "version": "==0.1.9"
+        },
+        "pyasn1-modules": {
+            "hash": "sha256:6c955210b86fcff3420957072280560ddaf183aa761fb76240c20c322e01021d",
+            "version": "==0.0.8"
         },
         "pylast": {
             "hash": "sha256:a482a769b6a037e2e9b78433de91a287eaf6aacff60bbb2f4562c3c7ece10430",
@@ -44,9 +64,17 @@
             "hash": "sha256:a1ea35e87a63c7825846d5b5c81d23d668e8a102d3b1b465ce95afe1b3a2e065",
             "version": "==2016.10"
         },
+        "rsa": {
+            "hash": "sha256:43f682fea81c452c98d09fc316aae12de6d30c4b5c84226642cf8f8fd1c93abd",
+            "version": "==3.4.2"
+        },
         "six": {
             "hash": "sha256:0ff78c403d9bccf5a425a6d31a12aa6b47f1c21ca4dc2573a7e2f32a97335eb1",
             "version": "==1.10.0"
+        },
+        "uritemplate": {
+            "hash": "sha256:1b9c467a940ce9fb9f50df819e8ddd14696f89b9a8cc87ac77952ba416e0a8fd",
+            "version": "==3.0.0"
         },
         "whitenoise": {
             "hash": "sha256:1d62a003a0ab747de96da45c831cbb512dcb7f69c1ef0bd20b1cd4ae45d8a0c4",

@@ -7,10 +7,12 @@ from django.utils import timezone
 
 import pylast
 import pytz
+from apiclient.discovery import build
 
 
 DEFAULT_LOCATION = (-48.876667, -123.393333)  # Oceanic Pole of Inaccessibility
-DEFAULT_YOUTUBE_URL = "https://www.youtube.com/v/dQw4w9WgXcQ"
+YOUTUBE_URL_PATTERN = "https://www.youtube.com/v/{}"
+DEFAULT_YOUTUBE_URL = YOUTUBE_URL_PATTERN.format("dQw4w9WgXcQ")
 
 log = logging.getLogger(__name__)
 
@@ -141,6 +143,28 @@ class Song(Location):
     @property
     def location(self):
         return float(self.latitude), float(self.longitude)
+
+    def update_links(self):
+        if self.youtube_url != DEFAULT_YOUTUBE_URL:
+            return False
+
+        query = f'"{self.artist} - {self.title}"'
+
+        youtube = build('youtube', 'v3', developerKey=settings.YOUTUBE_API_KEY)
+        search_response = youtube.search().list(
+            q=query,
+            part="id,snippet",
+            maxResults=5
+        ).execute()
+
+        for search_result in search_response.get('items', []):
+            if search_result['id']['kind'] == 'youtube#video':
+                vid = search_result['id']['videoId']
+                self.youtube_url = YOUTUBE_URL_PATTERN.format(vid)
+                log.info("%s => %s", query, self.youtube_url)
+                return True
+
+        return False
 
     @classmethod
     def _get_or_init(cls, track, account):

@@ -91,3 +91,5 @@ run-prod: .env install db
 	echo DATABASE_URL=postgresql://localhost/virtualboombox_dev >> $@
 	echo LASTFM_API_KEY= >> $@
 	echo LASTFM_API_SECRET= >> $@
+	echo GOOGLE_APPLICATION_CREDENTIALS= >> $@
+	echo YOUTUBE_API_KEY= >> $@
