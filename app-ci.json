@@ -10,7 +10,7 @@
   },
   "buildpacks": [
     {
-      "url": "https://github.com/kennethreitz/heroku-buildpack-pipenv.git#c189bab645e2b37a4c39889086dc7889fc0c1b15"
+      "url": "https://github.com/jacebrowning/heroku-buildpack-pipenv"
     }
   ],
   "addons": [
