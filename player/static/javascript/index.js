@@ -49,7 +49,7 @@ function getSongs(location) {
 
     locationAvailable = true;
 
-    data["limit"] = 5;
+    data["limit"] = 10;
     $.ajax({
         url: "/api/queue/",
         type: "post",
@@ -87,8 +87,11 @@ function showSongQueue(songs) {
     $("#song-queue").empty();
     for (i = 0; i < songs.length; i++) {
         var song = songs[i];
-        var name = song.artist + " - " + "<b>" + song.title + "</b>";
-        $("#song-queue").append("<li>" + name + "</li>");
+        var item = ""
+            + song.artist
+            + "&emsp;-&emsp;<b>" + song.title + "</b>"
+            + "&emsp;@&emsp;<i>" + song.miles + " miles</i>";
+        $("#song-queue").append("<li>" + item + "</li>");
     }
 }
 

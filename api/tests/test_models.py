@@ -1,3 +1,5 @@
+from unittest.mock import Mock
+
 import pytest
 from expecter import expect
 
@@ -17,9 +19,11 @@ def describe_queued_song():
     @pytest.fixture
     def song(irvine_ca, grand_rapids_mi):
         return QueuedSong(
-            artist="John Mayer",
-            title="No Such Thing",
-            youtube_url="http://example.com",
+            song=Mock(
+                artist="John Mayer",
+                title="No Such Thing",
+                youtube_url="http://example.com",
+            ),
             that_location=irvine_ca,
             this_location=grand_rapids_mi,
         )

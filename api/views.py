@@ -30,18 +30,11 @@ class QueuedSongViewSet(viewsets.ViewSet):
     def create(self, request):
         username = self._get_username(request)
         location = self._get_location(request)
-        plays = request.session.get('plays', [])
-        limit = int(request.POST.get('limit') or 1)
 
         if username:
             self._update_account(username, location)
 
-        songs = list(self._yield_songs(location, username, plays, limit))
-        assert songs, "No songs available"  # TODO: show a message to the user?
-
-        log.info("Nearest song: %s @ %s", songs[0].distance, songs[0].angle)
-        plays.append(songs[0].id)
-        request.session['plays'] = plays
+        songs = self._get_songs(request, username, location)
 
         return Response([s.data for s in songs], status=200)
 
@@ -71,25 +64,38 @@ class QueuedSongViewSet(viewsets.ViewSet):
     @staticmethod
     def _update_account(username, location):
         log.debug("Updating account location...")
+
         account = Account.objects.filter(username=username).first()
-        if account:
-            account.latitude = location[0]
-            account.longitude = location[1]
-            account.save()
-        else:
+        if not account:
             log.warning("No matching account for username: %r", username)
+            return
+
+        account.latitude = location[0]
+        account.longitude = location[1]
+        account.save()
+
+    @classmethod
+    def _get_songs(cls, request, username, location):
+        played_song_ids = request.session.get('played_song_ids', [])
+        limit = int(request.POST.get('limit') or 1)
+
+        result = cls._run_query(username, played_song_ids, location, limit)
+        songs = sorted(result, key=lambda x: x.distance)
+        assert songs, "No songs available"  # TODO: show a message to the user?
+
+        log.info("Nearest song: %s @ %s", songs[0].distance, songs[0].angle)
+        played_song_ids.append(songs[0].id)
+        request.session['played_song_ids'] = played_song_ids
+
+        return songs
 
     @staticmethod
-    def _yield_songs(location, username, plays, limit):
-        # TODO: find the best matching song
-        query = (
-            Song.objects
-            .exclude(account__username=username)
-            .order_by('-date')
-        )
+    def _run_query(username, played_song_ids, location, limit):
         count = 0
-        for song in query:
-            if song.id in plays:
+        for song in Song.objects \
+                .exclude(account__username=username).order_by('-date'):
+
+            if song.id in played_song_ids:
                 log.debug("Already played: %s", song)
                 continue
 

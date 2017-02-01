@@ -49,13 +49,18 @@ def calculate_bearing(point1, point2):
 
 class QueuedSong:
 
-    def __init__(self, song=None, this_location=None, **kwargs):
-        self.id = song.id if song else None
-        self.artist = kwargs.get('artist') or song.artist
-        self.title = kwargs.get('title') or song.title
-        self.youtube_url = kwargs.get('youtube_url') or song.youtube_url
-        self.that_location = kwargs.get('that_location') or song.location
+    def __init__(self, song, this_location, that_location=None):
+        self.song = song
         self.this_location = this_location
+        self._that_location = that_location
+
+    @property
+    def id(self):
+        return self.song.id
+
+    @property
+    def that_location(self):
+        return self._that_location or self.song.location
 
     @property
     def distance(self):
@@ -68,9 +73,9 @@ class QueuedSong:
     @property
     def data(self):
         return dict(
-            artist=self.artist,
-            title=self.title,
+            artist=self.song.artist,
+            title=self.song.title,
             miles=f"{self.distance:.1f}",
             degrees=self.angle,
-            youtube_url=self.youtube_url,
+            youtube_url=self.song.youtube_url,
         )
