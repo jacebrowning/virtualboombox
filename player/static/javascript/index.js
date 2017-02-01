@@ -1,8 +1,6 @@
 var locationAvailable = false;
 
 function spinCompass() {
-    $("#messages").empty();
-
     if (!$("#current-song").val()) {
         $("#current-song").html("Locating the nearest song...");
     }
@@ -27,6 +25,8 @@ function stopCompass() {
 }
 
 function updateLocation() {
+    $("#messages").empty();
+
     var options = {
       timeout: 10 * 1000,
       maximumAge: 5 * 60 * 1000,
@@ -79,12 +79,11 @@ function showLocationWarning(error) {
     console.log("Position unavailable: ", error);
 
     if (error.code == error.PERMISSION_DENIED) {
-        stopCompass();
         $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
-    } else if (error.code == error.POSITION_UNAVAILABLE) {
+        stopCompass();
+    } else {
         stopCompass();
         $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
-    } else {
         setTimeout(updateLocation, 3 * 1000);
     }
 }
