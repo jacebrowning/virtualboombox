@@ -2,10 +2,18 @@
 
 .navbar {
     border-radius: 0px;
-}
-.navbar-right {
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.navbar-collapse.collapse {
+    display: block !important;
+}
+.navbar-nav>p, .navbar-nav>a, .navbar-nav {
+    float: left !important;
+}
+.navbar-right {
+    float: right !important;
 }
 
 .messages {
@@ -22,7 +30,24 @@
 
 .btn-login {
     background-color: #db1f12;
-    color: #f0f0f0;
+    color: #f0f0f0 !important;
+}
+.btn-login:hover {
+    color: #000000 !important;
+}
+
+.btn-logout {
+    background-color: #db1f12;
+    color: #f0f0f0 !important;
+}
+.btn-logout:hover {
+    color: #000000 !important;
+}
+@media (max-width: 768px) {
+    .navbar-text {
+        /* TODO: This hack is needed because the navbar changes size.*/
+        padding-right: 20px;
+    }
 }
 
 .compass {

@@ -19,16 +19,25 @@
     <body>
 
         <nav class="navbar navbar-inverse">
-            <div class="navbar-right">
-            {% if username %}
-                <p class="navbar-text">
-                    Sharing from Last.fm as {{ username }}
-                </p>
-            {% else %}
-                <a href="https://www.last.fm/api/auth/?api_key={{ lastfm_api_key }}&&cb={{ lastfm_callback_url }}" class="btn btn-login navbar-btn fa fa-lastfm" role="button">
-                    Share your Last.fm
-                </a>
-            {% endif %}
+            <div class="collapse navbar-collapse">
+
+                <div class="nav navbar-nav navbar-right">
+                {% if username %}
+                    <p class="navbar-text">
+                        Sharing from Last.fm as {{ username }}
+                    </p>
+                    <a role="button" href="/logout" class="btn btn-logout navbar-btn" title="Log out from Last.fm">
+                        <span class="glyphicon glyphicon-log-out"></span>&nbsp;
+                    </a>
+                {% else %}
+                    <a role="button" href="https://www.last.fm/api/auth/?api_key={{ lastfm_api_key }}&&cb={{ lastfm_callback_url }}" class="btn btn-login navbar-btn" title="Log in with Last.fm">
+                        <span class="glyphicon glyphicon-log-in"></span>
+                        &nbsp;
+                        Share your Last.fm
+                    </a>
+                {% endif %}
+                </div>
+
             </div>
         </nav>
 
@@ -45,17 +54,14 @@
                     <div class="compass">
                         <img id="compass" class="compass-image" src="{% static 'images/compass.draw.io.svg' %}">
                         <div id="compass-text" class="compass-text">
-                           <!-- distance placeholder -->
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-5 col-md-4">
                     <div class="song">
-                        <p id="current-song">
-                            <!-- song placeholder -->
-                            Locating the nearest playing song...
-                        </p>
+                        <div id="current-song">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,7 +69,8 @@
             <div class="row">
                 <button id="next-song" type="button" class="btn btn-default center-block">
                     <span class="glyphicon glyphicon-refresh"></span>
-                    Find Nearest Playing Song
+                    &nbsp;
+                    Find Next Song
                 </button>
             </div>
 

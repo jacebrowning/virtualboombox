@@ -1,6 +1,10 @@
 var locationAvailable = false;
 
 function spinCompass() {
+    if (!$.trim($("#current-song").html())) {
+        $("#current-song").html("<i>Locating the nearest song...</i>");
+    }
+
     var start = $("#compass").getRotateAngle() % 360;
     var rotations = 10;
     $("#compass").rotate({
@@ -8,6 +12,16 @@ function spinCompass() {
         animateTo: 360 * rotations,
         duration: 20 * 1000 * rotations,
     });
+}
+
+function stopCompass() {
+    $("#compass").stopRotate();
+
+    $("#current-song").empty();
+
+    $("#next-song").prop("disabled", false);
+
+    locationAvailable = false;
 }
 
 function updateLocation() {
@@ -18,17 +32,20 @@ function updateLocation() {
       maximumAge: 5 * 60 * 1000,
     };
 
+    console.log("Getting current position...");
     navigator.geolocation.getCurrentPosition(
         getNextSong, showLocationWarning, options);
 }
 
 function getNextSong(location) {
-    locationAvailable = true;
-
     var data = {
         "latitude": location.coords.latitude,
         "longitude": location.coords.longitude,
+        "accuracy": location.coords.accuracy,
     };
+    console.log("Current position: ", data);
+
+    locationAvailable = true;
 
     $.ajax({
         url: "/api/queue/",
@@ -59,15 +76,16 @@ function showNextSong(event) {
 }
 
 function showLocationWarning(error) {
-    if (error.code == error.PERMISSION_DENIED) {
-        locationAvailable = false;
-        $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
-    } else if (error.code == error.POSITION_UNAVAILABLE) {
-        locationAvailable = false;
-        $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
-    }
+    console.log("Position unavailable: ", error);
 
-    $("#next-song").prop("disabled", false);
+    if (error.code == error.PERMISSION_DENIED) {
+        $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
+        stopCompass();
+    } else {
+        stopCompass();
+        $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
+        setTimeout(updateLocation, 3 * 1000);
+    }
 }
 
 $(document).ready( function () {
@@ -79,7 +97,7 @@ $(window).ready( function(e) {
     updateLocation();
 });
 
-$("#next-song").on( "click", function() {
+$("#next-song").on("click", function() {
     $("#next-song").prop("disabled", locationAvailable);
     spinCompass();
     updateLocation();
