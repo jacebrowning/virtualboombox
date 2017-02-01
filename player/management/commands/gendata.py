@@ -1,6 +1,7 @@
-from datetime import datetime
+from datetime import timedelta
 
 from django.core.management.base import BaseCommand
+from django.utils import timezone
 
 from player.models import Account, Song
 
@@ -26,5 +27,5 @@ class Command(BaseCommand):
         s = Song.objects.get_or_create(
             artist="The Beatles",
             title="Come Together",
-            date=datetime(2017, 1, 30),
+            date=timezone.now() - timedelta(days=3),
         )

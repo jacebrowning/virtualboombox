@@ -1,5 +1,7 @@
 var locationAvailable = false;
 
+// Compass
+
 function spinCompass() {
     if (!$.trim($("#current-song").html())) {
         $("#current-song").html("<i>Locating the nearest song...</i>");
@@ -59,6 +61,7 @@ function getSongs(location) {
 function showSongs(songs) {
     showNextSong(songs[0]);
     showSongQueue(songs.slice(1));
+    playVideo(songs[0].youtube_url);
 }
 
 function showNextSong(song) {
@@ -81,7 +84,6 @@ function showNextSong(song) {
 }
 
 function showSongQueue(songs) {
-    console.log(songs);
     $("#song-queue").empty();
     for (i = 0; i < songs.length; i++) {
         var song = songs[i];
@@ -102,6 +104,31 @@ function showLocationWarning(error) {
         setTimeout(updateLocation, 3 * 1000);
     }
 }
+
+// Player
+
+function onPlayerReady(event) {
+    console.log("Player is ready")
+}
+
+function playVideo(url) {
+    var checkExist = setInterval(function() {
+       if (window.player) {
+            console.log("Playing video: ", url)
+            window.player.loadVideoByUrl({mediaContentUrl: url});
+            clearInterval(checkExist);
+       }
+    }, 1 * 1000);
+}
+
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.ENDED) {
+        console.log("Player has finished")
+        $("#next-song").trigger("click");
+    }
+}
+
+// Events
 
 $(document).ready( function () {
     $("#next-song").prop("disabled", locationAvailable);

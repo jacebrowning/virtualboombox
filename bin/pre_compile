@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -eo pipefail
+
+indent() {
+  sed "s/^/       /"
+}
+
+puts-step() {
+  echo "-----> $@"
+}
+
+puts-step "Storing Google application credentials..."
+echo ${GOOGLE_APPLICATION_CREDENTIALS_DATA} > ${GOOGLE_APPLICATION_CREDENTIALS} | indent

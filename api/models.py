@@ -52,6 +52,7 @@ class QueuedSong:
     def __init__(self, song=None, this_location=None, **kwargs):
         self.artist = kwargs.get('artist') or song.artist
         self.title = kwargs.get('title') or song.title
+        self.youtube_url = kwargs.get('youtube_url') or song.youtube_url
         self.that_location = kwargs.get('that_location') or song.location
         self.this_location = this_location
 
@@ -70,4 +71,5 @@ class QueuedSong:
             title=self.title,
             miles=f"{self.distance:.1f}",
             degrees=self.angle,
+            youtube_url=self.youtube_url,
         )

@@ -6,6 +6,9 @@
     "DJANGO_SETTINGS_MODULE": {
       "required": true
     },
+    "GOOGLE_APPLICATION_CREDENTIALS": {
+      "required": true
+    },
     "LASTFM_API_KEY": {
       "required": true
     },
@@ -17,11 +20,14 @@
     },
     "WEB_CONCURRENCY": {
       "value": "4"
+    },
+    "YOUTUBE_API_KEY": {
+      "required": true
     }
   },
   "buildpacks": [
     {
-      "url": "https://github.com/kennethreitz/heroku-buildpack-pipenv"
+      "url": "https://github.com/jacebrowning/heroku-buildpack-pipenv"
     }
   ],
   "addons": [
