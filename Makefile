@@ -83,6 +83,7 @@ run: .env install db db-migrate db-superuser
 
 .PHONY: run-prod
 run-prod: .env install db
+	$(ACIVATE) bin/pre_compile
 	$(ACIVATE) bin/post_compile
 	$(ACIVATE) heroku local
 
@@ -91,5 +92,6 @@ run-prod: .env install db
 	echo DATABASE_URL=postgresql://localhost/virtualboombox_dev >> $@
 	echo LASTFM_API_KEY= >> $@
 	echo LASTFM_API_SECRET= >> $@
-	echo GOOGLE_APPLICATION_CREDENTIALS= >> $@
+	echo GOOGLE_APPLICATION_CREDENTIALS_DATA= >> $@
+	echo GOOGLE_APPLICATION_CREDENTIALS=/tmp/google.json >> $@
 	echo YOUTUBE_API_KEY= >> $@
