@@ -1,7 +1,7 @@
 var locationAvailable = false;
 
 function spinCompass() {
-    if (!$("#current-song").val()) {
+    if ($("#current-song").html() == "") {
         $("#current-song").html("Locating the nearest song...");
     }
 
