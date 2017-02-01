@@ -1,6 +1,12 @@
 var locationAvailable = false;
 
 function spinCompass() {
+    $("#messages").empty();
+
+    if (!$("#current-song").val()) {
+        $("#current-song").html("Locating the nearest song...");
+    }
+
     var start = $("#compass").getRotateAngle() % 360;
     var rotations = 10;
     $("#compass").rotate({
@@ -10,25 +16,36 @@ function spinCompass() {
     });
 }
 
-function updateLocation() {
-    $("#messages").empty();
+function stopCompass() {
+    $("#compass").stopRotate();
 
+    $("#current-song").empty();
+
+    $("#next-song").prop("disabled", false);
+
+    locationAvailable = false;
+}
+
+function updateLocation() {
     var options = {
       timeout: 10 * 1000,
       maximumAge: 5 * 60 * 1000,
     };
 
+    console.log("Getting current position...");
     navigator.geolocation.getCurrentPosition(
         getNextSong, showLocationWarning, options);
 }
 
 function getNextSong(location) {
-    locationAvailable = true;
-
     var data = {
         "latitude": location.coords.latitude,
         "longitude": location.coords.longitude,
+        "accuracy": location.coords.accuracy,
     };
+    console.log("Current position: ", data);
+
+    locationAvailable = true;
 
     $.ajax({
         url: "/api/queue/",
@@ -59,15 +76,17 @@ function showNextSong(event) {
 }
 
 function showLocationWarning(error) {
+    console.log("Position unavailable: ", error);
+
     if (error.code == error.PERMISSION_DENIED) {
-        locationAvailable = false;
+        stopCompass();
         $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
     } else if (error.code == error.POSITION_UNAVAILABLE) {
-        locationAvailable = false;
+        stopCompass();
         $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
+    } else {
+        setTimeout(updateLocation, 3 * 1000);
     }
-
-    $("#next-song").prop("disabled", false);
 }
 
 $(document).ready( function () {
