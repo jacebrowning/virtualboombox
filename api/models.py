@@ -50,6 +50,7 @@ def calculate_bearing(point1, point2):
 class QueuedSong:
 
     def __init__(self, song=None, this_location=None, **kwargs):
+        self.id = song.id if song else None
         self.artist = kwargs.get('artist') or song.artist
         self.title = kwargs.get('title') or song.title
         self.youtube_url = kwargs.get('youtube_url') or song.youtube_url
