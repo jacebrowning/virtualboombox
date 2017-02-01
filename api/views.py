@@ -30,15 +30,16 @@ class QueuedSongViewSet(viewsets.ViewSet):
     def create(self, request):
         username = self._get_username(request)
         location = self._get_location(request)
+        limit = int(request.POST.get('limit') or 1)
 
         if username:
             self._update_account(username, location)
 
-        song = self._get_next_song(location, username)
-        assert song, "No songs available"  # TODO: show a message?
-        log.info("Nearest song: %s @ %s", song.distance, song.angle)
+        songs = list(self._yield_songs(location, username, limit))
+        assert songs, "No songs available"  # TODO: show a message to the user?
+        log.info("Nearest song: %s @ %s", songs[0].distance, songs[0].angle)
 
-        return Response(song.data, status=200)
+        return Response([s.data for s in songs], status=200)
 
     @staticmethod
     def _get_username(request):
@@ -75,12 +76,12 @@ class QueuedSongViewSet(viewsets.ViewSet):
             log.warning("No matching account for username: %r", username)
 
     @staticmethod
-    def _get_next_song(location, username):
+    def _yield_songs(location, username, limit):
         # TODO: find the best matching song
-        for song in (
-                Song.objects
-                .exclude(account__username=username)
-                .order_by('-date')
-        ):
-            queued_song = QueuedSong(song, location)
-            return queued_song
+        query = (
+            Song.objects
+            .exclude(account__username=username)
+            .order_by('-date')
+        )
+        for song in query[:limit]:
+            yield QueuedSong(song, location)

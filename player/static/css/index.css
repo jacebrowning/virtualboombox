@@ -23,7 +23,7 @@
 }
 
 .row {
-    padding-top: 40px;
+    padding-top: 30px;
 }
 
 /* Custom */
@@ -67,11 +67,15 @@
     width: 100%;
 }
 
-.song {
+.current-song {
     height: 150px;
     display: flex;
     justify-content: flex-end;
     text-align: right;
     align-items: center;
+    font-size: 16px;
+}
+
+.song-queue {
     font-size: 16px;
 }
