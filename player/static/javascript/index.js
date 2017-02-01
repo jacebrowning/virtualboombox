@@ -1,8 +1,8 @@
 var locationAvailable = false;
 
 function spinCompass() {
-    if ($("#current-song").html() == "") {
-        $("#current-song").html("Locating the nearest song...");
+    if (!$.trim($("#current-song").html())) {
+        $("#current-song").html("<i>Locating the nearest song...</i>");
     }
 
     var start = $("#compass").getRotateAngle() % 360;
