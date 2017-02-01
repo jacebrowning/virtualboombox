@@ -65,9 +65,18 @@ class QueuedSong:
 
     @property
     def data(self):
+        # TODO: add YouTube URLs to the model
+        import random
+        youtube_url = random.choice([
+            "https://www.youtube.com/v/kfchvCyHmsc",
+            "https://www.youtube.com/v/UiyDmqO59QE",
+            "https://www.youtube.com/v/8X_Ot0k4XJc",
+        ])
+
         return dict(
             artist=self.artist,
             title=self.title,
             miles=f"{self.distance:.1f}",
             degrees=self.angle,
+            youtube_url=youtube_url,
         )
