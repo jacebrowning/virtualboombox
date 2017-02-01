@@ -52,6 +52,7 @@ class QueuedSong:
     def __init__(self, song=None, this_location=None, **kwargs):
         self.artist = kwargs.get('artist') or song.artist
         self.title = kwargs.get('title') or song.title
+        self.youtube_url = kwargs.get('youtube_url') or song.youtube_url
         self.that_location = kwargs.get('that_location') or song.location
         self.this_location = this_location
 
@@ -65,18 +66,10 @@ class QueuedSong:
 
     @property
     def data(self):
-        # TODO: add YouTube URLs to the model
-        import random
-        youtube_url = random.choice([
-            "https://www.youtube.com/v/kfchvCyHmsc",
-            "https://www.youtube.com/v/UiyDmqO59QE",
-            "https://www.youtube.com/v/8X_Ot0k4XJc",
-        ])
-
         return dict(
             artist=self.artist,
             title=self.title,
             miles=f"{self.distance:.1f}",
             degrees=self.angle,
-            youtube_url=youtube_url,
+            youtube_url=self.youtube_url,
         )

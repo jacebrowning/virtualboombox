@@ -19,6 +19,7 @@ def describe_queued_song():
         return QueuedSong(
             artist="John Mayer",
             title="No Such Thing",
+            youtube_url="http://example.com",
             that_location=irvine_ca,
             this_location=grand_rapids_mi,
         )
@@ -49,6 +50,7 @@ def describe_queued_song():
             expect(song.data) == {
                 'artist': 'John Mayer',
                 'title': 'No Such Thing',
+                'youtube_url': 'http://example.com',
                 'miles': '1841.8',
                 'degrees': 260.4110953861232,
             }

@@ -10,6 +10,7 @@ import pytz
 
 
 DEFAULT_LOCATION = (-48.876667, -123.393333)  # Oceanic Pole of Inaccessibility
+DEFAULT_YOUTUBE_URL = "https://www.youtube.com/v/dQw4w9WgXcQ"
 
 log = logging.getLogger(__name__)
 
@@ -86,6 +87,7 @@ class Song(Location):
     title = models.CharField(max_length=200)
     account = models.ForeignKey(Account, null=True, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
+    youtube_url = models.URLField(default=DEFAULT_YOUTUBE_URL)
 
     class Meta:
         unique_together = ('artist', 'title', 'account')
