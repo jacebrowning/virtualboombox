@@ -34,10 +34,10 @@ function updateLocation() {
 
     console.log("Getting current position...");
     navigator.geolocation.getCurrentPosition(
-        getNextSong, showLocationWarning, options);
+        getSongs, showLocationWarning, options);
 }
 
-function getNextSong(location) {
+function getSongs(location) {
     var data = {
         "latitude": location.coords.latitude,
         "longitude": location.coords.longitude,
@@ -47,32 +47,47 @@ function getNextSong(location) {
 
     locationAvailable = true;
 
+    data["limit"] = 5;
     $.ajax({
         url: "/api/queue/",
         type: "post",
         data: data,
-        success: showNextSong,
+        success: showSongs,
     });
 }
 
-function showNextSong(event) {
+function showSongs(songs) {
+    showNextSong(songs[0]);
+    showSongQueue(songs.slice(1));
+}
+
+function showNextSong(song) {
     var start = $("#compass").getRotateAngle() % 360;
     $("#compass").rotate({
         angle: start,
-        animateTo: event.degrees,
+        animateTo: song.degrees,
         duration: 1.5 * 1000,
         easing: $.easing.easeOutElastic,
     });
 
-    var distance = "<b>" + event.miles + "</b>" + "<br>" + "miles";
+    var distance = "<b>" + song.miles + "</b>" + "<br>" + "miles";
     $("#compass-text").html(distance);
 
-    var title = "<p><b>" + event.title + "</b></p>";
-    var artist = "<p>" + event.artist + "</p>";
-    var song = title + artist;
-    $("#current-song").html(song);
+    var title = "<p><b>" + song.title + "</b></p>";
+    var artist = "<p>" + song.artist + "</p>";
+    $("#current-song").html(title + artist);
 
     $("#next-song").prop("disabled", false);
+}
+
+function showSongQueue(songs) {
+    console.log(songs);
+    $("#song-queue").empty();
+    for (i = 0; i < songs.length; i++) {
+        var song = songs[i];
+        var name = song.artist + " - " + "<b>" + song.title + "</b>";
+        $("#song-queue").append("<li>" + name + "</li>");
+    }
 }
 
 function showLocationWarning(error) {
