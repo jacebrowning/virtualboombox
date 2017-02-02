@@ -88,11 +88,13 @@ class QueuedViewSet(viewsets.ViewSet):
 
     @staticmethod
     def _get_location(request):
-        # TODO: require latitude and longitude, fail on blanks
-        latitude = float(request.POST.get('latitude'))
-        longitude = float(request.POST.get('longitude'))
-        log.info("Location specified: %s, %s", latitude, longitude)
-        return latitude, longitude
+        serializer = QueueSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        location = serializer.data['latitude'], serializer.data['longitude']
+        log.info("Location specified: %s, %s", *location)
+
+        return location
 
     @staticmethod
     def _update_account(username, location):
@@ -110,7 +112,10 @@ class QueuedViewSet(viewsets.ViewSet):
     @classmethod
     def _get_songs(cls, request, username, location):
         played_song_ids = request.session.get('played_song_ids', [])
-        limit = int(request.POST.get('limit') or 1)
+
+        serializer = QueueSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        limit = serializer.data['limit']
 
         result = cls._run_query(username, played_song_ids, location, limit)
         songs = sorted(result, key=lambda x: x.distance)

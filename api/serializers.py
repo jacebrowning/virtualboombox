@@ -22,4 +22,4 @@ class QueueSerializer(serializers.Serializer):
     latitude = serializers.FloatField()
     longitude = serializers.FloatField()
     username = serializers.CharField(required=False)
-    limit = serializers.IntegerField(min_value=1, default=1)
+    limit = serializers.IntegerField(min_value=1, default=10)
