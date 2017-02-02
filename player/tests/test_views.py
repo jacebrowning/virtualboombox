@@ -1,6 +1,8 @@
 import pytest
 from expecter import expect
 
+from django.conf import settings
+
 
 def describe_login():
 
@@ -9,7 +11,7 @@ def describe_login():
 
         expect(response.status_code) == 403
 
-    @pytest.mark.xfail  # TODO: this requires Last.fm key to test
+    @pytest.mark.xfail(not settings.LASTFM_API_KEY, reason="Last.fm key unset")
     def with_invalid_token(client):
         response = client.get("/login/", {'token': "invalid"})
 
