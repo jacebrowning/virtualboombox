@@ -4,7 +4,6 @@ verify_ssl = true
 
 [packages]
 django = "~=1.10"
-django-dotenv = "~=1.4.1"
 djangorestframework = "~=3.5.3"
 dj-database-url = "==0.4.2"
 psycopg2 = "~=2.6"

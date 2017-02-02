@@ -5,9 +5,6 @@ all: install
 ci: check test
 
 ENV := .venv
-# TODO: replace this with 'pipenv shell' when it accepts arguments
-# https://github.com/kennethreitz/pipenv/issues/162
-ACIVATE := . $(ENV)/bin/activate &&
 TMP := tmp
 
 MANAGE := pipenv run python manage.py
@@ -16,7 +13,7 @@ MANAGE := pipenv run python manage.py
 
 .PHONY: setup
 setup:
-	python -m pip install pipenv==3.2.14
+	python -m pip install pipenv==3.3.2
 	@ touch Pipfile # force reinstall with the newer version of pipenv
 
 .PHONY: doctor
@@ -78,20 +75,20 @@ coverage: install
 # SERVER TARGETS ###############################################################
 
 .PHONY: run
-run: .env install db db-migrate db-superuser
+run: .envrc install db db-migrate db-superuser
 	$(MANAGE) runserver 5000
 
 .PHONY: run-prod
-run-prod: .env install db
-	$(ACIVATE) bin/pre_compile
-	$(ACIVATE) bin/post_compile
-	$(ACIVATE) heroku local
+run-prod: .envrc install db
+	pipenv shell "bin/pre_compile; exit $$?"
+	pipenv shell "bin/post_compile; exit $$?"
+	pipenv shell "heroku local; exit"
 
-.env:
-	echo SECRET_KEY=prod >> $@
-	echo DATABASE_URL=postgresql://localhost/virtualboombox_dev >> $@
-	echo LASTFM_API_KEY= >> $@
-	echo LASTFM_API_SECRET= >> $@
-	echo GOOGLE_APPLICATION_CREDENTIALS_DATA= >> $@
-	echo GOOGLE_APPLICATION_CREDENTIALS=/tmp/google.json >> $@
-	echo YOUTUBE_API_KEY= >> $@
+.envrc:
+	echo export SECRET_KEY=prod >> $@
+	echo export DATABASE_URL=postgresql://localhost/virtualboombox_dev >> $@
+	echo export LASTFM_API_KEY= >> $@
+	echo export LASTFM_API_SECRET= >> $@
+	echo export GOOGLE_APPLICATION_CREDENTIALS_DATA= >> $@
+	echo export GOOGLE_APPLICATION_CREDENTIALS=tmp/google.json >> $@
+	echo export YOUTUBE_API_KEY= >> $@
