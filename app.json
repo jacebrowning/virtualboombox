@@ -9,6 +9,9 @@
     "GOOGLE_APPLICATION_CREDENTIALS": {
       "required": true
     },
+    "GOOGLE_APPLICATION_CREDENTIALS_DATA": {
+      "required": true
+    },
     "LASTFM_API_KEY": {
       "required": true
     },
