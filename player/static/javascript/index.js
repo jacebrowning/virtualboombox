@@ -30,7 +30,7 @@ function stopCompass() {
 
 function getLocation() {
     var options = {
-      timeout: 10 * 1000,
+      timeout: 30 * 1000,
       maximumAge: 5 * 60 * 1000,
     };
 
