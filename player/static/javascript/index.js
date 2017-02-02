@@ -92,8 +92,8 @@ function showSongQueue(songs) {
         var song = songs[i];
         var item = ""
             + song.artist
-            + "&emsp;-&emsp;<b>" + song.title + "</b>"
-            + "&emsp;@&emsp;<i>" + song.miles + " miles</i>";
+            + " - "
+            + "<b>" + song.title + "</b>"
         $("#song-queue").append("<li>" + item + "</li>");
     }
 }
