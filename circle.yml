@@ -1,0 +1,22 @@
+version: 2
+
+executorType: docker
+
+containerInfo:
+  - image: python:3.6.0
+  - image: postgres:9.6.1
+
+stages:
+  build:
+    workDir: /home/ubuntu/virtualboombox
+    steps:
+      - type: checkout
+      - type: shell
+        command: make doctor
+      - type: shell
+        command: make install
+      - type: shell
+        command: make check
+      - type: shell
+        command: make test
+        # TODO: get reports working with CircleCI 2.0
