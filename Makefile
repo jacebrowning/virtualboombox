@@ -13,7 +13,7 @@ MANAGE := pipenv run python manage.py
 
 .PHONY: setup
 setup:
-	python -m pip install pipenv==3.3.2
+	python -m pip install pipenv==3.3.4
 	@ touch Pipfile # force reinstall with the newer version of pipenv
 
 .PHONY: doctor
@@ -80,9 +80,9 @@ run: .envrc install db db-migrate db-superuser
 
 .PHONY: run-prod
 run-prod: .envrc install db
-	pipenv shell "bin/pre_compile; exit $$?"
-	pipenv shell "bin/post_compile; exit $$?"
-	pipenv shell "heroku local; exit"
+	pipenv shell -c "bin/pre_compile; exit $$?"
+	pipenv shell -c "bin/post_compile; exit $$?"
+	pipenv shell -c "heroku local; exit $$?"
 
 .envrc:
 	echo export SECRET_KEY=prod >> $@
