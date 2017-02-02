@@ -3,6 +3,8 @@ from math import radians, degrees, cos, sin, asin, atan2, sqrt
 
 AVERAGE_EARTH_RADIUS = 3959
 
+PLACEHOLDER_YOUTUBE_URL = "https://www.youtube.com/v/dQw4w9WgXcQ"
+
 
 def calculate_haversine(point1, point2):
     """Calculate the great-circle distance between two locations."""
@@ -77,5 +79,5 @@ class QueuedSong:
             title=self.song.title,
             miles=f"{self.distance:.1f}",
             degrees=self.angle,
-            youtube_url=self.song.youtube_url,
+            youtube_url=self.song.youtube_url or PLACEHOLDER_YOUTUBE_URL,
         )

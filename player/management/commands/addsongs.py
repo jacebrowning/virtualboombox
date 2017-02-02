@@ -22,13 +22,12 @@ class Command(BaseCommand):
             for account in Account.objects.all():
                 song = Song.from_account(account)
                 if song:
-                    song.update_links()
+                    song.update()
                     song.save()
                 time.sleep(1)
 
             for song in Song.objects.order_by('-date'):
-                updated = song.update_links()
-                if updated:
+                if song.update():
                     song.save()
                     time.sleep(1)
 
