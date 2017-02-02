@@ -12,6 +12,8 @@ stages:
     steps:
       - type: checkout
       - type: shell
+        command: make setup
+      - type: shell
         command: make doctor
       - type: shell
         command: make install
