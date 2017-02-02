@@ -1,8 +1,12 @@
 import time
+import logging
 
 from django.core.management.base import BaseCommand
 
 from player.models import Account, Song
+
+
+log = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -30,6 +34,9 @@ class Command(BaseCommand):
                 if song.update():
                     song.save()
                     time.sleep(1)
+                if song.unknown:
+                    log.info("Deleting unidentifiable song: %s", song)
+                    song.delete()
 
             if not options['loop']:
                 break

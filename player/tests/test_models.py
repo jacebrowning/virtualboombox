@@ -55,3 +55,8 @@ def describe_song():
 
         def is_a_tuple(song):
             expect(song.location) == (1.0, 2.0)
+
+    def describe_unknown():
+
+        def when_no_links(song):
+            expect(song.unknown) == True

@@ -27,5 +27,11 @@ class Command(BaseCommand):
         Song.objects.get_or_create(
             artist="The Beatles",
             title="Come Together",
+            date=timezone.now() - timedelta(days=4),
+        )
+
+        Song.objects.get_or_create(
+            artist="this_is_an_unknown_artist",
+            title="this_is_an_unknown_title",
             date=timezone.now() - timedelta(days=3),
         )

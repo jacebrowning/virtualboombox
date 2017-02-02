@@ -149,6 +149,12 @@ class Song(Location):
     def location(self):
         return float(self.latitude), float(self.longitude)
 
+    @property
+    def unknown(self):
+        return not any((
+            self.youtube_url,
+        ))
+
     def update(self):
         """Update all externally computed properties."""
         return any((
