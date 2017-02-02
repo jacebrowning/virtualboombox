@@ -4,9 +4,14 @@ from expecter import expect
 
 def describe_login():
 
-    @pytest.mark.django_db
-    def with_invalid_token(client):
+    def with_missing_token(client):
         response = client.get("/login/")
+
+        expect(response.status_code) == 403
+
+    @pytest.mark.xfail  # TODO: this requires Last.fm key to test
+    def with_invalid_token(client):
+        response = client.get("/login/", {'token': "invalid"})
 
         expect(response.status_code) == 403
 

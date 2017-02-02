@@ -43,6 +43,10 @@ class Account(Location):
     @classmethod
     def from_token(cls, token):
         """Retrieve an existing account or create a new one."""
+        if not token:
+            log.error("No token provided")
+            return None
+
         log.info("Last.fm token: %s", token)
         username = cls._get_username_from_token(token)
         if not username:
