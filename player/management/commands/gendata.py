@@ -24,7 +24,7 @@ class Command(BaseCommand):
 
         Account.objects.get_or_create(username='_invalid')
 
-        s = Song.objects.get_or_create(
+        Song.objects.get_or_create(
             artist="The Beatles",
             title="Come Together",
             date=timezone.now() - timedelta(days=3),

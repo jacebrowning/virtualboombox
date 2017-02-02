@@ -1,4 +1,5 @@
-var locationAvailable = false;
+window.locationAvailable = false;
+window.autoplay = true;
 
 // Compass
 
@@ -21,9 +22,9 @@ function stopCompass() {
 
     $("#current-song").empty();
 
-    $("#next-song").prop("disabled", false);
+    $("#player-next").prop("disabled", false);
 
-    locationAvailable = false;
+    window.locationAvailable = false;
 }
 
 function getLocation() {
@@ -47,7 +48,7 @@ function getSongs(location) {
     };
     console.log("Current position: ", data);
 
-    locationAvailable = true;
+    window.locationAvailable = true;
 
     data["limit"] = 10;
     $.ajax({
@@ -80,7 +81,7 @@ function showNextSong(song) {
     var artist = "<p>" + song.artist + "</p>";
     $("#current-song").html(title + artist);
 
-    $("#next-song").prop("disabled", false);
+    $("#player-next").prop("disabled", false);
 }
 
 function showSongQueue(songs) {
@@ -118,7 +119,11 @@ function playVideo(url) {
     var checkExist = setInterval(function() {
        if (window.player) {
             console.log("Playing video: ", url)
-            window.player.loadVideoByUrl({mediaContentUrl: url});
+            if (window.autoplay == true) {
+                window.player.loadVideoByUrl({mediaContentUrl: url});
+            } else {
+                window.player.cueVideoByUrl({mediaContentUrl: url});
+            }
             clearInterval(checkExist);
        }
     }, 1 * 1000);
@@ -127,14 +132,19 @@ function playVideo(url) {
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.ENDED) {
         console.log("Player has finished")
-        $("#next-song").trigger("click");
+        $("#player-next").trigger("click");
     }
 }
 
 // Events
 
 $(document).ready( function () {
-    $("#next-song").prop("disabled", locationAvailable);
+    $("#player-toggle").html(
+        '<span class="glyphicon glyphicon-pause"></span>' +
+        '&nbsp;' +
+        'Pause Playback'
+    );
+    $("#player-next").prop("disabled", window.locationAvailable);
 });
 
 $(window).ready( function(e) {
@@ -142,8 +152,28 @@ $(window).ready( function(e) {
     getLocation();
 });
 
-$("#next-song").on("click", function() {
-    $("#next-song").prop("disabled", locationAvailable);
+$("#player-toggle").on("click", function() {
+    if (window.player.getPlayerState() == YT.PlayerState.PLAYING) {
+        window.autoplay = false;
+        window.player.pauseVideo();
+        $("#player-toggle").html(
+            '<span class="glyphicon glyphicon-play"></span>' +
+            '&nbsp;' +
+            'Resume Playback'
+        );
+    } else {
+        window.autoplay = true;
+        window.player.playVideo();
+        $("#player-toggle").html(
+            '<span class="glyphicon glyphicon-pause"></span>' +
+            '&nbsp;' +
+            'Pause Playback'
+        );
+    }
+});
+
+$("#player-next").on("click", function() {
+    $("#player-next").prop("disabled", window.locationAvailable);
     spinCompass();
-    getLocation();
+    setTimeout(getLocation, 1 * 1000);
 });
