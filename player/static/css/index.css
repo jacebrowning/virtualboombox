@@ -26,6 +26,11 @@
     padding-top: 30px;
 }
 
+hr {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 /* YouTube */
 
 .video-container {
