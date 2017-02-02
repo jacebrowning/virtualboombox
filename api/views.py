@@ -137,7 +137,7 @@ class QueuedViewSet(viewsets.ViewSet):
 
             if song.id in played_song_ids:
                 log.debug("Already played: %s", song)
-                last = song
+                last = last or song
                 continue
 
             yield QueuedSong(song, location)
@@ -146,6 +146,6 @@ class QueuedViewSet(viewsets.ViewSet):
             if count >= limit:
                 return
 
-        if last:
+        if last and not count:
             # Ensure there is at least once song in the queue
-            yield QueuedSong(song, location)
+            yield QueuedSong(last, location)
