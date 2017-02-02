@@ -1,4 +1,5 @@
 window.locationAvailable = false;
+window.playerAvailable = false;
 window.autoplay = true;
 
 // Compass
@@ -114,11 +115,12 @@ function showLocationWarning(error) {
 
 function onPlayerReady(event) {
     console.log("Player is ready")
+    window.playerAvailable = true;
 }
 
 function playVideo(url) {
     var checkExist = setInterval(function() {
-       if (window.player) {
+       if (window.playerAvailable) {
             console.log("Playing video: ", url)
             if (window.autoplay == true) {
                 window.player.loadVideoByUrl({mediaContentUrl: url});
