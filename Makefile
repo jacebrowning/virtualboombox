@@ -13,7 +13,7 @@ MANAGE := pipenv run python manage.py
 
 .PHONY: setup
 setup:
-	pip install pipenv==3.3.4
+	pip install pipenv==3.3.5
 	pipenv lock
 
 .PHONY: doctor

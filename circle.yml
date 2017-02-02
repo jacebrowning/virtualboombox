@@ -9,6 +9,8 @@ containerInfo:
 stages:
   build:
     workDir: /home/ubuntu/virtualboombox
+    environment:
+      - PIPENV_NOSPIN=1
     steps:
       - type: checkout
       - type: shell
