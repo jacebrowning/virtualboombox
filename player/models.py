@@ -45,6 +45,9 @@ class Account(Location):
         """Retrieve an existing account or create a new one."""
         log.info("Last.fm token: %s", token)
         username = cls._get_username_from_token(token)
+        if not username:
+            log.error("No account for token: %s", token)
+            return None
 
         account, created = cls.objects.get_or_create(username=username)
 

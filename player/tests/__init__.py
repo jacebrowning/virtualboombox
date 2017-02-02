@@ -1,0 +1,19 @@
+import logging
+
+import expecter
+
+log = logging.getLogger(__name__)
+
+
+def contains_html(response, text):
+    __tracebackhide__ = True
+
+    html = response.content.decode('utf-8')
+    # TODO: make this a regular expression to check word boundaries
+    if text in html:
+        return True
+
+    assert 0, (f"Expected:\n{html}\nto contain {text!r}, but it didn't")
+
+
+expecter.add_expectation(contains_html)
