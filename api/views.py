@@ -57,6 +57,7 @@ class QueuedViewSet(viewsets.ViewSet):
 
     serializer_class = QueueSerializer
     permission_classes = [AllowAny]
+    authentication_classes = []  # prevents 403 in production
 
     @csrf_exempt
     def create(self, request):
