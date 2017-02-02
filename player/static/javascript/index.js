@@ -87,7 +87,7 @@ function showNextSong(song) {
 function showSongQueue(songs) {
     $("#song-queue").empty();
 
-    for (i = 0; i < 5; i++) {
+    for (i = 0; i < 4; i++) {
         var song = songs[i];
         var item = ""
             + song.artist
