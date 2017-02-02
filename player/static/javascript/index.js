@@ -50,7 +50,7 @@ function getSongs(location) {
     console.log("Current position: ", data);
     window.locationAvailable = true;
 
-    data["limit"] = 10;
+    data["limit"] = 100;
     $.ajax({
         url: "/api/queue/",
         type: "POST",
@@ -86,7 +86,8 @@ function showNextSong(song) {
 
 function showSongQueue(songs) {
     $("#song-queue").empty();
-    for (i = 0; i < songs.length; i++) {
+
+    for (i = 0; i < 5; i++) {
         var song = songs[i];
         var item = ""
             + song.artist

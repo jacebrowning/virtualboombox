@@ -125,11 +125,14 @@ class QueuedViewSet(viewsets.ViewSet):
     @staticmethod
     def _run_query(username, played_song_ids, location, limit):
         count = 0
+        last = None
+
         for song in Song.objects \
                 .exclude(account__username=username).order_by('-date'):
 
             if song.id in played_song_ids:
                 log.debug("Already played: %s", song)
+                last = song
                 continue
 
             yield QueuedSong(song, location)
@@ -137,3 +140,7 @@ class QueuedViewSet(viewsets.ViewSet):
             count += 1
             if count >= limit:
                 return
+
+        if last:
+            # Ensure there is at least once song in the queue
+            yield QueuedSong(song, location)
