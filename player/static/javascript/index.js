@@ -28,8 +28,6 @@ function stopCompass() {
 }
 
 function getLocation() {
-    $("#messages").empty();
-
     var options = {
       timeout: 10 * 1000,
       maximumAge: 5 * 60 * 1000,
@@ -41,13 +39,14 @@ function getLocation() {
 }
 
 function getSongs(location) {
+    $("#messages").empty();
+
     var data = {
         "latitude": location.coords.latitude,
         "longitude": location.coords.longitude,
         "accuracy": location.coords.accuracy,
     };
     console.log("Current position: ", data);
-
     window.locationAvailable = true;
 
     data["limit"] = 10;
@@ -99,13 +98,15 @@ function showSongQueue(songs) {
 function showLocationWarning(error) {
     console.log("Position unavailable: ", error);
 
+    $("#messages").empty();
+
     if (error.code == error.PERMISSION_DENIED) {
         $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
         stopCompass();
     } else {
-        stopCompass();
         $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
-        setTimeout(getLocation, 3 * 1000);
+        stopCompass();
+        setTimeout(getLocation, 2 * 1000);
     }
 }
 
