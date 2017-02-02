@@ -13,8 +13,8 @@ MANAGE := pipenv run python manage.py
 
 .PHONY: setup
 setup:
-	python -m pip install pipenv==3.3.4
-	@ touch Pipfile # force reinstall with the newer version of pipenv
+	pip install pipenv==3.3.4
+	pipenv lock
 
 .PHONY: doctor
 doctor:
