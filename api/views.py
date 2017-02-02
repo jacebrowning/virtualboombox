@@ -1,30 +1,62 @@
 import logging
 
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from player.models import Account, Song
 
-from .serializers import SongSerializer, QueueRequestSerializer
+from .permissions import AllowAnonCreate
+from .serializers import AccountSerializer, SongSerializer, QueueSerializer
 from .models import QueuedSong
 
 
 log = logging.getLogger(__name__)
 
 
+class AccountViewSet(viewsets.ModelViewSet):
+
+    queryset = Account.objects.all()
+    serializer_class = AccountSerializer
+    permission_classes = [AllowAnonCreate]
+
+    def list(self, request):
+        if request.user.is_superuser:
+            return super().list(request)
+        else:
+            return Response([])
+
+    @csrf_exempt
+    def create(self, request):
+        account = get_object_or_404(Account, username=request.POST['username'])
+
+        serializer = AccountSerializer(account, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+
+        return Response(serializer.data)
+
+
 class SongViewSet(viewsets.ModelViewSet):
 
     queryset = Song.objects.all()
     serializer_class = SongSerializer
+    permission_classes = [AllowAnonCreate]
+
+    def list(self, request):
+        if request.user.is_superuser:
+            return super().list(request)
+        else:
+            return Response([])
 
 
-class QueuedSongViewSet(viewsets.ViewSet):
+class QueuedViewSet(viewsets.ViewSet):
 
+    serializer_class = QueueSerializer
     permission_classes = [AllowAny]
-    authentication_classes = []
-    serializer_class = QueueRequestSerializer
 
     @csrf_exempt
     def create(self, request):
@@ -36,7 +68,7 @@ class QueuedSongViewSet(viewsets.ViewSet):
 
         songs = self._get_songs(request, username, location)
 
-        return Response([s.data for s in songs], status=200)
+        return Response([s.data for s in songs])
 
     @staticmethod
     def _get_username(request):

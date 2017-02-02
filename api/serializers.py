@@ -1,6 +1,13 @@
 from rest_framework import serializers
 
-from player.models import Song
+from player.models import Account, Song
+
+
+class AccountSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Account
+        fields = ('username', 'latitude', 'longitude')
 
 
 class SongSerializer(serializers.HyperlinkedModelSerializer):
@@ -10,7 +17,7 @@ class SongSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'artist', 'title', 'latitude', 'longitude', 'date')
 
 
-class QueueRequestSerializer(serializers.Serializer):
+class QueueSerializer(serializers.Serializer):
 
     latitude = serializers.FloatField()
     longitude = serializers.FloatField()
