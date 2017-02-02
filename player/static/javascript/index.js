@@ -26,7 +26,7 @@ function stopCompass() {
     locationAvailable = false;
 }
 
-function updateLocation() {
+function getLocation() {
     $("#messages").empty();
 
     var options = {
@@ -52,7 +52,7 @@ function getSongs(location) {
     data["limit"] = 10;
     $.ajax({
         url: "/api/queue/",
-        type: "post",
+        type: "POST",
         data: data,
         success: showSongs,
     });
@@ -104,7 +104,7 @@ function showLocationWarning(error) {
     } else {
         stopCompass();
         $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
-        setTimeout(updateLocation, 3 * 1000);
+        setTimeout(getLocation, 3 * 1000);
     }
 }
 
@@ -139,11 +139,11 @@ $(document).ready( function () {
 
 $(window).ready( function(e) {
     spinCompass();
-    updateLocation();
+    getLocation();
 });
 
 $("#next-song").on("click", function() {
     $("#next-song").prop("disabled", locationAvailable);
     spinCompass();
-    updateLocation();
+    getLocation();
 });

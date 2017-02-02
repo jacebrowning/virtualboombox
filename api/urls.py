@@ -5,8 +5,9 @@ from . import views
 
 
 router = routers.DefaultRouter()
+router.register(r'accounts', views.AccountViewSet, base_name='accounts')
 router.register(r'songs', views.SongViewSet)
-router.register(r'queue', views.QueuedSongViewSet, base_name='queue')
+router.register(r'queue', views.QueuedViewSet, base_name='queue')
 
 urlpatterns = [
     url(r'^', include(router.urls)),
