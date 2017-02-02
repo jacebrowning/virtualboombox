@@ -1,5 +1,6 @@
 import logging
 
+from django.views import defaults
 from django.shortcuts import reverse, render, redirect
 from django.conf import settings
 
@@ -28,7 +29,8 @@ def login(request):
     if account:
         request.session['username'] = account.username
     else:
-        log.critical("TODO: show error message")
+        exception = Exception("Last.fm token is invalid.")
+        return defaults.permission_denied(request, exception)
 
     return redirect('index')
 

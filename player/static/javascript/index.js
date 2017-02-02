@@ -122,10 +122,11 @@ function onPlayerReady(event) {
 function playVideo(url) {
     var checkExist = setInterval(function() {
        if (window.playerAvailable) {
-            console.log("Playing video: ", url)
             if (window.autoplay == true) {
+                console.log("Playing video: ", url)
                 window.player.loadVideoByUrl({mediaContentUrl: url});
             } else {
+                console.log("Setting video: ", url)
                 window.player.cueVideoByUrl({mediaContentUrl: url});
             }
             clearInterval(checkExist);
@@ -165,6 +166,7 @@ $("#player-toggle").on("click", function() {
             '&nbsp;' +
             'Resume Playback'
         );
+        console.log("Video paused");
     } else {
         window.autoplay = true;
         window.player.playVideo();
@@ -173,6 +175,7 @@ $("#player-toggle").on("click", function() {
             '&nbsp;' +
             'Pause Playback'
         );
+        console.log("Video playing");
     }
 });
 

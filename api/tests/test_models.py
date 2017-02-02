@@ -20,6 +20,7 @@ def describe_queued_song():
     def song(irvine_ca, grand_rapids_mi):
         return QueuedSong(
             song=Mock(
+                id=42,
                 artist="John Mayer",
                 title="No Such Thing",
                 youtube_url="http://example.com",
@@ -27,6 +28,11 @@ def describe_queued_song():
             that_location=irvine_ca,
             this_location=grand_rapids_mi,
         )
+
+    def describe_id():
+
+        def it_matches_the_song(song):
+            expect(song.id) == 42
 
     def describe_distance():
 
