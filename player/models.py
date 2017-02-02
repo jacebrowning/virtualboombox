@@ -155,7 +155,7 @@ class Song(Location):
 
         youtube = build('youtube', 'v3', developerKey=settings.YOUTUBE_API_KEY)
 
-        query = f'"{self.artist} - {self.title}"'
+        query = f"{self.artist} - {self.title}"
         response = youtube.search().list(
             q=query,
             part="id,snippet",
@@ -166,8 +166,10 @@ class Song(Location):
             if result['id']['kind'] == 'youtube#video':
                 key = result['id']['videoId']
                 self.youtube_url = f"https://www.youtube.com/v/{key}"
-                log.info("%s => %s", query, self.youtube_url)
+                log.info("%r => %s", query, self.youtube_url)
                 return True
+
+        log.warning("%r => (no results)", query)
 
         return False
 
