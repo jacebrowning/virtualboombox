@@ -13,8 +13,9 @@ MANAGE := pipenv run python manage.py
 
 .PHONY: setup
 setup:
-	pip install pipenv==3.3.5
+	pip install pipenv==3.3.5 gitman==1.3b4
 	pipenv lock
+	touch gitman.yml
 
 .PHONY: doctor
 doctor:
@@ -24,8 +25,9 @@ doctor:
 
 .PHONY: install
 install: $(ENV)
-$(ENV): Pipfile*
+$(ENV): Pipfile* gitman.yml
 	pipenv install --dev
+	pipenv shell -c "gitman install; exit $$?"
 	@ mkdir -p tmp
 	@ touch $@
 
@@ -62,7 +64,7 @@ check: install
 
 .PHONY: test
 test: install
-	pipenv run py.test
+	pipenv run py.test api player
 
 .PHONY: watch
 watch: install
