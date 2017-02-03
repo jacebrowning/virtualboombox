@@ -5,10 +5,10 @@
   },
   "env": {
     "GOOGLE_APPLICATION_CREDENTIALS": {
-      "required": true
+      "value": "/tmp/google.json"
     },
     "GOOGLE_APPLICATION_CREDENTIALS_DATA": {
-      "required": true
+      "value": "<placeholder>"
     },
     "SECRET_KEY": {
       "value": "test"
