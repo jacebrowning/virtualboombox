@@ -22,6 +22,7 @@ class Location(models.Model):
                                    default=DEFAULT_LOCATION[0])
     longitude = models.DecimalField(max_digits=9, decimal_places=6,
                                     default=DEFAULT_LOCATION[1])
+    date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return f"({self.latitude}, {self.longitude})"
@@ -62,6 +63,15 @@ class Account(Location):
 
         return account
 
+    def __str__(self):
+        location = super().__str__()
+        return f"{self.username} @ {location}"
+
+    def _set_location(self, pair):
+        self.latitude, self.longitude = pair
+        self.date = timezone.now()
+    location = property(fset=_set_location)
+
     @staticmethod
     def _get_username_from_token(token):
         network = pylast.LastFMNetwork(
@@ -82,10 +92,6 @@ class Account(Location):
 
         return username
 
-    def __str__(self):
-        location = super().__str__()
-        return f"{self.username} @ {location}"
-
 
 class Song(Location):
     """Played song with location information."""
@@ -93,7 +99,6 @@ class Song(Location):
     artist = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     account = models.ForeignKey(Account, null=True, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now)
     youtube_url = models.URLField(null=True)
 
     class Meta:

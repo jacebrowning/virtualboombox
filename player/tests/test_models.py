@@ -37,6 +37,17 @@ def describe_account():
 
             expect(str(account)) == "foobar @ (1.2, -3.4)"
 
+    def describe_location():
+
+        def it_updates_the_date(account):
+            initial_date = account.date
+
+            account.location = (1, 2)
+
+            expect(account.latitude) == 1.0
+            expect(account.longitude) == 2.0
+            expect(account.date) > initial_date
+
 
 def describe_song():
 

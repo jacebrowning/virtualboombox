@@ -19,7 +19,9 @@ class AccountAdmin(admin.ModelAdmin, ClickableMixin):
     list_display = [
         'username',
         'clickable_maps_url',
+        'date',
     ]
+    ordering = ['-date']
 
 
 class SongAdmin(admin.ModelAdmin, ClickableMixin):

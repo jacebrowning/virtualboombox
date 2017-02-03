@@ -105,8 +105,7 @@ class QueuedViewSet(viewsets.ViewSet):
             log.warning("No matching account for username: %r", username)
             return
 
-        account.latitude = location[0]
-        account.longitude = location[1]
+        account.location = location
         account.save()
 
     @classmethod
