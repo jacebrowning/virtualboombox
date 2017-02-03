@@ -2,7 +2,7 @@ window.locationAvailable = false;
 window.playerAvailable = false;
 window.autoplay = true;
 
-// Compass
+// Compass /////////////////////////////////////////////////////////////////////
 
 function spinCompass() {
     if (!$.trim($("#current-song").html())) {
@@ -113,11 +113,22 @@ function showLocationWarning(error) {
     }
 }
 
-// Player
+// Player //////////////////////////////////////////////////////////////////////
 
 function onPlayerReady(event) {
     console.log("Player is ready")
     window.playerAvailable = true;
+}
+
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.ENDED) {
+        console.log("Player has finished")
+        $("#player-next").trigger("click");
+    } else if (event.data == YT.PlayerState.PAUSED) {
+        pauseVideo();
+    } else if (event.data == YT.PlayerState.PLAYING) {
+        resumeVideo();
+    }
 }
 
 function playVideo(url) {
@@ -135,14 +146,43 @@ function playVideo(url) {
     }, 1 * 1000);
 }
 
-function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.ENDED) {
-        console.log("Player has finished")
-        $("#player-next").trigger("click");
-    }
+function pauseVideo() {
+    window.autoplay = false;
+    window.player.pauseVideo();
+    $("#player-toggle").html(
+        '<span class="glyphicon glyphicon-play"></span>' +
+        '&nbsp;' +
+        'Resume Playback'
+    );
+    console.log("Video paused");
 }
 
-// Events
+function resumeVideo() {
+    window.autoplay = true;
+    window.player.playVideo();
+    $("#player-toggle").html(
+        '<span class="glyphicon glyphicon-pause"></span>' +
+        '&nbsp;' +
+        'Pause Playback'
+    );
+    console.log("Video playing");
+}
+
+$("#player-toggle").on("click", function() {
+    if (window.player.getPlayerState() == YT.PlayerState.PLAYING) {
+        pauseVideo();
+    } else {
+        resumeVideo();
+    }
+});
+
+$("#player-next").on("click", function() {
+    $("#player-next").prop("disabled", window.locationAvailable);
+    spinCompass();
+    setTimeout(getLocation, 1 * 1000);
+});
+
+// Loading /////////////////////////////////////////////////////////////////////
 
 $(document).ready( function () {
     $("#player-toggle").html(
@@ -156,32 +196,4 @@ $(document).ready( function () {
 $(window).ready( function(e) {
     spinCompass();
     getLocation();
-});
-
-$("#player-toggle").on("click", function() {
-    if (window.player.getPlayerState() == YT.PlayerState.PLAYING) {
-        window.autoplay = false;
-        window.player.pauseVideo();
-        $("#player-toggle").html(
-            '<span class="glyphicon glyphicon-play"></span>' +
-            '&nbsp;' +
-            'Resume Playback'
-        );
-        console.log("Video paused");
-    } else {
-        window.autoplay = true;
-        window.player.playVideo();
-        $("#player-toggle").html(
-            '<span class="glyphicon glyphicon-pause"></span>' +
-            '&nbsp;' +
-            'Pause Playback'
-        );
-        console.log("Video playing");
-    }
-});
-
-$("#player-next").on("click", function() {
-    $("#player-next").prop("disabled", window.locationAvailable);
-    spinCompass();
-    setTimeout(getLocation, 1 * 1000);
 });
