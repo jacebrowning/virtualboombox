@@ -15,6 +15,7 @@ MANAGE := pipenv run python manage.py
 setup:
 	pip install pipenv==3.3.5
 	pipenv lock
+	touch Pipfile
 
 .PHONY: doctor
 doctor:
@@ -40,6 +41,8 @@ clean:
 data: install
 	$(MANAGE) gendata
 	$(MANAGE) addsongs
+	$(MANAGE) updatesongs
+	$(MANAGE) cleansongs
 
 .PHONY: db
 db:

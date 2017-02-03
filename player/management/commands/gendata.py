@@ -35,3 +35,9 @@ class Command(BaseCommand):
             title="this_is_an_unknown_title",
             date=timezone.now() - timedelta(days=3),
         )
+
+        Song.objects.get_or_create(
+            artist="An Old Artist",
+            title="And Old Title",
+            date=timezone.now() - timedelta(days=30),
+        )
