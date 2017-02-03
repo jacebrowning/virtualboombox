@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import logging
 
 from django.db import models
@@ -155,6 +155,10 @@ class Song(Location):
             self.youtube_url,
         ))
 
+    @property
+    def stale(self):
+        return timezone.now() - self.date > timedelta(days=7)
+
     def update(self):
         """Update all externally computed properties."""
         return any((
@@ -182,7 +186,7 @@ class Song(Location):
                 log.info("%r => %s", query, self.youtube_url)
                 return True
 
-        log.warning("%r => (no results)", query)
+        log.warning("%r => (no YouTube results)", query)
 
         return False
 

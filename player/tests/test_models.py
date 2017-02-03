@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 import pytest
 from expecter import expect
+from django.utils import timezone
 
 from ..models import Location, Account, Song
 
@@ -60,3 +63,15 @@ def describe_song():
 
         def when_no_links(song):
             expect(song.unknown) == True
+
+    def describe_stale():
+
+        def when_new(song):
+            song.date = timezone.now() - timedelta(days=1)
+
+            expect(song.stale) == False
+
+        def when_old(song):
+            song.date = timezone.now() - timedelta(days=8)
+
+            expect(song.stale) == True
