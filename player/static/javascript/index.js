@@ -31,7 +31,7 @@ function stopCompass() {
 function getLocation() {
     var options = {
       timeout: 30 * 1000,
-      maximumAge: 5 * 60 * 1000,
+      maximumAge: 15 * 60 * 1000,
     };
 
     console.log("Getting current position...");
