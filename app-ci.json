@@ -4,6 +4,12 @@
     "test": "make test"
   },
   "env": {
+    "GOOGLE_APPLICATION_CREDENTIALS": {
+      "required": true
+    },
+    "GOOGLE_APPLICATION_CREDENTIALS_DATA": {
+      "required": true
+    },
     "SECRET_KEY": {
       "value": "test"
     }
