@@ -1,5 +1,9 @@
 /* Boostrap */
 
+body {
+    background-color: #F1F1F1
+}
+
 .navbar {
     border-radius: 0px;
     padding-left: 5px;
@@ -53,15 +57,15 @@ hr {
 
 .btn-login {
     background-color: #db1f12;
-    color: #f0f0f0 !important;
+    color: #f1f1f1 !important;
 }
 .btn-login:hover {
     color: #000000 !important;
 }
 
 .btn-logout {
-    background-color: #db1f12;
-    color: #f0f0f0 !important;
+    background-color: #b01205;
+    color: #e2e2e2 !important;
 }
 .btn-logout:hover {
     color: #000000 !important;
