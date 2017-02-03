@@ -3,20 +3,38 @@
     <head>
         <title>Virtual Boombox</title>
 
+        <!-- Metadata -->
         <meta name="description" content="Discover songs playing nearby using Last.fm.">
         <meta name="google" content="nositelinkssearchbox">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="{% static 'css/index.css' %}">
-
+        <!-- Favicon -->
         <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" href="{% static 'favicons/favicon-32x32.png' %}" sizes="32x32">
         <link rel="icon" type="image/png" href="{% static 'favicons/favicon-16x16.png' %}" sizes="16x16">
         <link rel="manifest" href="{% static 'favicons/manifest.json' %}">
         <link rel="mask-icon" href="{% static 'favicons/safari-pinned-tab.svg' %}" color="#db1f12">
         <meta name="theme-color" content="#db1f12">
+
+        <!-- Social Media -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@virtualboombox">
+        <meta name="twitter:title" content="Virtual Boombox">
+        <meta name="twitter:description" content="Discover songs playing nearby using Last.fm.">
+        <meta name="twitter:image" content="https://{{ request.get_host }}{% static 'images/logo.draw.io.png' %}">
+        <meta property="fb:app_id" content="1055331451243218">
+        <meta property="og:title" content="Virtual Boombox">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://{{ request.get_host }}">
+        <meta property="og:image" content="https://{{ request.get_host }}{% static 'images/logo.draw.io.png' %}">
+        <meta property="og:image:width" content="407">
+        <meta property="og:image:height" content="407">
+        <meta property="og:description" content="Discover songs playing nearby using Last.fm">
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
     </head>
     <body><div class="content">
 
