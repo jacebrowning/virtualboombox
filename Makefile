@@ -4,7 +4,7 @@ all: install
 .PHONY: ci
 ci: check test
 
-ENV := .venv
+ENV := ~/.local/share/virtualenvs/virtualboombox
 TMP := tmp
 
 MANAGE := pipenv run python manage.py
