@@ -1,0 +1,15 @@
+location: vendor/gitman
+sources:
+- name: pylast
+  repo: git://github.com/jacebrowning/pylast.git
+  rev: auth-token
+  link:
+  scripts:
+  - ~/.local/share/virtualenvs/virtualboombox/python setup.py develop
+sources_locked:
+- name: pylast
+  repo: git://github.com/jacebrowning/pylast.git
+  rev: 0b2e61d9ffdd0bb6572ea05064b60be9d1d73de9
+  link:
+  scripts:
+  - ~/.local/share/virtualenvs/virtualboombox/bin/python setup.py develop

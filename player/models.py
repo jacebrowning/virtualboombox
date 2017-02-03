@@ -64,21 +64,17 @@ class Account(Location):
 
     @staticmethod
     def _get_username_from_token(token):
-        network = pylast.LastFMNetwork(
-            api_key=settings.LASTFM_API_KEY,
-            api_secret=settings.LASTFM_API_SECRET,
-            token=token,
-        )
-
         try:
-            user = network.get_authenticated_user()
+            network = pylast.LastFMNetwork(
+                api_key=settings.LASTFM_API_KEY,
+                api_secret=settings.LASTFM_API_SECRET,
+                token=token,
+            )
         except pylast.WSError as exc:
             log.error(exc)
-            username = None
+            return None
         else:
-            username = user.username
-
-        return username
+            return network.get_authenticated_user().username
 
     def __str__(self):
         location = super().__str__()
