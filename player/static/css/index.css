@@ -35,12 +35,12 @@ hr {
     margin-bottom: 30px;
 }
 
-.footer {
-    position: absolute;
+footer {
     bottom: 0;
     width: 100%;
-    height: 60px;
-    line-height: 60px;
+    height: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 /* YouTube */
@@ -112,6 +112,6 @@ hr {
 }
 
 .song-queue>li {
-    padding-bottom: 15px;
+    padding-bottom: 10px;
     font-size: 16px;
 }
