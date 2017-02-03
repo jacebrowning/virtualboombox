@@ -10,7 +10,7 @@ stages:
   build:
     workDir: /home/ubuntu/virtualboombox
     environment:
-      - PIPENV_NOSPIN=1
+      PIPENV_NOSPIN: true
     steps:
       - type: checkout
       - type: shell
