@@ -1,9 +1,15 @@
 {
   "scripts": {
-    "test-setup": "make doctor install",
+    "test-setup": "make clean doctor install",
     "test": "make test"
   },
   "env": {
+    "GOOGLE_APPLICATION_CREDENTIALS": {
+      "value": "/tmp/google.json"
+    },
+    "GOOGLE_APPLICATION_CREDENTIALS_DATA": {
+      "value": "<placeholder>"
+    },
     "SECRET_KEY": {
       "value": "test"
     }
