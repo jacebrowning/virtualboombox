@@ -29,6 +29,7 @@ class SongAdmin(admin.ModelAdmin, ClickableMixin):
         'clickable_maps_url',
         'date',
     ]
+    ordering = ['-date']
 
     def username(self, obj):
         return obj.account.username if obj.account else ""
