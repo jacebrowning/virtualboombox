@@ -61,6 +61,8 @@
             </div>
         </nav>
 
+         <a class="a-scrobbling" href="/scrobbling">What is Last.fm?</a>
+
         <ul id="messages" class="messages">
         {% for message in messages %}
             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>

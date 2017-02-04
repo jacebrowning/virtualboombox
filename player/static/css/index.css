@@ -94,6 +94,12 @@ hr {
     }
 }
 
+.a-scrobbling {
+    float: right;
+    padding-right: 10px;
+    margin-top: -10px;
+}
+
 .compass {
     position: relative;
     text-align: center;
