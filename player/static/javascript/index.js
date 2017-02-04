@@ -1,6 +1,5 @@
 window.locationAvailable = false;
 window.playerAvailable = false;
-window.autoplay = true;
 
 // Compass /////////////////////////////////////////////////////////////////////
 
@@ -136,38 +135,47 @@ function onPlayerStateChange(event) {
 function playVideo(url) {
     var checkExist = setInterval(function() {
        if (window.playerAvailable) {
-            if (window.autoplay == true) {
-                console.log("Playing video: ", url)
-                window.player.loadVideoByUrl({mediaContentUrl: url});
-            } else {
+            if (document.location.hash == "#paused") {
                 console.log("Setting video: ", url)
                 window.player.cueVideoByUrl({mediaContentUrl: url});
+
+            } else {
+                console.log("Playing video: ", url)
+                window.player.loadVideoByUrl({mediaContentUrl: url});
             }
             clearInterval(checkExist);
        }
     }, 1 * 1000);
 }
 
-function pauseVideo() {
-    window.autoplay = false;
+function pauseVideo(init) {
     window.player.pauseVideo();
-    $("#player-toggle").html(
-        '<span class="glyphicon glyphicon-play"></span>' +
-        '&nbsp;' +
-        'Resume Playback'
-    );
+    showResumeButton();
     console.log("Video paused");
 }
 
-function resumeVideo() {
-    window.autoplay = true;
+function resumeVideo(init) {
     window.player.playVideo();
+    showPauseButton();
+    console.log("Video playing");
+}
+
+function showPauseButton() {
+    document.location.hash = "playing";
     $("#player-toggle").html(
         '<span class="glyphicon glyphicon-pause"></span>' +
         '&nbsp;' +
         'Pause Playback'
     );
-    console.log("Video playing");
+}
+
+function showResumeButton() {
+    document.location.hash = "paused";
+    $("#player-toggle").html(
+        '<span class="glyphicon glyphicon-play"></span>' +
+        '&nbsp;' +
+        'Resume Playback'
+    );
 }
 
 $("#player-toggle").on("click", function() {
@@ -187,11 +195,11 @@ $("#player-next").on("click", function() {
 // Loading /////////////////////////////////////////////////////////////////////
 
 $(document).ready( function () {
-    $("#player-toggle").html(
-        '<span class="glyphicon glyphicon-pause"></span>' +
-        '&nbsp;' +
-        'Pause Playback'
-    );
+    if (document.location.hash == "#paused") {
+        showResumeButton();
+    } else {
+        showPauseButton();
+    }
     $("#player-next").prop("disabled", window.locationAvailable);
 });
 

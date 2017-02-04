@@ -31,11 +31,3 @@ def describe_logout():
 
         expect(response.status_code) == 200
         expect(response).contains_html("Share your Last.fm")
-
-
-def describe_playback():
-
-    def is_initially_playing(client):
-        response = client.get("/")
-
-        expect(response).contains_html("Pause Playback")
