@@ -60,12 +60,12 @@ function getSongs(location) {
 }
 
 function showSongs(songs) {
-    showNextSong(songs[0]);
-    showSongQueue(songs.slice(1));
+    showNowPlaying(songs[0]);
+    showNearbySongs(songs.slice(1));
     playVideo(songs[0].youtube_url);
 }
 
-function showNextSong(song) {
+function showNowPlaying(song) {
     var start = $("#compass").getRotateAngle() % 360;
     $("#compass").rotate({
         angle: start,
@@ -74,27 +74,29 @@ function showNextSong(song) {
         easing: $.easing.easeOutElastic,
     });
 
-    var distance = "<b>" + song.miles + "</b>" + "<br>" + "miles";
-    $("#compass-text").html(distance);
+    var html = "<b>" + song.miles + "</b>" + "<br>" + "miles";
+    $("#compass-text").html(html);
 
-    var title = "<p><b>" + song.title + "</b></p>";
-    var artist = "<p>" + song.artist + "</p>";
-    $("#current-song").html(title + artist);
+    var html = '<p><b>"' + song.title + '"</b></p>'
+        + "<p><i>by&nbsp;&nbsp;</i></p>"
+        + "<p>" + song.artist + "</p>";
+    $("#current-song").html(html);
 
     $("#player-next").prop("disabled", false);
 }
 
-function showSongQueue(songs) {
+function showNearbySongs(songs) {
     $("#song-queue").empty();
 
     var count = Math.min(songs.length, 4);
     for (i = 0; i < count; i++) {
         var song = songs[i];
-        var item = ""
+        var html = "<li>"
+            + '<b>"' + song.title + '"</b>'
+            + "&nbsp;&nbsp;<i>by</i>&nbsp;&nbsp;"
             + song.artist
-            + " - "
-            + "<b>" + song.title + "</b>"
-        $("#song-queue").append("<li>" + item + "</li>");
+            + "</li>"
+        $("#song-queue").append(html);
     }
 }
 
