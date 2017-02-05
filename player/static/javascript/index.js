@@ -76,7 +76,8 @@ function showNowPlaying(song) {
     var html = "<b>" + song.miles + "</b>" + "<br>" + "miles";
     $("#compass-text").html(html);
 
-    var html = '<p><b>"' + song.title + '"</b></p>'
+    var html = ""
+        + '<p><a href="' + song.lastfm_url + '" target="_blank"><b>' + song.title + '</b></a></p>'
         + "<p><i>by&nbsp;&nbsp;</i></p>"
         + "<p>" + song.artist + "</p>";
     $("#current-song").html(html);
@@ -91,7 +92,7 @@ function showNearbySongs(songs) {
     for (i = 0; i < count; i++) {
         var song = songs[i];
         var html = "<li>"
-            + '<b>"' + song.title + '"</b>'
+            + '<a href="' + song.lastfm_url + '" target="_blank"><b>' + song.title + '</b></a>'
             + "&nbsp;&nbsp;<i>by</i>&nbsp;&nbsp;"
             + song.artist
             + "</li>"

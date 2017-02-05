@@ -23,7 +23,8 @@ def describe_queued_song():
                 id=42,
                 artist="John Mayer",
                 title="No Such Thing",
-                youtube_url="http://example.com",
+                lastfm_url="http://last.fm/foobar",
+                youtube_url="http://youtube.com/foobar",
             ),
             that_location=irvine_ca,
             this_location=grand_rapids_mi,
@@ -60,7 +61,8 @@ def describe_queued_song():
             expect(song.data) == {
                 'artist': 'John Mayer',
                 'title': 'No Such Thing',
-                'youtube_url': 'http://example.com',
+                'lastfm_url': 'http://last.fm/foobar',
+                'youtube_url': 'http://youtube.com/foobar',
                 'miles': '1841.8',
                 'degrees': 260.4110953861232,
             }

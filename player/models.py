@@ -164,6 +164,12 @@ class Song(Location):
     def stale(self):
         return timezone.now() - self.date > timedelta(days=7)
 
+    @property
+    def lastfm_url(self):
+        artist = self.artist.replace(' ', '+')
+        title = self.title.replace(' ', '+')
+        return f"http://www.last.fm/music/{artist}/_/{title}"
+
     def update(self):
         """Update all externally computed properties."""
         return any((

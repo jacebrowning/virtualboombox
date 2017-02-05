@@ -86,3 +86,9 @@ def describe_song():
             song.date = timezone.now() - timedelta(days=8)
 
             expect(song.stale) == True
+
+    def describe_lastfm_url():
+
+        def is_based_on_artist_and_title(song):
+            expect(song.lastfm_url) == \
+                "http://www.last.fm/music/The+Bars/_/Foo"

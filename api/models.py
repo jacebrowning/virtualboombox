@@ -79,5 +79,6 @@ class QueuedSong:
             title=self.song.title,
             miles=f"{self.distance:.1f}",
             degrees=self.angle,
+            lastfm_url=self.song.lastfm_url,
             youtube_url=self.song.youtube_url or PLACEHOLDER_YOUTUBE_URL,
         )

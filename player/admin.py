@@ -8,6 +8,12 @@ admin.site.site_header = "Virtual Boombox"
 
 class ClickableMixin:
 
+    def clickable_lastfm_url(self, obj):
+        return f'<a href="{obj.lastfm_url}">{obj.lastfm_url}</a>'
+
+    clickable_lastfm_url.allow_tags = True
+    clickable_lastfm_url.short_description = 'Last.fm'
+
     def clickable_maps_url(self, obj):
         return f'<a href="{obj.maps_url}">{obj.maps_url}</a>'
 
@@ -27,6 +33,7 @@ class AccountAdmin(admin.ModelAdmin, ClickableMixin):
 class SongAdmin(admin.ModelAdmin, ClickableMixin):
     list_display = [
         'name',
+        'clickable_lastfm_url',
         'username',
         'clickable_maps_url',
         'date',
