@@ -6,6 +6,9 @@
     "DJANGO_SETTINGS_MODULE": {
       "required": true
     },
+    "GOOGLE_ANALYTICS_ID": {
+      "required": true
+    },
     "GOOGLE_APPLICATION_CREDENTIALS": {
       "required": true
     },
