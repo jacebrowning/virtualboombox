@@ -94,7 +94,7 @@ hr {
     }
 }
 
-.a-scrobbling {
+#scrobbling {
     float: right;
     padding-right: 10px;
     margin-top: -10px;

@@ -61,7 +61,9 @@
             </div>
         </nav>
 
-         <a class="a-scrobbling" href="/scrobbling">What is Last.fm?</a>
+        {% if not username %}
+        <a id="scrobbling" href="http://www.last.fm/about/trackmymusic" target="_blank">What is Last.fm?</a>
+        {% endif %}
 
         <ul id="messages" class="messages">
         {% for message in messages %}
