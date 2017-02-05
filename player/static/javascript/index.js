@@ -61,7 +61,7 @@ function getSongs(location) {
 function showSongs(songs) {
     showNowPlaying(songs[0]);
     showNearbySongs(songs.slice(1));
-    playVideo(songs[0].youtube_url);
+    showVideo(songs[0].youtube_url);
 }
 
 function showNowPlaying(song) {
@@ -128,11 +128,11 @@ function onPlayerStateChange(event) {
     } else if (event.data == YT.PlayerState.PAUSED) {
         pauseVideo();
     } else if (event.data == YT.PlayerState.PLAYING) {
-        resumeVideo();
+        playVideo();
     }
 }
 
-function playVideo(url) {
+function showVideo(url) {
     var checkExist = setInterval(function() {
        if (window.playerAvailable) {
             if (document.location.hash == "#paused") {
@@ -148,24 +148,24 @@ function playVideo(url) {
     }, 1 * 1000);
 }
 
+function playVideo(init) {
+    window.player.playVideo();
+    showPauseButton();
+    console.log("Video playing");
+}
+
 function pauseVideo(init) {
     window.player.pauseVideo();
     showResumeButton();
     console.log("Video paused");
 }
 
-function resumeVideo(init) {
-    window.player.playVideo();
-    showPauseButton();
-    console.log("Video playing");
-}
-
-function showPauseButton() {
-    document.location.hash = "playing";
+function showPlayButton() {
+    document.location.hash = "paused";
     $("#player-toggle").html(
-        '<span class="glyphicon glyphicon-pause"></span>' +
+        '<span class="glyphicon glyphicon-play"></span>' +
         '&nbsp;' +
-        'Pause Playback'
+        'Start Playback'
     );
 }
 
@@ -178,11 +178,20 @@ function showResumeButton() {
     );
 }
 
+function showPauseButton() {
+    document.location.hash = "playing";
+    $("#player-toggle").html(
+        '<span class="glyphicon glyphicon-pause"></span>' +
+        '&nbsp;' +
+        'Pause Playback'
+    );
+}
+
 $("#player-toggle").on("click", function() {
     if (window.player.getPlayerState() == YT.PlayerState.PLAYING) {
         pauseVideo();
     } else {
-        resumeVideo();
+        playVideo();
     }
 });
 
@@ -195,7 +204,10 @@ $("#player-next").on("click", function() {
 // Loading /////////////////////////////////////////////////////////////////////
 
 $(document).ready( function () {
-    if (document.location.hash == "#paused") {
+    isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+    if ( isMobile ) {
+        showPlayButton();
+    } else if (document.location.hash == "#paused") {
         showResumeButton();
     } else {
         showPauseButton();
