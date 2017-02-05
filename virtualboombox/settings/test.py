@@ -11,3 +11,5 @@ DATABASES = {
         'TEST_NAME': 'virtualboombox_test',
     }
 }
+
+GOOGLE_ANALYTICS_ID = 'localhost'

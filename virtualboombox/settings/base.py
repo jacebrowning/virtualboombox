@@ -126,3 +126,8 @@ LASTFM_API_SECRET = os.getenv('LASTFM_API_SECRET')
 # YouTube
 
 YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
+
+
+# Google Analytics
+
+GOOGLE_ANALYTICS_ID = os.getenv('GOOGLE_ANALYTICS_ID')
