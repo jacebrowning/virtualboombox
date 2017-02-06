@@ -59,12 +59,12 @@ class QueuedSong:
     WEIGHT_DISTANCE = 0.75
     WEIGHT_TIME = 0.25
 
-    def __init__(self, song, this_location,
-                 that_location=None, elapsed_time=None):
+    def __init__(self, song, this_location, that_location=None):
         self.song = song
         self.this_location = this_location
         self._that_location = that_location
-        self._elapsed_time = elapsed_time
+        self._distance = None
+        self._elapsed_time = None
 
     @property
     def id(self):
@@ -88,7 +88,14 @@ class QueuedSong:
 
     @property
     def distance(self):
-        return calculate_haversine(self.this_location, self.that_location)
+        if self._distance is None:
+            return calculate_haversine(self.this_location, self.that_location)
+        else:
+            return self._distance
+
+    @distance.setter
+    def distance(self, value):
+        self._distance = value
 
     @property
     def score(self):
@@ -108,10 +115,15 @@ class QueuedSong:
 
     @property
     def data(self):
+        if self.distance < 20:
+            miles = f"{self.distance:.1f}"
+        else:
+            miles = str(round(self.distance))
+
         return dict(
             artist=self.song.artist,
             title=self.song.title,
-            miles=f"{self.distance:.1f}",
+            miles=miles,
             degrees=self.angle,
             lastfm_url=self.song.lastfm_url,
             youtube_url=self.song.youtube_url or PLACEHOLDER_YOUTUBE_URL,

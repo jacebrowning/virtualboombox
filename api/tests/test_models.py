@@ -106,6 +106,11 @@ def describe_queued_song():
                 'title': 'No Such Thing',
                 'lastfm_url': 'http://last.fm/foobar',
                 'youtube_url': 'http://youtube.com/foobar',
-                'miles': '1841.8',
+                'miles': '1842',
                 'degrees': 260.4110953861232,
             }
+
+        def it_includes_decimals_on_smaller_distances(song):
+            song.distance = 1.23
+
+            expect(song.data['miles']) == '1.2'
