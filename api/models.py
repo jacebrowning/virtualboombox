@@ -1,5 +1,7 @@
 from math import radians, degrees, cos, sin, asin, atan2, sqrt
 
+from django.utils import timezone
+
 
 AVERAGE_EARTH_RADIUS = 3959
 
@@ -51,10 +53,15 @@ def calculate_bearing(point1, point2):
 
 class QueuedSong:
 
-    def __init__(self, song, this_location, that_location=None):
+    BASE_DISTANCE = 0.5  # miles
+    BASE_TIME = 5  # minutes
+
+    def __init__(self, song, this_location,
+                 that_location=None, elapsed_time=None):
         self.song = song
         self.this_location = this_location
         self._that_location = that_location
+        self._elapsed_time = elapsed_time
 
     @property
     def id(self):
@@ -65,8 +72,27 @@ class QueuedSong:
         return self._that_location or self.song.location
 
     @property
+    def elapsed_time(self):
+        if self._elapsed_time is None:
+            delta = timezone.now() - self.song.date
+            return delta.days * 24 * 60 + delta.seconds / 60
+        else:
+            return self._elapsed_time
+
+    @elapsed_time.setter
+    def elapsed_time(self, value):
+        self._elapsed_time = value
+
+    @property
     def distance(self):
         return calculate_haversine(self.this_location, self.that_location)
+
+    @property
+    def score(self):
+        return round(sum((
+            self.BASE_DISTANCE / (self.distance + self.BASE_DISTANCE),
+            self.BASE_TIME / (self.elapsed_time + self.BASE_TIME),
+        )) / 2, 3)
 
     @property
     def angle(self):

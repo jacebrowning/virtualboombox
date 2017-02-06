@@ -1,7 +1,9 @@
 from unittest.mock import Mock
+from datetime import timedelta
 
 import pytest
 from expecter import expect
+from django.utils import timezone
 
 from ..models import QueuedSong
 
@@ -35,6 +37,23 @@ def describe_queued_song():
         def it_matches_the_song(song):
             expect(song.id) == 42
 
+    def describe_elapsed_time():
+
+        def when_live(song):
+            song.song.date = timezone.now()
+
+            expect(song.elapsed_time) == 0.0
+
+        def when_recent(song):
+            song.song.date = timezone.now() - timedelta(minutes=15)
+
+            expect(song.elapsed_time) == 15.0
+
+        def when_old(song):
+            song.song.date = timezone.now() - timedelta(days=2)
+
+            expect(song.elapsed_time) == 2880.0
+
     def describe_distance():
 
         def when_near(song):
@@ -42,8 +61,32 @@ def describe_queued_song():
 
             expect(song.distance) == 0.0
 
-        def when_distant(song):
+        def when_far(song):
             expect(song.distance) == 1841.7935937669608
+
+    def describe_score():
+
+        def when_near_and_new(song):
+            song.this_location = song.that_location
+            song.elapsed_time = 0
+
+            expect(song.score) == 1.0
+
+        def when_near_and_old(song):
+            song.this_location = song.that_location
+            song.elapsed_time = 15
+
+            expect(song.score) == 0.625
+
+        def when_far_and_new(song):
+            song.elapsed_time = 0
+
+            expect(song.score) == 0.500
+
+        def when_far_and_old(song):
+            song.elapsed_time = 15
+
+            expect(song.score) == 0.125
 
     def describe_angle():
 
@@ -52,7 +95,7 @@ def describe_queued_song():
 
             expect(song.angle) == 0.0
 
-        def when_distant(song):
+        def when_far(song):
             expect(song.angle) == 260.4110953861232
 
     def describe_data():
