@@ -116,18 +116,17 @@ class QueuedViewSet(viewsets.ViewSet):
         serializer.is_valid(raise_exception=True)
         limit = serializer.data['limit']
 
-        result = cls._run_query(username, played_song_ids, location, limit)
+        result = cls._run_query(username, played_song_ids, location)
         songs = sorted(result, key=lambda x: x.score, reverse=True)
-        assert songs, "No songs available"  # TODO: show a message to the user?
 
         log.info("Nearest song: %s @ %s", songs[0].distance, songs[0].angle)
         played_song_ids.append(songs[0].id)
         request.session['played_song_ids'] = played_song_ids
 
-        return songs
+        return songs[:limit]
 
     @staticmethod
-    def _run_query(username, played_song_ids, location, limit):
+    def _run_query(username, played_song_ids, location):
         count = 0
         last = None
 
@@ -142,9 +141,9 @@ class QueuedViewSet(viewsets.ViewSet):
             yield QueuedSong(song, location)
 
             count += 1
-            if count >= limit:
+            if count >= 1000:
                 return
 
         if last and not count:
-            # Ensure there is at least once song in the queue
+            # Ensure there is at least one song in the queue
             yield QueuedSong(last, location)
