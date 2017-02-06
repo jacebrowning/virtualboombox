@@ -53,7 +53,11 @@ def describe_song():
 
     @pytest.fixture
     def song():
-        return Song(artist="The Bars", title="Foo", latitude=1, longitude=2)
+        return Song(
+            artist="The Bars", title="Foo",
+            youtube_url="http://example.com",
+            latitude=1, longitude=2,
+        )
 
     def describe_str():
 
@@ -72,7 +76,14 @@ def describe_song():
 
     def describe_unknown():
 
-        def when_no_links(song):
+        def when_no_youtube_url(song):
+            song.youtube_url = None
+
+            expect(song.unknown) == True
+
+        def when_podcast(song):
+            song.title = "Episode 42: Foo"
+
             expect(song.unknown) == True
 
     def describe_stale():

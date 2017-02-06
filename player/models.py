@@ -1,3 +1,4 @@
+import re
 from datetime import datetime, timedelta
 import logging
 
@@ -101,6 +102,8 @@ class Song(Location):
     account = models.ForeignKey(Account, null=True, on_delete=models.CASCADE)
     youtube_url = models.URLField(null=True)
 
+    RE_PODCAST = re.compile("episode\s+\d+", re.IGNORECASE)
+
     class Meta:
         unique_together = ('artist', 'title', 'account')
 
@@ -156,8 +159,9 @@ class Song(Location):
 
     @property
     def unknown(self):
-        return not any((
+        return not all((
             self.youtube_url,
+            not self.RE_PODCAST.search(self.title),
         ))
 
     @property
