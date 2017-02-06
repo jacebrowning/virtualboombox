@@ -88,6 +88,8 @@ function showNowPlaying(song) {
 function showNearbySongs(songs) {
     $("#song-queue").empty();
 
+    $("#nearby-songs").css("visibility", "visible");
+
     var count = Math.min(songs.length, 4);
     for (i = 0; i < count; i++) {
         var song = songs[i];
