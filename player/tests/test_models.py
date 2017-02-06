@@ -83,7 +83,7 @@ def describe_song():
             expect(song.stale) == False
 
         def when_old(song):
-            song.date = timezone.now() - timedelta(days=8)
+            song.date = timezone.now() - timedelta(days=4)
 
             expect(song.stale) == True
 

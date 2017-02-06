@@ -162,7 +162,7 @@ class Song(Location):
 
     @property
     def stale(self):
-        return timezone.now() - self.date > timedelta(days=7)
+        return timezone.now() - self.date > timedelta(days=3)
 
     @property
     def lastfm_url(self):
