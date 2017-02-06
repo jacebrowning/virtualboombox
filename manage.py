@@ -1,4 +1,4 @@
-#!/Users/Browning/.local/share/virtualenvs/virtualboombox/bin/python
+#!.venv/bin/python
 
 import os
 import sys
