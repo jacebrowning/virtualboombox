@@ -136,6 +136,8 @@ function onPlayerStateChange(event) {
 function showVideo(url) {
     var checkExist = setInterval(function() {
        if (window.playerAvailable) {
+            $("#player").css("visibility", "visible");
+
             if (document.location.hash == "#paused") {
                 console.log("Setting video: ", url)
                 window.player.cueVideoByUrl({mediaContentUrl: url});
@@ -144,6 +146,7 @@ function showVideo(url) {
                 console.log("Playing video: ", url)
                 window.player.loadVideoByUrl({mediaContentUrl: url});
             }
+
             clearInterval(checkExist);
        }
     }, 1 * 1000);
