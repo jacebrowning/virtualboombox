@@ -56,9 +56,6 @@ class QueuedSong:
     BASE_DISTANCE = 0.5  # miles
     BASE_TIME = 5  # minutes
 
-    WEIGHT_DISTANCE = 0.75
-    WEIGHT_TIME = 0.25
-
     def __init__(self, song, this_location, that_location=None):
         self.song = song
         self.this_location = this_location
@@ -99,15 +96,13 @@ class QueuedSong:
 
     @property
     def score(self):
-        value = sum((
+        values = [
+            self.BASE_DISTANCE / (self.distance + self.BASE_DISTANCE),
+            self.BASE_TIME / (self.elapsed_time + self.BASE_TIME),
+        ]
+        average = sum(values) / len(values)
 
-            self.BASE_DISTANCE / (self.distance + self.BASE_DISTANCE)
-                * self.WEIGHT_DISTANCE,
-
-            self.BASE_TIME / (self.elapsed_time + self.BASE_TIME)
-                * self.WEIGHT_TIME,
-        ))
-        return round(value, 3)
+        return round(average, 3)
 
     @property
     def angle(self):
