@@ -117,7 +117,7 @@ class QueuedViewSet(viewsets.ViewSet):
         limit = serializer.data['limit']
 
         result = cls._run_query(username, played_song_ids, location, limit)
-        songs = sorted(result, key=lambda x: x.distance)
+        songs = sorted(result, key=lambda x: x.score, reverse=True)
         assert songs, "No songs available"  # TODO: show a message to the user?
 
         log.info("Nearest song: %s @ %s", songs[0].distance, songs[0].angle)
