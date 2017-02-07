@@ -17,7 +17,7 @@ def describe_location():
 
         def it_uses_google_maps(location):
             expect(location.maps_url) == \
-                "https://www.google.com/maps/@1.2000,-3.4000,19z"
+                "https://www.google.com/maps/@1.2000,-3.4000,10z"
 
 
 def describe_account():

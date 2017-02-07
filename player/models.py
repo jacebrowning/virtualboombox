@@ -31,7 +31,7 @@ class Location(models.Model):
     @property
     def maps_url(self):
         return ("https://www.google.com/maps/"
-                f"@{self.latitude:.4f},{self.longitude:.4f},19z")
+                f"@{self.latitude:.4f},{self.longitude:.4f},10z")
 
     class Meta:
         abstract = True
