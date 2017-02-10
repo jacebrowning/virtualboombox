@@ -61,15 +61,15 @@
             </div>
         </nav>
 
-        {% if not username %}
-        <a id="scrobbling" href="http://www.last.fm/about/trackmymusic" target="_blank">What is Last.fm?</a>
-        {% endif %}
-
         <ul id="messages" class="messages">
         {% for message in messages %}
             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
         </ul>
+
+        {% if not username %}
+        <a id="scrobbling" href="http://www.last.fm/about/trackmymusic" target="_blank">What is Last.fm?</a>
+        {% endif %}
 
         <div class="container">
 
