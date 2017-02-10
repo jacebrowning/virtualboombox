@@ -3,6 +3,12 @@
     "postdeploy": "make data"
   },
   "env": {
+    // Build variables
+    "PIPENV_VENV_IN_PROJECT": {
+      "value": "true"
+    },
+
+    // Runtime variables
     "DJANGO_SETTINGS_MODULE": {
       "required": true
     },

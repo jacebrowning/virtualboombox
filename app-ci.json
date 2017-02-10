@@ -4,6 +4,12 @@
     "test": "make test"
   },
   "env": {
+    // Build variables
+    "PIPENV_VENV_IN_PROJECT": {
+      "value": "true"
+    },
+
+    // Runtime variables
     "SECRET_KEY": {
       "value": "test"
     }
