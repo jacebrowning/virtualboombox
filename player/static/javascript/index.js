@@ -39,15 +39,17 @@ function getLocation() {
 }
 
 function getSongs(location) {
-    $("#messages").empty();
-
     var data = {
         "latitude": location.coords.latitude,
         "longitude": location.coords.longitude,
         "accuracy": location.coords.accuracy,
     };
     console.log("Current position: ", data);
-    window.locationAvailable = true;
+
+    if (data.accuracy != -1) {
+        $("#messages").empty();
+        window.locationAvailable = true;
+    }
 
     data["limit"] = 100;
     $.ajax({
@@ -113,7 +115,14 @@ function showLocationWarning(error) {
     } else {
         $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
         stopCompass();
-        setTimeout(getLocation, 2 * 1000);
+        getSongs({
+            "coords": {
+                // Oceanic Pole of Inaccessibility
+                "latitude": -48.876667,
+                "longitude": -123.393333,
+                "accuracy": -1,
+            },
+        });
     }
 }
 
