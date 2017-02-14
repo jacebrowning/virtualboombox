@@ -75,23 +75,17 @@ class Account(Location):
 
     @staticmethod
     def _get_username_from_token(token):
-        network = pylast.LastFMNetwork(
-            api_key=settings.LASTFM_API_KEY,
-            api_secret=settings.LASTFM_API_SECRET,
-        )
-
-        call = pylast._Request(network, 'auth.getSession', {'token': token})
-        call.sign_it()
-
         try:
-            xml = call.execute()
+            network = pylast.LastFMNetwork(
+                api_key=settings.LASTFM_API_KEY,
+                api_secret=settings.LASTFM_API_SECRET,
+                token=token
+            )
         except pylast.WSError as exc:
             log.error(exc)
-            username = None
+            return None
         else:
-            username = xml.getElementsByTagName('name')[0].firstChild.data
-
-        return username
+            return network.get_authenticated_user().get_name()
 
 
 class Song(Location):
