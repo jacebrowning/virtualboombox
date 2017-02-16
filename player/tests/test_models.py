@@ -89,12 +89,12 @@ def describe_song():
     def describe_stale():
 
         def when_new(song):
-            song.date = timezone.now() - timedelta(days=1)
+            song.date = timezone.now() - timedelta(hours=5.9)
 
             expect(song.stale) == False
 
         def when_old(song):
-            song.date = timezone.now() - timedelta(days=4)
+            song.date = timezone.now() - timedelta(hours=6.1)
 
             expect(song.stale) == True
 
