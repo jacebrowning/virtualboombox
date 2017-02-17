@@ -16,4 +16,3 @@ class Command(BaseCommand):
         for song in Song.objects.order_by('-date'):
             if song.update():
                 song.save()
-                time.sleep(1)

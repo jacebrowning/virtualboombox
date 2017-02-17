@@ -106,6 +106,8 @@ class Song(Location):
         """Initialize a new song or update an existing song without saving."""
         log.debug(f"Adding songs from '{account.username}'...")
 
+        time.sleep(1)  # quota rate limiter
+
         network = pylast.LastFMNetwork(
             api_key=settings.LASTFM_API_KEY,
             api_secret=settings.LASTFM_API_SECRET,
@@ -178,6 +180,8 @@ class Song(Location):
         """Update the YouTube URL if not set."""
         if self.youtube_url:
             return False
+
+        time.sleep(1)  # quota rate limiter
 
         youtube = build('youtube', 'v3', developerKey=settings.YOUTUBE_API_KEY)
 

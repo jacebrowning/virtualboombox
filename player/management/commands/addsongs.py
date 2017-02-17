@@ -18,4 +18,3 @@ class Command(BaseCommand):
             if song:
                 song.update()
                 song.save()
-            time.sleep(1)
