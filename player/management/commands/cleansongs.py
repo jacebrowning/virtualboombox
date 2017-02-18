@@ -16,6 +16,6 @@ class Command(BaseCommand):
             if song.unknown:
                 log.info("Deleting unidentifiable song: %s", song)
                 song.delete()
-            if song.stale:
+            elif song.stale:
                 log.info("Deleting stale song: %s", song)
                 song.delete()
