@@ -8,13 +8,15 @@ admin.site.site_header = "Virtual Boombox"
 
 class ClickableMixin:
 
-    def clickable_lastfm_url(self, obj):
+    @staticmethod
+    def clickable_lastfm_url(obj):
         return f'<a href="{obj.lastfm_url}">{obj.lastfm_url}</a>'
 
     clickable_lastfm_url.allow_tags = True
     clickable_lastfm_url.short_description = 'Last.fm'
 
-    def clickable_maps_url(self, obj):
+    @staticmethod
+    def clickable_maps_url(obj):
         return f'<a href="{obj.maps_url}">{obj.maps_url}</a>'
 
     clickable_maps_url.allow_tags = True
@@ -40,7 +42,8 @@ class SongAdmin(admin.ModelAdmin, ClickableMixin):
     ]
     ordering = ['-date']
 
-    def username(self, obj):
+    @staticmethod
+    def username(obj):
         return obj.account.username if obj.account else ""
 
     username.short_description = 'Account'

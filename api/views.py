@@ -4,7 +4,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
-from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from player.models import Account, Song
@@ -30,7 +29,7 @@ class AccountViewSet(viewsets.ModelViewSet):
             return Response([])
 
     @csrf_exempt
-    def create(self, request):
+    def create(self, request):  # pylint: disable=arguments-differ
         account = get_object_or_404(Account, username=request.POST['username'])
 
         serializer = AccountSerializer(account, data=request.data)

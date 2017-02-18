@@ -1,3 +1,5 @@
+# pylint: disable=unused-variable,expression-not-assigned
+
 import pytest
 from expecter import expect
 

@@ -6,7 +6,7 @@ log = logging.getLogger(__name__)
 
 
 def contains_html(response, text):
-    __tracebackhide__ = True
+    __tracebackhide__ = True  # pylint: disable=unused-variable
 
     html = response.content.decode('utf-8')
     # TODO: make this a regular expression to check word boundaries

@@ -1,7 +1,6 @@
-import pytest
-from expecter import expect
+# pylint: disable=unused-variable,expression-not-assigned
 
-from player.models import Account
+from expecter import expect
 
 
 def describe_root():

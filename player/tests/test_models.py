@@ -1,3 +1,5 @@
+# pylint: disable=unused-variable,expression-not-assigned,redefined-outer-name,singleton-comparison
+
 from datetime import timedelta
 
 import pytest

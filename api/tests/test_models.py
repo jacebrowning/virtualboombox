@@ -1,3 +1,5 @@
+# pylint: disable=unused-variable,expression-not-assigned
+
 from unittest.mock import Mock
 from datetime import timedelta
 

@@ -4,8 +4,6 @@ from django.views import defaults
 from django.shortcuts import reverse, render, redirect
 from django.conf import settings
 
-import pylast
-
 from .models import Account
 
 
