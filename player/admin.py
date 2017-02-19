@@ -8,15 +8,13 @@ admin.site.site_header = "Virtual Boombox"
 
 class ClickableMixin:
 
-    @staticmethod
-    def clickable_lastfm_url(obj):
+    def clickable_lastfm_url(self, obj):  # pylint: disable=no-self-use
         return f'<a href="{obj.lastfm_url}">{obj.lastfm_url}</a>'
 
     clickable_lastfm_url.allow_tags = True
     clickable_lastfm_url.short_description = 'Last.fm'
 
-    @staticmethod
-    def clickable_maps_url(obj):
+    def clickable_maps_url(self, obj):  # pylint: disable=no-self-use
         return f'<a href="{obj.maps_url}">{obj.maps_url}</a>'
 
     clickable_maps_url.allow_tags = True
