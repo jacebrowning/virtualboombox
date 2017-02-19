@@ -9,7 +9,7 @@ from player.models import Account, Song
 class Command(BaseCommand):
     help = "Generate data for manual testing"
 
-    def handle(self, *args, **kwargs):
+    def handle(self, *args, **kwargs):  # pylint: disable=unused-argument
         Account.objects.get_or_create(username='justus87')
 
         a, _ = Account.objects.get_or_create(username='aliasguru')

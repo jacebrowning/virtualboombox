@@ -9,7 +9,7 @@ from django.utils import timezone
 
 import pylast
 import pytz
-from apiclient.discovery import build
+from apiclient.discovery import build  # pylint: disable=import-error
 
 
 DEFAULT_LOCATION = (-48.876667, -123.393333)  # Oceanic Pole of Inaccessibility
@@ -97,7 +97,7 @@ class Song(Location):
     account = models.ForeignKey(Account, null=True, on_delete=models.CASCADE)
     youtube_url = models.URLField(null=True)
 
-    RE_PODCAST = re.compile("episode\s+\d+", re.IGNORECASE)
+    RE_PODCAST = re.compile(r"episode\s+\d+", re.IGNORECASE)
 
     class Meta:
         unique_together = ('artist', 'title', 'account')

@@ -7,7 +7,7 @@ log = logging.getLogger(__name__)
 
 
 def contains_json(response, **kwargs):
-    __tracebackhide__ = True
+    __tracebackhide__ = True  # pylint: disable=unused-variable
 
     data = response.json()
     missing = None

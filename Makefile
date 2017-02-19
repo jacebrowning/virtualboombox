@@ -30,6 +30,8 @@ doctor:
 install: $(ENV)
 $(ENV): Pipfile*
 	pipenv install --dev
+	.venv/bin/pip install git+git://github.com/PyCQA/pylint.git@e0fdd25c214e60bef10fbaa46252f4aaa74de8c2
+	.venv/bin/pip install git+git://github.com/PyCQA/astroid.git@4e7d9fee4080d2e0db67a3e0463be8b196e56a95
 	@ mkdir -p tmp
 	@ touch $@
 
@@ -64,6 +66,7 @@ db-superuser: install
 
 .PHONY: check
 check: install
+	pipenv run pylint api player virtualboombox --rcfile=.pylint.ini
 	pipenv run pycodestyle --config=.pycodestyle.ini
 
 .PHONY: test

@@ -17,7 +17,7 @@ class SongSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'artist', 'title', 'latitude', 'longitude', 'date')
 
 
-class QueueSerializer(serializers.Serializer):
+class QueueSerializer(serializers.Serializer):  # pylint: disable=abstract-method
 
     latitude = serializers.FloatField()
     longitude = serializers.FloatField()
