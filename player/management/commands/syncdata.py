@@ -1,3 +1,4 @@
+import time
 import logging
 
 from django.core.management.base import BaseCommand
@@ -29,10 +30,16 @@ class Command(BaseCommand):
 
     @staticmethod
     def add_songs():
+        start = time.time()
+
         for account in Account.objects.order_by('-date'):
             song = Song.from_account(account)
-            if song:
+            if song and song.update():
                 song.save()
+
+            if time.time() - start > 60 * 4:
+                log.warning("Breaking early to cycle users")
+                break
 
     @staticmethod
     def update_songs():
