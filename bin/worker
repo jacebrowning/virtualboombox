@@ -3,6 +3,5 @@
 while [ true ]
 do
     python manage.py addsongs
-    python manage.py updatesongs
     python manage.py cleansongs
 done

@@ -13,13 +13,19 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):  # pylint: disable=unused-argument
         count = Song.objects.count()
-        if count < 250:
-            log.warning(f"Only {count} songs")
-            return
+
         for song in Song.objects.order_by('-date'):
+
+            if count < 250:
+                log.warning(f"Only {count} songs")
+                break
+
             if song.unknown:
                 log.info("Deleting unidentifiable song: %s", song)
                 song.delete()
+                count -= 1
+
             elif song.stale:
                 log.info("Deleting stale song: %s", song)
                 song.delete()
+                count -= 1
