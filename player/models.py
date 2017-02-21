@@ -107,7 +107,7 @@ class Song(Location):
         """Initialize a new song or update an existing song without saving."""
         log.debug(f"Adding songs from '{account.username}'...")
 
-        time.sleep(1)  # quota rate limiter
+        time.sleep(5)  # quota rate limiter
 
         network = pylast.LastFMNetwork(
             api_key=settings.LASTFM_API_KEY,
@@ -190,7 +190,7 @@ class Song(Location):
         response = youtube.search().list(
             q=query,
             part="id,snippet",
-            maxResults=5
+            maxResults=1,
         ).execute()
 
         for result in response.get('items', []):
