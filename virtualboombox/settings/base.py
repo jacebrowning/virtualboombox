@@ -122,6 +122,8 @@ REST_FRAMEWORK = {
 LASTFM_API_KEY = os.getenv('LASTFM_API_KEY')
 LASTFM_API_SECRET = os.getenv('LASTFM_API_SECRET')
 
+LASTFM_API_DELAY = 1  # seconds
+
 
 # YouTube
 
@@ -130,8 +132,8 @@ YOUTUBE_API_KEY = os.getenv('YOUTUBE_API_KEY')
 # YouTube API quota: 1,000,000 points / 24 hours
 # Cost per query: 100 points
 # Seconds in a day: 24 * 60 * 60 = 86,400 seconds
-# Minimum seconds between requests: 86.4
-YOUTUBE_API_DELAY = 60 * 1.5
+# Minimum seconds between queries: 8.64
+YOUTUBE_API_DELAY = 10 # seconds
 
 
 # Google Analytics

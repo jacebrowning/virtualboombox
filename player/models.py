@@ -1,4 +1,5 @@
 import re
+import time
 from datetime import datetime, timedelta
 import logging
 
@@ -106,6 +107,8 @@ class Song(Location):
         """Initialize a new song or update an existing song without saving."""
         log.debug(f"Adding songs from '{account.username}'...")
 
+        time.sleep(settings.LASTFM_API_DELAY)  # rate limit API calls
+
         network = pylast.LastFMNetwork(
             api_key=settings.LASTFM_API_KEY,
             api_secret=settings.LASTFM_API_SECRET,
@@ -179,6 +182,8 @@ class Song(Location):
         if self.youtube_url:
             return False
 
+        time.sleep(settings.YOUTUBE_API_DELAY)  # rate limit API calls
+
         youtube = build('youtube', 'v3', developerKey=settings.YOUTUBE_API_KEY)
 
         query = f"{self.artist} - {self.title}"
@@ -197,7 +202,7 @@ class Song(Location):
 
         log.warning("%r => (no YouTube results)", query)
 
-        return True
+        return False
 
     @classmethod
     def _get_or_init(cls, track, account):

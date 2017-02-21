@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-while [ true ]
-do
-    python manage.py addsongs
-    python manage.py cleansongs
-done

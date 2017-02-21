@@ -45,8 +45,7 @@ clean:
 .PHONY: data
 data: install
 	$(MANAGE) gendata
-	$(MANAGE) addsongs
-	$(MANAGE) cleansongs
+	$(MANAGE) syncdata
 
 .PHONY: db
 db:
