@@ -197,7 +197,7 @@ class Song(Location):
 
         log.warning("%r => (no YouTube results)", query)
 
-        return False
+        return True
 
     @classmethod
     def _get_or_init(cls, track, account):
