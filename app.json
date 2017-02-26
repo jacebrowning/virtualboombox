@@ -3,12 +3,19 @@
     "postdeploy": "make data"
   },
   "env": {
-    // Build variables
-    "PIPENV_VENV_IN_PROJECT": {
+    "PIPENV_COLORBLIND" : {
       "value": "true"
     },
+    "PIPENV_NOSPIN" : {
+      "value": "true"
+    },
+    "PIPENV_VENV_IN_PROJECT" : {
+      "value": "true"
+    },
+    "VIRTUAL_ENV": {
+      "value": "heroku"
+    },
 
-    // Runtime variables
     "DJANGO_SETTINGS_MODULE": {
       "required": true
     },
