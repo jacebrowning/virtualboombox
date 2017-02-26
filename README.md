@@ -4,6 +4,12 @@
 
 ## Commands
 
+Set up runtime dependencies:
+
+```
+$ make data
+```
+
 Run the app:
 
 ```

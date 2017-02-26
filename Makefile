@@ -43,22 +43,23 @@ clean:
 # RUNTIME DEPENDENCIES #########################################################
 
 .PHONY: data
+ifdef VIRTUAL_ENV
+data:
+	./manage gendata
+	./manage syncdata
+else
 data: install
 	$(MANAGE) gendata
 	$(MANAGE) syncdata
+endif
 
 .PHONY: db
 db:
 	- createdb virtualboombox_dev
 
-.PHONY: db-migrate
-db-migrate: install
+.PHONY: migrate
+migrate: install
 	$(MANAGE) migrate
-
-.PHONY: db-superuser
-db-superuser: install
-	@ echo "Creating the default superuser..."
-	@- echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@localhost', 'password')" | $(MANAGE) shell >> tmp/manage.log 2>&1
 
 # VALIDATION TARGETS ###########################################################
 
@@ -82,7 +83,7 @@ coverage: install
 # SERVER TARGETS ###############################################################
 
 .PHONY: run
-run: .envrc install db db-migrate db-superuser
+run: .envrc install db migrate
 	$(MANAGE) runserver 5000
 
 .PHONY: run-prod

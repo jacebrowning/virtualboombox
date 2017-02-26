@@ -1,6 +1,9 @@
 from datetime import timedelta
+from contextlib import suppress
 
 from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
+from django.db.utils import IntegrityError
 from django.utils import timezone
 
 from player.models import Account, Song
@@ -10,6 +13,9 @@ class Command(BaseCommand):
     help = "Generate data for manual testing"
 
     def handle(self, *args, **kwargs):  # pylint: disable=unused-argument
+        with suppress(IntegrityError):
+            User.objects.create_superuser('admin', 'admin@localhost', 'password')
+
         Account.objects.get_or_create(username='justus87')
 
         a, _ = Account.objects.get_or_create(username='aliasguru')
