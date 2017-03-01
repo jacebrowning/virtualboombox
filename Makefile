@@ -16,7 +16,7 @@ MANAGE := pipenv run python manage.py
 
 .PHONY: setup
 setup:
-	pip install pipenv==3.3.5
+	pip install pipenv==3.5.0
 	pipenv lock
 	touch Pipfile
 
@@ -30,8 +30,6 @@ doctor:
 install: $(ENV)
 $(ENV): Pipfile*
 	pipenv install --dev
-	.venv/bin/pip install git+git://github.com/PyCQA/pylint.git@e0fdd25c214e60bef10fbaa46252f4aaa74de8c2
-	.venv/bin/pip install git+git://github.com/PyCQA/astroid.git@4e7d9fee4080d2e0db67a3e0463be8b196e56a95
 	@ mkdir -p tmp
 	@ touch $@
 
