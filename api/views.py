@@ -118,9 +118,12 @@ class QueuedViewSet(viewsets.ViewSet):
         result = cls._run_query(username, played_song_ids, location)
         songs = sorted(result, key=lambda x: x.score, reverse=True)
 
-        log.info("Nearest song: %s @ %s", songs[0].distance, songs[0].angle)
-        played_song_ids.append(songs[0].id)
-        request.session['played_song_ids'] = played_song_ids
+        if songs:
+            log.info("Nearest song: %s @ %s", songs[0].distance, songs[0].angle)
+            played_song_ids.append(songs[0].id)
+            request.session['played_song_ids'] = played_song_ids
+        else:
+            log.warning("No songs available")
 
         return songs[:limit]
 
