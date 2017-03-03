@@ -43,8 +43,8 @@ clean:
 .PHONY: data
 ifdef VIRTUAL_ENV
 data:
-	./manage gendata
-	./manage syncdata
+	python manage.py gendata
+	python manage.py syncdata
 else
 data: install
 	$(MANAGE) gendata
