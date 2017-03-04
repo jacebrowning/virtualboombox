@@ -70,7 +70,7 @@ def describe_queued_song():
 
         def when_near_and_new(song):
             song.this_location = song.that_location
-            song.elapsed_time = 0
+            song.elapsed_time = 4
 
             expect(song.score) == 1.0
 
@@ -78,17 +78,17 @@ def describe_queued_song():
             song.this_location = song.that_location
             song.elapsed_time = 15
 
-            expect(song.score) == 0.625
+            expect(song.score) == 0.997
 
         def when_far_and_new(song):
             song.elapsed_time = 0
 
-            expect(song.score) == 0.5
+            expect(song.score) == 0.926
 
         def when_far_and_old(song):
             song.elapsed_time = 15
 
-            expect(song.score) == 0.125
+            expect(song.score) == 0.923
 
     def describe_angle():
 
