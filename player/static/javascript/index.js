@@ -67,6 +67,11 @@ function showSongs(songs) {
 }
 
 function showNowPlaying(song) {
+    if (!song) {
+        console.log("No song currently playing")
+        return;
+    }
+
     var start = $("#compass").getRotateAngle() % 360;
     $("#compass").rotate({
         angle: start,
