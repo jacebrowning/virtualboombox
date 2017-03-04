@@ -4,7 +4,7 @@ body {
     padding: 0;
     margin: 0;
     height: 100%;
-    background-color: #F1F1F1
+    background-color: #f1f1f1
 }
 
 .navbar {
@@ -60,7 +60,7 @@ hr {
     padding-top: 30px;
     height: 0;
     overflow: hidden;
-    background-color: black;
+    background-color: #000000;
 }
 
 .video-container iframe, .video-container object, .video-container embed {
@@ -78,7 +78,7 @@ hr {
     color: #f1f1f1 !important;
 }
 .btn-login:hover {
-    color: black !important;
+    color: #000000 !important;
 }
 
 .btn-logout {
@@ -86,7 +86,7 @@ hr {
     color: #e2e2e2 !important;
 }
 .btn-logout:hover {
-    color: black !important;
+    color: #000000 !important;
 }
 @media (max-width: 768px) {
     .navbar-text {
@@ -125,6 +125,19 @@ hr {
     text-align: right;
     align-items: center;
     font-size: 16px;
+}
+
+#slider {
+    width: 100%
+}
+#slider .slider-selection {
+    background: #d9d9d9;
+}
+#slider .slider-handle {
+    background: #db1f12;
+}
+#slider .slider-tick {
+    background: #000000;
 }
 
 .song-queue>li {

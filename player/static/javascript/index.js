@@ -52,6 +52,7 @@ function getSongs(location) {
     }
 
     data["limit"] = 100;
+    data["distance-weight"] = $("#distance-weight").slider('getValue') / 100.0;
     $.ajax({
         url: "/api/queue/",
         type: "POST",
@@ -238,4 +239,13 @@ $(document).ready( function () {
 $(window).ready( function(e) {
     spinCompass();
     getLocation();
+});
+
+
+$("#distance-weight").slider({
+    id: 'slider',
+    ticks: [0, 50, 100],
+    ticks_snap_bounds: 2,
+    value: 50,
+    tooltip: 'hide',
 });
