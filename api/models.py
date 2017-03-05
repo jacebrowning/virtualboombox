@@ -53,6 +53,9 @@ def calculate_bearing(point1, point2):
 
 class QueuedSong:
 
+    WEIGHT_DISTANCE = 0.5
+    WEIGHT_TIME = 0.5
+
     def __init__(self, song, this_location, that_location=None):
         self.song = song
         self.this_location = this_location
@@ -93,16 +96,13 @@ class QueuedSong:
 
     @property
     def score(self):
-        values = [
-            self._scale_distance(self.distance),
-            self._scale_time(self.elapsed_time),
-        ]
-        average = sum(values) / len(values)
-
-        return round(average, 3)
+        return round(sum([
+            self._scale_distance(self.distance, self.WEIGHT_DISTANCE),
+            self._scale_time(self.elapsed_time, self.WEIGHT_TIME),
+        ]), 3)
 
     @staticmethod
-    def _scale_distance(value, weight=1):
+    def _scale_distance(value, weight):
         """Scale distance between 0 and 1 with optional weighting.
 
         0 to 1/2 mile (walking distance)        => 1
@@ -118,7 +118,7 @@ class QueuedSong:
         return (1 - value / upper) * weight
 
     @staticmethod
-    def _scale_time(value, weight=1):
+    def _scale_time(value, weight):
         """Scale elapsed time between 0 and 1 with optional weighting.
 
         0 to 5 minutes (song still playing)     => 1

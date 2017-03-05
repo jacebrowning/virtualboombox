@@ -90,6 +90,20 @@ def describe_queued_song():
 
             expect(song.score) == 0.923
 
+        def when_favoring_distance(song):
+            song.elapsed_time = 15
+            song.WEIGHT_DISTANCE = 1.0
+            song.WEIGHT_TIME = 0.0
+
+            expect(song.score) == 0.852
+
+        def when_favoring_time(song):
+            song.elapsed_time = 15
+            song.WEIGHT_DISTANCE = 0.0
+            song.WEIGHT_TIME = 1.0
+
+            expect(song.score) == 0.993
+
     def describe_angle():
 
         def when_near(song):

@@ -23,3 +23,5 @@ class QueueSerializer(serializers.Serializer):  # pylint: disable=abstract-metho
     longitude = serializers.FloatField()
     username = serializers.CharField(required=False)
     limit = serializers.IntegerField(min_value=1, default=10)
+    weightDistance = serializers.FloatField(default=0.5)
+    weightTime = serializers.FloatField(default=0.5)

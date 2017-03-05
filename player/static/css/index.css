@@ -127,16 +127,16 @@ hr {
     font-size: 16px;
 }
 
-#slider {
+#distance-weight-slider {
     width: 100%
 }
-#slider .slider-selection {
+#distance-weight-slider .slider-selection {
     background: #d9d9d9;
 }
-#slider .slider-handle {
+#distance-weight-slider .slider-handle {
     background: #db1f12;
 }
-#slider .slider-tick {
+#distance-weight-slider .slider-tick {
     background: #000000;
 }
 

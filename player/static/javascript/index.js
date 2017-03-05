@@ -51,8 +51,11 @@ function getSongs(location) {
         window.locationAvailable = true;
     }
 
+    var weightDistance = $("#distance-weight").slider('getValue') / 100.0
+    data["weightDistance"] = weightDistance;
+    data["weightTime"] = 1.0 - weightDistance;
     data["limit"] = 100;
-    data["distance-weight"] = $("#distance-weight").slider('getValue') / 100.0;
+
     $.ajax({
         url: "/api/queue/",
         type: "POST",
@@ -243,7 +246,7 @@ $(window).ready( function(e) {
 
 
 $("#distance-weight").slider({
-    id: 'slider',
+    id: 'distance-weight-slider',
     ticks: [0, 50, 100],
     ticks_snap_bounds: 2,
     value: 50,
