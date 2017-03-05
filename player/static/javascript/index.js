@@ -51,7 +51,11 @@ function getSongs(location) {
         window.locationAvailable = true;
     }
 
+    var weightDistance = $("#distance-weight").slider('getValue') / 100.0
+    data["weightDistance"] = weightDistance;
+    data["weightTime"] = 1.0 - weightDistance;
     data["limit"] = 100;
+
     $.ajax({
         url: "/api/queue/",
         type: "POST",
@@ -238,4 +242,13 @@ $(document).ready( function () {
 $(window).ready( function(e) {
     spinCompass();
     getLocation();
+});
+
+
+$("#distance-weight").slider({
+    id: 'distance-weight-slider',
+    ticks: [0, 50, 100],
+    ticks_snap_bounds: 2,
+    value: 50,
+    tooltip: 'hide',
 });

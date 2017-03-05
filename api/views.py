@@ -60,13 +60,16 @@ class QueuedViewSet(viewsets.ViewSet):
 
     @csrf_exempt
     def create(self, request):
+        serializer = QueueSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
         username = self._get_username(request)
-        location = self._get_location(request)
+        location = self._get_location(serializer.data)
 
         if username:
             self._update_account(username, location)
 
-        songs = self._get_songs(request, username, location)
+        songs = self._get_songs(request, serializer.data, username, location)
 
         return Response([s.data for s in songs])
 
@@ -86,11 +89,8 @@ class QueuedViewSet(viewsets.ViewSet):
         return None
 
     @staticmethod
-    def _get_location(request):
-        serializer = QueueSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-
-        location = serializer.data['latitude'], serializer.data['longitude']
+    def _get_location(data):
+        location = data['latitude'], data['longitude']
         log.info("Location specified: %s, %s", *location)
 
         return location
@@ -108,15 +108,16 @@ class QueuedViewSet(viewsets.ViewSet):
         account.save()
 
     @classmethod
-    def _get_songs(cls, request, username, location):
+    def _get_songs(cls, request, data, username, location):
         played_song_ids = request.session.get('played_song_ids', [])
 
-        serializer = QueueSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        limit = serializer.data['limit']
-
-        result = cls._run_query(username, played_song_ids, location)
-        songs = sorted(result, key=lambda x: x.score, reverse=True)
+        songs = []
+        results = cls._run_query(username, played_song_ids, location)
+        for song in results:
+            song.WEIGHT_DISTANCE = data['weightDistance']
+            song.WEIGHT_TIME = data['weightTime']
+            songs.append(song)
+        songs.sort(key=lambda x: x.score, reverse=True)
 
         if songs:
             log.info("Nearest song: %s @ %s", songs[0].distance, songs[0].angle)
@@ -125,7 +126,7 @@ class QueuedViewSet(viewsets.ViewSet):
         else:
             log.warning("No songs available")
 
-        return songs[:limit]
+        return songs[:data['limit']]
 
     @staticmethod
     def _run_query(username, played_song_ids, location):
