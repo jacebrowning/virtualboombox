@@ -4,7 +4,13 @@
 
 ## Commands
 
-Set up runtime dependencies:
+Install dependencies:
+
+```
+$ make install
+```
+
+Generate test data:
 
 ```
 $ make data
@@ -14,6 +20,7 @@ Run the app:
 
 ```
 $ make run
+$ make reload  # live reload server
 ```
 
 Run all checks:

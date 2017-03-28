@@ -48,7 +48,7 @@ data:
 else
 data: install
 	$(MANAGE) gendata
-	$(MANAGE) syncdata --limit=3
+	$(MANAGE) syncdata --limit=5
 endif
 
 .PHONY: db
@@ -83,6 +83,10 @@ coverage: install
 .PHONY: run
 run: .envrc install db migrate
 	$(MANAGE) runserver 5000
+
+.PHONY: reload
+reload: .envrc install
+	$(MANAGE) livereload
 
 .PHONY: run-prod
 run-prod: .envrc install db
