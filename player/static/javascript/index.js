@@ -99,16 +99,14 @@ function showNowPlaying(song) {
 function showNearbySongs(songs) {
     $("#song-queue").empty();
 
-    $("#nearby-songs").css("visibility", "visible");
-
-    var count = Math.min(songs.length, 4);
+    var count = Math.min(songs.length, 5);
     for (i = 0; i < count; i++) {
         var song = songs[i];
-        var html = "<li>"
-            + '<a href="' + song.lastfm_url + '" target="_blank"><b>' + song.title + '</b></a>'
-            + "&nbsp;&nbsp;<i>by</i>&nbsp;&nbsp;"
+        var html ='<a href="' + song.lastfm_url + '" target="_blank" class="list-group-item">'
+            + '<b>' + song.title + '</b>'
+            + "&nbsp;<i>by</i>&nbsp;"
             + song.artist
-            + "</li>"
+            + "</a>"
         $("#song-queue").append(html);
     }
 }
@@ -186,29 +184,17 @@ function pauseVideo(init) {
 
 function showPlayButton() {
     document.location.hash = "paused";
-    $("#player-toggle").html(
-        '<span class="glyphicon glyphicon-play"></span>' +
-        '&nbsp;' +
-        'Start Playback'
-    );
+    $("#player-toggle").html('<span class="glyphicon glyphicon-play"></span>');
 }
 
 function showResumeButton() {
     document.location.hash = "paused";
-    $("#player-toggle").html(
-        '<span class="glyphicon glyphicon-play"></span>' +
-        '&nbsp;' +
-        'Resume Playback'
-    );
+    $("#player-toggle").html('<span class="glyphicon glyphicon-play"></span>');
 }
 
 function showPauseButton() {
     document.location.hash = "playing";
-    $("#player-toggle").html(
-        '<span class="glyphicon glyphicon-pause"></span>' +
-        '&nbsp;' +
-        'Pause Playback'
-    );
+    $("#player-toggle").html('<span class="glyphicon glyphicon-pause"></span>');
 }
 
 $("#player-toggle").on("click", function() {

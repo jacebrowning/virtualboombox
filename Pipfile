@@ -12,6 +12,7 @@ pytz = "*"
 whitenoise = "~=3.3"
 gunicorn = "~=19.6"
 Django = "~=1.10"
+django-livereload-server = "*"
 
 [dev-packages]
 pycodestyle = "*"

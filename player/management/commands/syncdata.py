@@ -53,9 +53,9 @@ class Command(BaseCommand):
 
         for song in Song.objects.order_by('-date'):
 
-            if limit and count < limit:
+            if limit and count <= limit:
                 log.warning(f"Only {count} songs in queue")
-                break
+                return
 
             if song.unknown:
                 log.info("Deleting unidentifiable song: %s", song)

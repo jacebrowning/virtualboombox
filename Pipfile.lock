@@ -1,52 +1,44 @@
 {
     "_meta": {
+        "hash": {
+            "sha256": "ff1413f7f3f052738773334a70d81edf904fc952e889c6a26f4216902a0ca5e4"
+        },
+        "requires": {},
         "sources": [
             {
                 "url": "https://pypi.python.org/simple",
                 "verify_ssl": true
             }
-        ],
-        "requires": {},
-        "hash": {
-            "sha256": "30e43ee817cd53fcb98f4fb335b3bd8c4a4f356036b6badae380c40f5be3710c"
-        }
+        ]
     },
     "default": {
-        "djangorestframework": {
-            "hash": "sha256:110afa12784ceadfb50808882689302d266785b51e3d13286744333ff6d78e60",
-            "version": "==3.5.4"
+        "Django": {
+            "hash": "sha256:2cfb83859bfaa10e2bd586340bead27c69fdcaa21fa683a008cc712482c26726",
+            "version": "==1.10.6"
+        },
+        "beautifulsoup4": {
+            "hash": "sha256:0a91347d5a4ab2196407ff4d3d758f2e712cae9bdfa3fd1eb0f83edea95e0d8d",
+            "version": "==4.5.3"
         },
         "dj-database-url": {
             "hash": "sha256:e16d94c382ea0564c48038fa7fe8d9c890ef1ab1a8ec4cb48e732c124b9482fd",
             "version": "==0.4.2"
         },
-        "psycopg2": {
-            "hash": "sha256:3474c77a657fc2344f415ac0b5dc053ee0b3cdc84bbcc7cfc8047604b981febc",
-            "version": "==2.7"
+        "django-livereload-server": {
+            "hash": "sha256:9450af6e0ad1866a1b5b787f98f9354fa2e4ceb38e135405019f630798b294cf",
+            "version": "==0.2.3"
         },
-        "pylast": {
-            "hash": "sha256:85f8dd96aef0ccba5f80379c3d7bc1fabd72f59aebab040daf40a8b72268f9bd",
-            "version": "==1.8.0"
+        "djangorestframework": {
+            "hash": "sha256:110afa12784ceadfb50808882689302d266785b51e3d13286744333ff6d78e60",
+            "version": "==3.5.4"
         },
         "google-api-python-client": {
             "hash": "sha256:c0f4bcf398c937a43f382eecb384ba9b3a97ef9c24b156420b1b396fcaadd0af",
             "version": "==1.6.2"
         },
-        "pytz": {
-            "hash": "sha256:a1ea35e87a63c7825846d5b5c81d23d668e8a102d3b1b465ce95afe1b3a2e065",
-            "version": "==2016.10"
-        },
-        "whitenoise": {
-            "hash": "sha256:1d62a003a0ab747de96da45c831cbb512dcb7f69c1ef0bd20b1cd4ae45d8a0c4",
-            "version": "==3.3.0"
-        },
         "gunicorn": {
-            "hash": "sha256:723234ea1fa8dff370ab69830ba8bc37469a7cba13fd66055faeef24085e6530",
-            "version": "==19.6.0"
-        },
-        "Django": {
-            "hash": "sha256:2cfb83859bfaa10e2bd586340bead27c69fdcaa21fa683a008cc712482c26726",
-            "version": "==1.10.6"
+            "hash": "sha256:75af03c99389535f218cc596c7de74df4763803f7b63eb09d77e92b3956b36c6",
+            "version": "==19.7.1"
         },
         "httplib2": {
             "hash": "sha256:e404d3b7bd86c1bc931906098e7c1305d6a3a6dcef141b8bb1059903abb3ceeb",
@@ -56,6 +48,10 @@
             "hash": "sha256:f8ff4ad855b8917cdf213a33719e874d0fab1c26d44b2f08c9dfd7a5781889f5",
             "version": "==4.0.0"
         },
+        "psycopg2": {
+            "hash": "sha256:74ee532d6068a1456d5eda254513656c716cdee0a7389c91c094c7ce3500a9c9",
+            "version": "==2.7.1"
+        },
         "pyasn1": {
             "hash": "sha256:0439b9bd518418260c2641a571f0e07fce4370cab13b68f19b5e023306c03cad",
             "version": "==0.2.3"
@@ -63,6 +59,14 @@
         "pyasn1-modules": {
             "hash": "sha256:6c955210b86fcff3420957072280560ddaf183aa761fb76240c20c322e01021d",
             "version": "==0.0.8"
+        },
+        "pylast": {
+            "hash": "sha256:85f8dd96aef0ccba5f80379c3d7bc1fabd72f59aebab040daf40a8b72268f9bd",
+            "version": "==1.8.0"
+        },
+        "pytz": {
+            "hash": "sha256:a1ea35e87a63c7825846d5b5c81d23d668e8a102d3b1b465ce95afe1b3a2e065",
+            "version": "==2016.10"
         },
         "rsa": {
             "hash": "sha256:43f682fea81c452c98d09fc316aae12de6d30c4b5c84226642cf8f8fd1c93abd",
@@ -72,59 +76,35 @@
             "hash": "sha256:0ff78c403d9bccf5a425a6d31a12aa6b47f1c21ca4dc2573a7e2f32a97335eb1",
             "version": "==1.10.0"
         },
+        "tornado": {
+            "hash": "sha256:2898f992f898cd41eeb8d53b6df75495f2f423b6672890aadaf196ea1448edcc",
+            "version": "==4.4.2"
+        },
         "uritemplate": {
             "hash": "sha256:1b9c467a940ce9fb9f50df819e8ddd14696f89b9a8cc87ac77952ba416e0a8fd",
             "version": "==3.0.0"
+        },
+        "whitenoise": {
+            "hash": "sha256:1d62a003a0ab747de96da45c831cbb512dcb7f69c1ef0bd20b1cd4ae45d8a0c4",
+            "version": "==3.3.0"
         }
     },
     "develop": {
-        "pycodestyle": {
-            "hash": "sha256:6c4245ade1edfad79c3446fadfc96b0de2759662dc29d07d80a6f27ad1ca6ba9",
-            "version": "==2.3.1"
-        },
-        "pytest": {
-            "hash": "sha256:ccc23b4aab3ef3e19e731de9baca73f3b1a7e610d9ec65b28c36a5a3305f0349",
-            "version": "==2.9.2"
-        },
-        "pytest-django": {
-            "hash": "sha256:00995c2999b884a38ae9cd30a8c00ed32b3d38c1041250ea84caf18085589662",
-            "version": "==3.1.2"
-        },
-        "pytest-describe": {
-            "hash": "sha256:c592f1294e4455cebe88f162a1475e347c0668ce256c4d1a4ccd21d6c5f51827",
-            "version": "==0.11.0"
-        },
-        "pytest-watch": {
-            "hash": "sha256:29941f6ff74e6d85cc0796434a5cbc27ebe51e91ed24fd0757fad5cc6fd3d491",
-            "version": "==4.1.0"
-        },
-        "coverage.space": {
-            "hash": "sha256:07d4a01a500f4070597fa3aa4ee3a305abcb02c20ea6d24a09d6fc3ca9a655df",
-            "version": "==0.7"
-        },
-        "pytest-expecter": {
-            "hash": "sha256:9c6ed4d26df0e80a31b2c6ad86a959593f0c5b2459ea366496c45d9bbd9d358a",
-            "version": "==0.2.2.post3"
-        },
-        "pytest-cov": {
-            "hash": "sha256:10e37e876f49ddec80d6c83a54b657157f1387ebc0f7755285f8c156130014a1",
-            "version": "==2.4.0"
-        },
-        "pylint": {
-            "git": "https://github.com/PyCQA/pylint.git",
-            "ref": "e0fdd25c214e60bef10fbaa46252f4aaa74de8c2"
-        },
-        "astroid": {
-            "git": "https://github.com/PyCQA/astroid.git",
-            "ref": "4e7d9fee4080d2e0db67a3e0463be8b196e56a95"
+        "PyYAML": {
+            "hash": "sha256:592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab",
+            "version": "==3.12"
         },
         "appdirs": {
-            "hash": "sha256:a53330b9d53b66aba1e26907dea2958982ebad92735f9faf3897b73c909a20c1",
-            "version": "==1.4.2"
+            "hash": "sha256:d8b24664561d0d34ddfaec54636d502d7cea6e29c3eaf68f3df6180863e2166e",
+            "version": "==1.4.3"
         },
         "argh": {
             "hash": "sha256:a9b3aaa1904eeb78e32394cd46c6f37ac0fb4af6dc488daa58971bdc7d7fcaf3",
             "version": "==0.26.2"
+        },
+        "astroid": {
+            "git": "https://github.com/PyCQA/astroid.git",
+            "ref": "4e7d9fee4080d2e0db67a3e0463be8b196e56a95"
         },
         "backports.shutil_get_terminal_size": {
             "hash": "sha256:0975ba55054c15e346944b38956a4c9cbee9009391e41b86c68990effb8c1f64",
@@ -137,6 +117,10 @@
         "coverage": {
             "hash": "sha256:8b282292973a1dc4eccfcc0776e0fde75b5b3de2e35164c2d854f7dd80149e4b",
             "version": "==4.3.4"
+        },
+        "coverage.space": {
+            "hash": "sha256:607edd10808e8e9faa52e8e04cc9ad81772ce78aa3ab5ea53d4758df32c32974",
+            "version": "==0.7.2.post4"
         },
         "docopt": {
             "hash": "sha256:49b3a825280bd66b3aa83585ef59c4a8c82f2c8a522dbe754a8bc8d08c85c491",
@@ -151,24 +135,52 @@
             "version": "==0.1.2"
         },
         "py": {
-            "hash": "sha256:2d4bba2e25fff58140e6bdce1e485e89bb59776adbe01d490baa6b1f37a3dd6b",
-            "version": "==1.4.32"
+            "hash": "sha256:81b5e37db3cc1052de438375605fb5d3b3e97f950f415f9143f04697c684d7eb",
+            "version": "==1.4.33"
+        },
+        "pycodestyle": {
+            "hash": "sha256:6c4245ade1edfad79c3446fadfc96b0de2759662dc29d07d80a6f27ad1ca6ba9",
+            "version": "==2.3.1"
+        },
+        "pylint": {
+            "git": "https://github.com/PyCQA/pylint.git",
+            "ref": "e0fdd25c214e60bef10fbaa46252f4aaa74de8c2"
         },
         "pyparsing": {
-            "hash": "sha256:67101d7acee692962f33dd30b5dce079ff532dd9aa99ff48d52a3dad51d2fe84",
-            "version": "==2.1.10"
+            "hash": "sha256:fee43f17a9c4087e7ed1605bd6df994c6173c1e977d7ade7b651292fab2bd010",
+            "version": "==2.2.0"
         },
-        "PyYAML": {
-            "hash": "sha256:592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab",
-            "version": "==3.12"
+        "pytest": {
+            "hash": "sha256:ccc23b4aab3ef3e19e731de9baca73f3b1a7e610d9ec65b28c36a5a3305f0349",
+            "version": "==2.9.2"
+        },
+        "pytest-cov": {
+            "hash": "sha256:10e37e876f49ddec80d6c83a54b657157f1387ebc0f7755285f8c156130014a1",
+            "version": "==2.4.0"
+        },
+        "pytest-describe": {
+            "hash": "sha256:c592f1294e4455cebe88f162a1475e347c0668ce256c4d1a4ccd21d6c5f51827",
+            "version": "==0.11.0"
+        },
+        "pytest-django": {
+            "hash": "sha256:00995c2999b884a38ae9cd30a8c00ed32b3d38c1041250ea84caf18085589662",
+            "version": "==3.1.2"
+        },
+        "pytest-expecter": {
+            "hash": "sha256:9c6ed4d26df0e80a31b2c6ad86a959593f0c5b2459ea366496c45d9bbd9d358a",
+            "version": "==0.2.2.post3"
+        },
+        "pytest-watch": {
+            "hash": "sha256:29941f6ff74e6d85cc0796434a5cbc27ebe51e91ed24fd0757fad5cc6fd3d491",
+            "version": "==4.1.0"
         },
         "requests": {
             "hash": "sha256:1a720e8862a41aa22e339373b526f508ef0c8988baf48b84d3fc891a8e237efb",
             "version": "==2.13.0"
         },
         "setuptools": {
-            "hash": "sha256:9349b47bcdef2e695065791260f9416b7aae8739fd30c6849f807bce5281d046",
-            "version": "==34.3.1"
+            "hash": "sha256:e436d8c9dcf67ea8902bfa7cce1ef698f36bf303f13b4f62a5668891ecd380dd",
+            "version": "==34.3.3"
         },
         "six": {
             "hash": "sha256:0ff78c403d9bccf5a425a6d31a12aa6b47f1c21ca4dc2573a7e2f32a97335eb1",
