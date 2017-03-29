@@ -227,6 +227,7 @@ $("#player-next").on("click", function() {
     $("#player-next").prop("disabled", window.locationAvailable);
     spinCompass();
     setTimeout(getLocation, 1 * 1000);
+    updateReactions();
 });
 
 // Reactions ///////////////////////////////////////////////////////////////////
@@ -237,8 +238,6 @@ function updateReactions() {
         type: "GET",
         success: showReactions,
     });
-
-    setTimeout(updateReactions, 60 * 1000);
 }
 
 function showReactions(reactions) {
