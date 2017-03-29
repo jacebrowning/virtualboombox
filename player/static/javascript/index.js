@@ -254,8 +254,8 @@ function showReactions(reactions) {
     var count = Math.min(reactions.length, 5);
     for (i = 0; i < count; i++) {
         var reaction = reactions[i];
-        var html = reaction.comment;
-        var html ='<li class="list-group-item">' + reaction.comment +  '</li>';
+        var comment = reaction.comment.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        var html ='<li class="list-group-item">' + comment +  '</li>';
         $("#comments").append(html);
     }
 }
