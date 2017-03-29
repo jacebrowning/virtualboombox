@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from player.models import Account, Song
+from social.models import Reaction
 
 
 class AccountSerializer(serializers.ModelSerializer):
@@ -25,3 +26,13 @@ class QueueSerializer(serializers.Serializer):  # pylint: disable=abstract-metho
     limit = serializers.IntegerField(min_value=1, default=10)
     weightDistance = serializers.FloatField(default=0.5)
     weightTime = serializers.FloatField(default=0.5)
+
+
+class ReactionSerializer(serializers.ModelSerializer):
+
+    comment = serializers.CharField()
+    song = serializers.UUIDField()
+
+    class Meta:
+        model = Reaction
+        fields = ('comment', 'song')

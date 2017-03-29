@@ -22,7 +22,7 @@ def describe_accounts():
 
     def describe_GET():
 
-        def when_annon(client):
+        def when_anon(client):
             response = client.get("/api/accounts/")
 
             expect(response.status_code) == 200
@@ -48,3 +48,14 @@ def describe_queue():
             response = client.get("/api/queue/")
 
             expect(response.status_code) == 405
+
+
+def describe_reactions():
+
+    def describe_GET():
+
+        def when_anon(client):
+            response = client.get("/api/reactions/")
+
+            expect(response.status_code) == 200
+            expect(response.json()) == []

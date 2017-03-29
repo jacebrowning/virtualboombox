@@ -48,7 +48,7 @@ data:
 else
 data: install
 	$(MANAGE) gendata
-	$(MANAGE) syncdata --limit=5
+	$(MANAGE) syncdata --limit=10
 endif
 
 .PHONY: db

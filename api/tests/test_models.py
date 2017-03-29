@@ -24,7 +24,7 @@ def describe_queued_song():
     def song(irvine_ca, grand_rapids_mi):
         return QueuedSong(
             song=Mock(
-                id=42,
+                ref='abc123',
                 artist="John Mayer",
                 title="No Such Thing",
                 lastfm_url="http://last.fm/foobar",
@@ -34,10 +34,10 @@ def describe_queued_song():
             this_location=grand_rapids_mi,
         )
 
-    def describe_id():
+    def describe_ref():
 
-        def it_matches_the_song(song):
-            expect(song.id) == 42
+        def it_matches_the_song_ref(song):
+            expect(song.ref) == 'abc123'
 
     def describe_elapsed_time():
 
@@ -120,10 +120,11 @@ def describe_queued_song():
             expect(song.data) == {
                 'artist': 'John Mayer',
                 'title': 'No Such Thing',
-                'lastfm_url': 'http://last.fm/foobar',
-                'youtube_url': 'http://youtube.com/foobar',
                 'miles': '1842',
                 'degrees': 260.4110953861232,
+                'lastfm_url': 'http://last.fm/foobar',
+                'youtube_url': 'http://youtube.com/foobar',
+                'ref': 'abc123',
             }
 
         def it_includes_decimals_on_smaller_distances(song):

@@ -1,5 +1,6 @@
 import re
 import time
+import uuid
 from datetime import datetime, timedelta
 import logging
 
@@ -96,6 +97,7 @@ class Song(Location):
     title = models.CharField(max_length=200)
     account = models.ForeignKey(Account, null=True, on_delete=models.CASCADE)
     youtube_url = models.URLField(null=True)
+    ref = models.UUIDField(default=uuid.uuid4, editable=False)
 
     RE_PODCAST = re.compile(r"episode\s+\d+", re.IGNORECASE)
 

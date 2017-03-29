@@ -1,5 +1,34 @@
 window.locationAvailable = false;
 window.playerAvailable = false;
+window.currentSongRef = null;
+
+// Messages ////////////////////////////////////////////////////////////////////
+
+function showLocationWarning(error) {
+    console.log("Position unavailable: ", error);
+
+    $("#messages").empty();
+
+    if (error.code == error.PERMISSION_DENIED) {
+        $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
+        stopCompass();
+    } else {
+        $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
+        stopCompass();
+        getSongs({
+            "coords": {
+                // Oceanic Pole of Inaccessibility
+                "latitude": -48.876667,
+                "longitude": -123.393333,
+                "accuracy": -1,
+            },
+        });
+    }
+}
+
+function clearMessages() {
+    $("#messages").empty();
+}
 
 // Compass /////////////////////////////////////////////////////////////////////
 
@@ -38,13 +67,15 @@ function getLocation() {
         getSongs, showLocationWarning, options);
 }
 
+// Songs ///////////////////////////////////////////////////////////////////////
+
 function getSongs(location) {
     var data = {
         "latitude": location.coords.latitude,
         "longitude": location.coords.longitude,
         "accuracy": location.coords.accuracy,
     };
-    console.log("Current position: ", data);
+    console.log("Current position data: ", data);
 
     if (data.accuracy != -1) {
         $("#messages").empty();
@@ -75,6 +106,7 @@ function showNowPlaying(song) {
         console.log("No song currently playing")
         return;
     }
+    window.currentSongRef = song.ref;
 
     var start = $("#compass").getRotateAngle() % 360;
     $("#compass").rotate({
@@ -99,6 +131,14 @@ function showNowPlaying(song) {
 function showNearbySongs(songs) {
     $("#song-queue").empty();
 
+    if (songs.length == 0) {
+        var message = "No songs are playing nearby"
+        console.log(message);
+        var html = '<li class="list-group-item"><i>' + message + '.</i></li>';
+        $("#song-queue").append(html);
+        return;
+    }
+
     var count = Math.min(songs.length, 5);
     for (i = 0; i < count; i++) {
         var song = songs[i];
@@ -108,28 +148,6 @@ function showNearbySongs(songs) {
             + song.artist
             + "</a>"
         $("#song-queue").append(html);
-    }
-}
-
-function showLocationWarning(error) {
-    console.log("Position unavailable: ", error);
-
-    $("#messages").empty();
-
-    if (error.code == error.PERMISSION_DENIED) {
-        $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
-        stopCompass();
-    } else {
-        $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
-        stopCompass();
-        getSongs({
-            "coords": {
-                // Oceanic Pole of Inaccessibility
-                "latitude": -48.876667,
-                "longitude": -123.393333,
-                "accuracy": -1,
-            },
-        });
     }
 }
 
@@ -211,6 +229,58 @@ $("#player-next").on("click", function() {
     setTimeout(getLocation, 1 * 1000);
 });
 
+// Reactions ///////////////////////////////////////////////////////////////////
+
+function updateReactions() {
+    $.ajax({
+        url: "/api/reactions/",
+        type: "GET",
+        success: showReactions,
+    });
+
+    setTimeout(updateReactions, 60 * 1000);
+}
+
+function showReactions(reactions) {
+    $("#comments").empty();
+
+    if (reactions.length == 0) {
+        var message = "No one has reacted to your songs";
+        console.log(message);
+        var html = '<li class="list-group-item"><i>' + message + '.</i></li>';
+        $("#comments").append(html);
+        return;
+    }
+
+    var count = Math.min(reactions.length, 5);
+    for (i = 0; i < count; i++) {
+        var reaction = reactions[i];
+        var html = reaction.comment;
+        var html ='<li class="list-group-item">' + reaction.comment +  '</li>';
+        $("#comments").append(html);
+    }
+}
+
+$("#reaction-form").on("submit", function (event) {
+    var data = {
+        "song": window.currentSongRef,
+        "comment": $("#reaction-text").val(),
+    };
+    console.log("Reaction data: ", data);
+
+    $.ajax({
+        url: "/api/reactions/",
+        type: "POST",
+        data: data,
+        success: function() {
+            $("#messages").append('<li class="alert alert-info">Your message has been delivered!</li>');
+            setTimeout(clearMessages, 3 * 1000);
+        },
+    });
+
+    this.reset();
+});
+
 // Loading /////////////////////////////////////////////////////////////////////
 
 $(document).ready( function () {
@@ -225,11 +295,11 @@ $(document).ready( function () {
     $("#player-next").prop("disabled", window.locationAvailable);
 });
 
-$(window).ready( function(e) {
+$(window).ready( function(event) {
     spinCompass();
     getLocation();
+    updateReactions();
 });
-
 
 $("#distance-weight").slider({
     id: 'distance-weight-slider',

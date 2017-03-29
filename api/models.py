@@ -64,8 +64,8 @@ class QueuedSong:
         self._elapsed_time = None
 
     @property
-    def id(self):
-        return self.song.id
+    def ref(self):
+        return self.song.ref
 
     @property
     def that_location(self):
@@ -151,4 +151,5 @@ class QueuedSong:
             degrees=self.angle,
             lastfm_url=self.song.lastfm_url,
             youtube_url=self.song.youtube_url or PLACEHOLDER_YOUTUBE_URL,
+            ref=str(self.ref),
         )
