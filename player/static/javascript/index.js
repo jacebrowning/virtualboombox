@@ -1,5 +1,6 @@
 window.locationAvailable = false;
 window.playerAvailable = false;
+window.currentSongId = null;
 
 // Compass /////////////////////////////////////////////////////////////////////
 
@@ -44,7 +45,7 @@ function getSongs(location) {
         "longitude": location.coords.longitude,
         "accuracy": location.coords.accuracy,
     };
-    console.log("Current position: ", data);
+    console.log("Current position data: ", data);
 
     if (data.accuracy != -1) {
         $("#messages").empty();
@@ -75,6 +76,8 @@ function showNowPlaying(song) {
         console.log("No song currently playing")
         return;
     }
+    console.log(song);
+    window.currentSongId = song.id;
 
     var start = $("#compass").getRotateAngle() % 360;
     $("#compass").rotate({
@@ -211,6 +214,48 @@ $("#player-next").on("click", function() {
     setTimeout(getLocation, 1 * 1000);
 });
 
+// Reactions ///////////////////////////////////////////////////////////////////
+
+function updateReactions() {
+    $.ajax({
+        url: "/api/reactions/",
+        type: "GET",
+        success: showReactions,
+    });
+}
+
+function showReactions(reactions) {
+    $("#comments").empty();
+
+    console.log(reactions);
+
+    var count = Math.min(reactions.length, 5);
+    for (i = 0; i < count; i++) {
+        var reaction = reactions[i];
+        var html = reaction.comment;
+        var html ='<li class="list-group-item">' + reaction.comment +  '</li>';
+        $("#comments").append(html);
+    }
+}
+
+$("#reaction-form").on("submit", function (event) {
+    var data = {
+        "song": window.currentSongId,
+        "comment": $("#reaction-text").val(),
+    };
+    console.log("Reaction data: ", data);
+
+    $.ajax({
+        url: "/api/reactions/",
+        type: "POST",
+        data: data,
+    });
+
+    this.reset();
+
+    updateReactions();
+});
+
 // Loading /////////////////////////////////////////////////////////////////////
 
 $(document).ready( function () {
@@ -225,11 +270,11 @@ $(document).ready( function () {
     $("#player-next").prop("disabled", window.locationAvailable);
 });
 
-$(window).ready( function(e) {
+$(window).ready( function(event) {
     spinCompass();
     getLocation();
+    updateReactions();
 });
-
 
 $("#distance-weight").slider({
     id: 'distance-weight-slider',

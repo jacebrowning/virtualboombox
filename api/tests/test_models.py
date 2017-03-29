@@ -118,6 +118,7 @@ def describe_queued_song():
 
         def it_optimizes_for_clients(song):
             expect(song.data) == {
+                'id': 42,
                 'artist': 'John Mayer',
                 'title': 'No Such Thing',
                 'lastfm_url': 'http://last.fm/foobar',

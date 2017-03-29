@@ -7,6 +7,7 @@ from django.db.utils import IntegrityError
 from django.utils import timezone
 
 from player.models import Account, Song
+from social.models import Reaction
 
 
 class Command(BaseCommand):
@@ -16,7 +17,18 @@ class Command(BaseCommand):
         with suppress(IntegrityError):
             User.objects.create_superuser('admin', 'admin@localhost', 'password')
 
-        Account.objects.get_or_create(username='justus87')
+        me, _ = Account.objects.get_or_create(username='justus87')
+
+        for index in range(5):
+            song, _ = Song.objects.get_or_create(
+                artist=f"Artist {index}",
+                title=f"Title {index}",
+                account=me,
+            )
+            Reaction.objects.get_or_create(
+                song=song,
+                comment=f"Artist {index} rocks!",
+            )
 
         a, _ = Account.objects.get_or_create(username='aliasguru')
         a.latitude = 33.670348

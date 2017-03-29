@@ -145,6 +145,7 @@ class QueuedSong:
             miles = str(round(self.distance))
 
         return dict(
+            id=self.id,
             artist=self.song.artist,
             title=self.song.title,
             miles=miles,
