@@ -2,6 +2,34 @@ window.locationAvailable = false;
 window.playerAvailable = false;
 window.currentSongRef = null;
 
+// Messages ////////////////////////////////////////////////////////////////////
+
+function showLocationWarning(error) {
+    console.log("Position unavailable: ", error);
+
+    $("#messages").empty();
+
+    if (error.code == error.PERMISSION_DENIED) {
+        $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
+        stopCompass();
+    } else {
+        $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
+        stopCompass();
+        getSongs({
+            "coords": {
+                // Oceanic Pole of Inaccessibility
+                "latitude": -48.876667,
+                "longitude": -123.393333,
+                "accuracy": -1,
+            },
+        });
+    }
+}
+
+function clearMessages() {
+    $("#messages").empty();
+}
+
 // Compass /////////////////////////////////////////////////////////////////////
 
 function spinCompass() {
@@ -38,6 +66,8 @@ function getLocation() {
     navigator.geolocation.getCurrentPosition(
         getSongs, showLocationWarning, options);
 }
+
+// Songs ///////////////////////////////////////////////////////////////////////
 
 function getSongs(location) {
     var data = {
@@ -118,28 +148,6 @@ function showNearbySongs(songs) {
             + song.artist
             + "</a>"
         $("#song-queue").append(html);
-    }
-}
-
-function showLocationWarning(error) {
-    console.log("Position unavailable: ", error);
-
-    $("#messages").empty();
-
-    if (error.code == error.PERMISSION_DENIED) {
-        $("#messages").append('<li class="alert alert-danger">Location sharing is disabled for your browser.</li>');
-        stopCompass();
-    } else {
-        $("#messages").append('<li class="alert alert-warning">Your location could not be determined.</li>');
-        stopCompass();
-        getSongs({
-            "coords": {
-                // Oceanic Pole of Inaccessibility
-                "latitude": -48.876667,
-                "longitude": -123.393333,
-                "accuracy": -1,
-            },
-        });
     }
 }
 
@@ -264,6 +272,10 @@ $("#reaction-form").on("submit", function (event) {
         url: "/api/reactions/",
         type: "POST",
         data: data,
+        success: function() {
+            $("#messages").append('<li class="alert alert-info">Your message has been delivered!</li>');
+            setTimeout(clearMessages, 3 * 1000);
+        },
     });
 
     this.reset();
