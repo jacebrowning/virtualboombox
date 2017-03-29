@@ -1,6 +1,6 @@
 window.locationAvailable = false;
 window.playerAvailable = false;
-window.currentSongId = null;
+window.currentSongRef = null;
 
 // Compass /////////////////////////////////////////////////////////////////////
 
@@ -76,8 +76,7 @@ function showNowPlaying(song) {
         console.log("No song currently playing")
         return;
     }
-    console.log(song);
-    window.currentSongId = song.id;
+    window.currentSongRef = song.ref;
 
     var start = $("#compass").getRotateAngle() % 360;
     $("#compass").rotate({
@@ -101,6 +100,14 @@ function showNowPlaying(song) {
 
 function showNearbySongs(songs) {
     $("#song-queue").empty();
+
+    if (songs.length == 0) {
+        var message = "No songs are playing nearby"
+        console.log(message);
+        var html = '<li class="list-group-item"><i>' + message + '.</i></li>';
+        $("#song-queue").append(html);
+        return;
+    }
 
     var count = Math.min(songs.length, 5);
     for (i = 0; i < count; i++) {
@@ -222,12 +229,20 @@ function updateReactions() {
         type: "GET",
         success: showReactions,
     });
+
+    setTimeout(updateReactions, 60 * 1000);
 }
 
 function showReactions(reactions) {
     $("#comments").empty();
 
-    console.log(reactions);
+    if (reactions.length == 0) {
+        var message = "No one has reacted to your songs";
+        console.log(message);
+        var html = '<li class="list-group-item"><i>' + message + '.</i></li>';
+        $("#comments").append(html);
+        return;
+    }
 
     var count = Math.min(reactions.length, 5);
     for (i = 0; i < count; i++) {
@@ -240,7 +255,7 @@ function showReactions(reactions) {
 
 $("#reaction-form").on("submit", function (event) {
     var data = {
-        "song": window.currentSongId,
+        "song": window.currentSongRef,
         "comment": $("#reaction-text").val(),
     };
     console.log("Reaction data: ", data);
@@ -252,8 +267,6 @@ $("#reaction-form").on("submit", function (event) {
     });
 
     this.reset();
-
-    updateReactions();
 });
 
 // Loading /////////////////////////////////////////////////////////////////////

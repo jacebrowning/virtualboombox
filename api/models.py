@@ -64,8 +64,8 @@ class QueuedSong:
         self._elapsed_time = None
 
     @property
-    def id(self):
-        return self.song.id
+    def ref(self):
+        return self.song.ref
 
     @property
     def that_location(self):
@@ -145,11 +145,11 @@ class QueuedSong:
             miles = str(round(self.distance))
 
         return dict(
-            id=self.id,
             artist=self.song.artist,
             title=self.song.title,
             miles=miles,
             degrees=self.angle,
             lastfm_url=self.song.lastfm_url,
             youtube_url=self.song.youtube_url or PLACEHOLDER_YOUTUBE_URL,
+            ref=str(self.ref),
         )

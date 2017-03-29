@@ -111,10 +111,10 @@ class QueuedViewSet(viewsets.ViewSet):
 
     @classmethod
     def _get_songs(cls, request, data, username, location):
-        played_song_ids = request.session.get('played_song_ids', [])
+        played_song_refs = request.session.get('played_song_refs', [])
 
         songs = []
-        results = cls._run_query(username, played_song_ids, location)
+        results = cls._run_query(username, played_song_refs, location)
         for song in results:
             song.WEIGHT_DISTANCE = data['weightDistance']
             song.WEIGHT_TIME = data['weightTime']
@@ -123,22 +123,22 @@ class QueuedViewSet(viewsets.ViewSet):
 
         if songs:
             log.info("Nearest song: %s @ %s", songs[0].distance, songs[0].angle)
-            played_song_ids.append(songs[0].id)
-            request.session['played_song_ids'] = played_song_ids
+            played_song_refs.append(str(songs[0].ref))
+            request.session['played_song_refs'] = played_song_refs
         else:
             log.warning("No songs available")
 
         return songs[:data['limit']]
 
     @staticmethod
-    def _run_query(username, played_song_ids, location):
+    def _run_query(username, played_song_refs, location):
         count = 0
         last = None
 
         for song in Song.objects \
                 .exclude(account__username=username).order_by('-date'):
 
-            if song.id in played_song_ids:
+            if str(song.ref) in played_song_refs:
                 log.debug("Already played: %s", song)
                 last = last or song
                 continue
@@ -182,7 +182,8 @@ class ReactionViewSet(viewsets.ModelViewSet):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        song = Song.objects.get(id=serializer.data['song'])
+        # TODO: this can return more than one song due to the default UUID value
+        song = Song.objects.filter(ref=serializer.data['song']).first()
 
         reaction = Reaction(song=song, comment=serializer.data['comment'])
         reaction.save()
