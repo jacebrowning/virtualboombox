@@ -261,6 +261,8 @@ function showReactions(reactions) {
 }
 
 $("#reaction-form").on("submit", function (event) {
+    event.preventDefault();
+
     var data = {
         "song": window.currentSongRef,
         "comment": $("#reaction-text").val(),
