@@ -51,6 +51,9 @@
                         <span class="glyphicon glyphicon-log-out"></span>&nbsp;
                     </a>
                 {% else %}
+                    <p class="navbar-text">
+                        <a href="http://www.last.fm/about/trackmymusic" target="_blank">What is Last.fm?</a>
+                    </p>
                     <a role="button" href="https://www.last.fm/api/auth/?api_key={{ lastfm_api_key }}&&cb={{ lastfm_callback_url }}" class="btn btn-login navbar-btn" title="Log in with Last.fm">
                         <span class="glyphicon glyphicon-log-in"></span>
                         &nbsp;
@@ -67,10 +70,6 @@
             <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
         {% endfor %}
         </ul>
-
-        {% if not username %}
-        <a id="scrobbling" href="http://www.last.fm/about/trackmymusic" target="_blank">What is Last.fm?</a>
-        {% endif %}
 
         <div class="container-fluid">
 
