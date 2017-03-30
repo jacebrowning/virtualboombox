@@ -102,3 +102,4 @@ run-prod: .envrc install db
 	echo export GOOGLE_APPLICATION_CREDENTIALS_DATA= >> $@
 	echo export GOOGLE_APPLICATION_CREDENTIALS=tmp/google.json >> $@
 	echo export YOUTUBE_API_KEY= >> $@
+	echo export VIRTUALBOOMBOX_MINIMUM_SONGS=250 >> $@

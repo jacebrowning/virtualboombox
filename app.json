@@ -40,6 +40,9 @@
     "WEB_CONCURRENCY": {
       "value": "4"
     },
+    "VIRTUALBOOMBOX_MINIMUM_SONGS": {
+      "required": true
+    },
     "YOUTUBE_API_KEY": {
       "required": true
     }
