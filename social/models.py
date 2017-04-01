@@ -10,5 +10,9 @@ class Reaction(models.Model):
     song = models.ForeignKey(Song, null=True, on_delete=models.CASCADE)
     date = models.DateTimeField(default=timezone.now)
 
+    @property
+    def song_ref(self):
+        return self.song.ref
+
     def __str__(self):
         return self.comment

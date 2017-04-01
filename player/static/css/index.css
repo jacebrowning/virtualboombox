@@ -60,6 +60,13 @@ body {
     }
 }
 
+blockquote {
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+}
+
 .footer {
     bottom: 0;
     width: 100%;

@@ -31,8 +31,9 @@ class QueueSerializer(serializers.Serializer):  # pylint: disable=abstract-metho
 class ReactionSerializer(serializers.ModelSerializer):
 
     comment = serializers.CharField()
-    song = serializers.UUIDField()
+    song = SongSerializer(required=False)
+    song_ref = serializers.UUIDField()
 
     class Meta:
         model = Reaction
-        fields = ('comment', 'song')
+        fields = ('comment', 'song', 'song_ref')
