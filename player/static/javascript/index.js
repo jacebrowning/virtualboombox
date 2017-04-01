@@ -2,6 +2,14 @@ window.locationAvailable = false;
 window.playerAvailable = false;
 window.currentSongRef = null;
 
+function formatSong(song) {
+    html = '<b>' + song.title + '</b>'
+    + "&nbsp;<i>by</i>&nbsp;"
+    + song.artist;
+    return html;
+}
+
+
 // Messages ////////////////////////////////////////////////////////////////////
 
 function showLocationWarning(error) {
@@ -143,9 +151,7 @@ function showNearbySongs(songs) {
     for (i = 0; i < count; i++) {
         var song = songs[i];
         var html ='<a href="' + song.lastfm_url + '" target="_blank" class="list-group-item">'
-            + '<b>' + song.title + '</b>'
-            + "&nbsp;<i>by</i>&nbsp;"
-            + song.artist
+            + formatSong(song);
             + "</a>"
         $("#song-queue").append(html);
     }
@@ -255,7 +261,10 @@ function showReactions(reactions) {
     for (i = 0; i < count; i++) {
         var reaction = reactions[i];
         var comment = reaction.comment.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-        var html ='<li class="list-group-item">' + comment +  '</li>';
+        var html ='<li class="list-group-item">' +
+            '<p>' + formatSong(reaction.song) + '</p>' +
+            '<blockquote>' + comment + '</blockquote>' +
+            '</li>';
         $("#comments").append(html);
     }
 }
@@ -264,7 +273,7 @@ $("#reaction-form").on("submit", function (event) {
     event.preventDefault();
 
     var data = {
-        "song": window.currentSongRef,
+        "song_ref": window.currentSongRef,
         "comment": $("#reaction-text").val(),
     };
     console.log("Reaction data: ", data);
