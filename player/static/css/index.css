@@ -21,7 +21,7 @@ body {
 .navbar-right {
     float: right !important;
 }
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .navbar {
         margin-bottom: 15px;
     }
@@ -54,7 +54,7 @@ body {
 .row {
     padding-top: 30px;
 }
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .row {
         padding-top: 10px;
     }
