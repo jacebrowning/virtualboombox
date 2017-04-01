@@ -1,8 +1,5 @@
 # pylint: disable=unused-variable,expression-not-assigned,redefined-outer-name,singleton-comparison
 
-from datetime import timedelta
-from unittest.mock import MagicMock
-
 import pytest
 from expecter import expect
 
@@ -14,11 +11,30 @@ from ..models import Reaction
 def describe_reaction():
 
     @pytest.fixture
-    def reaction():
+    def reaction(song):
         return Reaction(
-            song=Song(),
+            song=song,
             comment="Great song!",
         )
+
+    @pytest.fixture
+    def song():
+        return Song()
+
+    def describe_create():
+
+        def it_replaces_unsafe_characters(song):
+            unsafe = '<script>alert("Hello, world!");</script>'
+            reaction = Reaction.create(song=song, comment=unsafe)
+
+            expect(reaction.comment) == \
+                '&lt;script&gt;alert("Hello, world!");&lt;/script&gt;'
+
+        def it_styles_reactions(song):
+            reaction = Reaction.create(song=song, comment='LOVE',)
+
+            expect(reaction.comment) == \
+                '<span class="glyphicon glyphicon-heart"></span>'
 
     def describe_str():
 

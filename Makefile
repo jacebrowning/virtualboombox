@@ -63,7 +63,7 @@ migrate: install
 
 .PHONY: check
 check: install
-	pipenv run pylint api player virtualboombox --rcfile=.pylint.ini
+	pipenv run pylint api player social virtualboombox --rcfile=.pylint.ini
 	pipenv run pycodestyle --config=.pycodestyle.ini
 
 .PHONY: test

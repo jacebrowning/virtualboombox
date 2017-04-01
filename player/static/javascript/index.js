@@ -260,21 +260,39 @@ function showReactions(reactions) {
     var count = Math.min(reactions.length, 5);
     for (i = 0; i < count; i++) {
         var reaction = reactions[i];
-        var comment = reaction.comment.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         var html ='<li class="list-group-item">' +
             '<p>' + formatSong(reaction.song) + '</p>' +
-            '<blockquote>' + comment + '</blockquote>' +
+            '<blockquote>' + reaction.comment + '</blockquote>' +
             '</li>';
         $("#comments").append(html);
     }
 }
 
+$("#reaction-love").on("click", function (event) {
+    sendReaction('LOVE');
+});
+
+$("#reaction-like").on("click", function (event) {
+    sendReaction('LIKE');
+});
+
+$("#reaction-hate").on("click", function (event) {
+    sendReaction('HATE');
+});
+
+
 $("#reaction-form").on("submit", function (event) {
     event.preventDefault();
 
+    sendReaction($("#reaction-text").val());
+
+    this.reset();
+});
+
+function sendReaction(comment) {
     var data = {
         "song_ref": window.currentSongRef,
-        "comment": $("#reaction-text").val(),
+        "comment": comment,
     };
     console.log("Reaction data: ", data);
 
@@ -287,9 +305,7 @@ $("#reaction-form").on("submit", function (event) {
             setTimeout(clearMessages, 3 * 1000);
         },
     });
-
-    this.reset();
-});
+}
 
 // Loading /////////////////////////////////////////////////////////////////////
 

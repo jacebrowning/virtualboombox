@@ -184,8 +184,9 @@ class ReactionViewSet(viewsets.ModelViewSet):
 
         # TODO: this can return more than one song due to the default UUID value
         song = Song.objects.filter(ref=serializer.data['song_ref']).first()
+        comment = serializer.data['comment']
 
-        reaction = Reaction(song=song, comment=serializer.data['comment'])
+        reaction = Reaction.create(song=song, comment=comment)
         reaction.save()
 
         return Response(serializer.data)
