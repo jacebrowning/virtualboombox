@@ -9,7 +9,6 @@ function formatSong(song) {
     return html;
 }
 
-
 // Messages ////////////////////////////////////////////////////////////////////
 
 function showLocationWarning(error) {
@@ -268,15 +267,15 @@ function showReactions(reactions) {
     }
 }
 
-$("#reaction-love").on("click", function (event) {
+$("#reaction-love-button").on("click", function (event) {
     sendReaction('LOVE');
 });
 
-$("#reaction-like").on("click", function (event) {
+$("#reaction-like-button").on("click", function (event) {
     sendReaction('LIKE');
 });
 
-$("#reaction-hate").on("click", function (event) {
+$("#reaction-hate-button").on("click", function (event) {
     sendReaction('HATE');
 });
 
@@ -286,7 +285,8 @@ $("#reaction-form").on("submit", function (event) {
 
     sendReaction($("#reaction-text").val());
 
-    this.reset();
+    this.reset()
+    $("#reaction-form-button").tooltip('show');
 });
 
 function sendReaction(comment) {
@@ -300,12 +300,14 @@ function sendReaction(comment) {
         url: "/api/reactions/",
         type: "POST",
         data: data,
-        success: function() {
-            $("#messages").append('<li class="alert alert-info">Your message has been delivered!</li>');
-            setTimeout(clearMessages, 3 * 1000);
-        },
     });
 }
+
+$('[data-toggle="tooltip"]').on('shown.bs.tooltip', function () {
+    setTimeout(function () {
+        $('[data-toggle="tooltip"]').tooltip('hide');
+   }, 2000);
+});
 
 // Loading /////////////////////////////////////////////////////////////////////
 
@@ -319,6 +321,7 @@ $(document).ready( function () {
         showPauseButton();
     }
     $("#player-next").prop("disabled", window.locationAvailable);
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 $(window).ready( function(event) {
