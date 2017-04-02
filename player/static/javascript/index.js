@@ -9,7 +9,6 @@ function formatSong(song) {
     return html;
 }
 
-
 // Messages ////////////////////////////////////////////////////////////////////
 
 function showLocationWarning(error) {
@@ -260,21 +259,40 @@ function showReactions(reactions) {
     var count = Math.min(reactions.length, 5);
     for (i = 0; i < count; i++) {
         var reaction = reactions[i];
-        var comment = reaction.comment.replace(/</g, "&lt;").replace(/>/g, "&gt;");
         var html ='<li class="list-group-item">' +
             '<p>' + formatSong(reaction.song) + '</p>' +
-            '<blockquote>' + comment + '</blockquote>' +
+            '<blockquote>' + reaction.comment + '</blockquote>' +
             '</li>';
         $("#comments").append(html);
     }
 }
 
+$("#reaction-love-button").on("click", function (event) {
+    sendReaction('LOVE');
+});
+
+$("#reaction-like-button").on("click", function (event) {
+    sendReaction('LIKE');
+});
+
+$("#reaction-hate-button").on("click", function (event) {
+    sendReaction('HATE');
+});
+
+
 $("#reaction-form").on("submit", function (event) {
     event.preventDefault();
 
+    sendReaction($("#reaction-text").val());
+
+    this.reset()
+    $("#reaction-form-button").tooltip('show');
+});
+
+function sendReaction(comment) {
     var data = {
         "song_ref": window.currentSongRef,
-        "comment": $("#reaction-text").val(),
+        "comment": comment,
     };
     console.log("Reaction data: ", data);
 
@@ -282,13 +300,13 @@ $("#reaction-form").on("submit", function (event) {
         url: "/api/reactions/",
         type: "POST",
         data: data,
-        success: function() {
-            $("#messages").append('<li class="alert alert-info">Your message has been delivered!</li>');
-            setTimeout(clearMessages, 3 * 1000);
-        },
     });
+}
 
-    this.reset();
+$('[data-toggle="tooltip"]').on('shown.bs.tooltip', function () {
+    setTimeout(function () {
+        $('[data-toggle="tooltip"]').tooltip('hide');
+   }, 2000);
 });
 
 // Loading /////////////////////////////////////////////////////////////////////
@@ -303,6 +321,7 @@ $(document).ready( function () {
         showPauseButton();
     }
     $("#player-next").prop("disabled", window.locationAvailable);
+    $('[data-toggle="tooltip"]').tooltip();
 });
 
 $(window).ready( function(event) {
