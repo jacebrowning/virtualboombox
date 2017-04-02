@@ -277,6 +277,7 @@ $("#reaction-like-button").on("click", function (event) {
 
 $("#reaction-hate-button").on("click", function (event) {
     sendReaction('HATE');
+    $("#player-next").click();
 });
 
 
