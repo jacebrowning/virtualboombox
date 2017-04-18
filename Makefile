@@ -46,14 +46,10 @@ data:
 	python manage.py gendata
 	python manage.py syncdata
 else
-data: install
+data: install migrate
 	$(MANAGE) gendata
 	$(MANAGE) syncdata --limit=10
 endif
-
-.PHONY: db
-db:
-	- createdb virtualboombox_dev
 
 .PHONY: migrate
 migrate: install
@@ -81,7 +77,7 @@ coverage: install
 # SERVER TARGETS ###############################################################
 
 .PHONY: run
-run: .envrc install db migrate
+run: .envrc install
 	$(MANAGE) runserver 5000
 
 .PHONY: reload
@@ -89,7 +85,7 @@ reload: .envrc install
 	$(MANAGE) livereload
 
 .PHONY: run-prod
-run-prod: .envrc install db
+run-prod: .envrc install
 	pipenv shell -c "bin/pre_compile; exit $$?"
 	pipenv shell -c "bin/post_compile; exit $$?"
 	pipenv shell -c "heroku local; exit $$?"
