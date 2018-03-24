@@ -1,8 +1,11 @@
 [[source]]
+
 url = "https://pypi.python.org/simple"
 verify_ssl = true
+name = "pypi"
 
 [packages]
+
 djangorestframework = "~=3.5.3"
 dj-database-url = "==0.4.2"
 psycopg2 = "~=2.6"
@@ -15,6 +18,7 @@ django-livereload-server = "*"
 Django = "~=1.10"
 
 [dev-packages]
+
 pylint = "~=1.7.0"
 pycodestyle = "*"
 pytest = "~=3.0.7"
