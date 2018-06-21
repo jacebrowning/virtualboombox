@@ -4,27 +4,38 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[requires]
+
+python_version = "3.6"
+
 [packages]
 
-djangorestframework = "~=3.5.3"
+Django = "~=2.0.6"
+
+djangorestframework = "~=3.8.2"
+
 dj-database-url = "==0.4.2"
 psycopg2-binary = "~=2.6"
-pylast = "~=2.3.0"
+
 google-api-python-client = "~=1.6.1"
+pylast = "~=2.3.0"
 pytz = "*"
-whitenoise = "~=3.3"
+
 gunicorn = "~=19.6"
+whitenoise = "~=3.3"
+
 django-livereload-server = "*"
-Django = "~=1.10"
 
 [dev-packages]
 
-pylint = "~=1.7.0"
 pycodestyle = "*"
+pylint = "~=1.7.0"
+
 pytest = "~=3.3"
-pytest-django = "*"
+pytest-cov = "*"
 pytest-describe = "*"
+pytest-django = "*"
 pytest-expecter = "*"
 pytest-watch = "*"
+
 coverage-space = "*"
-pytest-cov = "*"
