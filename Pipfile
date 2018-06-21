@@ -1,6 +1,6 @@
 [[source]]
 
-url = "https://pypi.python.org/simple"
+url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
@@ -8,8 +8,8 @@ name = "pypi"
 
 djangorestframework = "~=3.5.3"
 dj-database-url = "==0.4.2"
-psycopg2 = "~=2.6"
-pylast = "~=1.8"
+psycopg2-binary = "~=2.6"
+pylast = "~=2.3.0"
 google-api-python-client = "~=1.6.1"
 pytz = "*"
 whitenoise = "~=3.3"
@@ -21,10 +21,10 @@ Django = "~=1.10"
 
 pylint = "~=1.7.0"
 pycodestyle = "*"
-pytest = "~=3.0.7"
+pytest = "~=3.3"
 pytest-django = "*"
-pytest-describe = "==0.11.0"
-pytest-expecter = "==0.2.2.post5"
+pytest-describe = "*"
+pytest-expecter = "*"
 pytest-watch = "*"
 coverage-space = "*"
 pytest-cov = "*"
