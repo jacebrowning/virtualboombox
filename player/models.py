@@ -87,7 +87,10 @@ class Account(Location):
             log.error(exc)
             return None
         else:
-            return network.get_authenticated_user().get_name()
+            user = network.get_authenticated_user()
+            username = user.get_name()
+            log.info("Current username: %s", username)
+            return username
 
 
 class Song(Location):
