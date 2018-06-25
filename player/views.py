@@ -1,6 +1,5 @@
 import logging
 
-from django.views import defaults
 from django.shortcuts import reverse, render, redirect
 from django.conf import settings
 from django.contrib import messages
