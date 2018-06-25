@@ -1,0 +1,87 @@
+{% load static %}
+<html>
+    <head>
+        <title>Virtual Boombox | Login</title>
+
+        <!-- Metadata -->
+        <meta name="description" content="Discover music playing nearby using Last.fm.">
+        <meta name="google" content="nositelinkssearchbox">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicons/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" href="{% static 'favicons/favicon-32x32.png' %}" sizes="32x32">
+        <link rel="icon" type="image/png" href="{% static 'favicons/favicon-16x16.png' %}" sizes="16x16">
+        <link rel="manifest" href="{% static 'favicons/manifest.json' %}">
+        <link rel="mask-icon" href="{% static 'favicons/safari-pinned-tab.svg' %}" color="#db1f12">
+        <meta name="theme-color" content="#db1f12">
+
+        <!-- Social Media -->
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@virtualboombox">
+        <meta name="twitter:title" content="Virtual Boombox">
+        <meta name="twitter:description" content="Discover music playing nearby using Last.fm.">
+        <meta name="twitter:image" content="https://{{ request.get_host }}{% static 'images/logo.png' %}">
+        <meta property="fb:app_id" content="1055331451243218">
+        <meta property="og:title" content="Virtual Boombox">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://{{ request.get_host }}">
+        <meta property="og:image" content="https://{{ request.get_host }}{% static 'images/logo.png' %}">
+        <meta property="og:image:width" content="200">
+        <meta property="og:image:height" content="200">
+        <meta property="og:description" content="Discover music playing nearby using Last.fm">
+
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.7.2/css/bootstrap-slider.min.css">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    </head>
+    <body>
+        <div class="content">
+
+
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-offset-2 col-sm-8 col-md-offset-3 col-sm-6">
+
+                    <form action="/login/" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                          <input type="text" class="form-control" name="username"placeholder="Your Last.fm username">
+                          <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default">
+                                <span class="glyphicon glyphicon-log-in"></span>
+                                &nbsp;
+                                Login
+                            </button>
+                          </span>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+        </div> <!-- container -->
+        </div> <!-- content -->
+
+        <div class="footer">
+            <p class="text-muted pull-left">
+                © 2017 <a href="https://jacebrowning.info" target="_blank">Jace Browning</a>
+            </p>
+            <p class="text-muted pull-right">
+                <a href="https://www.facebook.com/virtualboombox" target="_blank">Send Feedback</a>
+            </p>
+        </div>
+
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -47,6 +47,7 @@ class Account(Location):
     @classmethod
     def from_token(cls, token):
         """Retrieve an existing account or create a new one."""
+
         if not token:
             log.error("No token provided")
             return None
@@ -87,7 +88,10 @@ class Account(Location):
             log.error(exc)
             return None
         else:
-            return network.get_authenticated_user().get_name()
+            user = network.get_authenticated_user()
+            username = user.get_name()
+            log.info("Current username: %s", username)
+            return username
 
 
 class Song(Location):

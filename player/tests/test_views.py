@@ -11,13 +11,13 @@ def describe_login():
     def with_missing_token(client):
         response = client.get("/login/")
 
-        expect(response.status_code) == 403
+        expect(response.status_code) == 200
 
     @pytest.mark.xfail(not settings.LASTFM_API_KEY, reason="Last.fm key unset")
     def with_invalid_token(client):
         response = client.get("/login/", {'token': "invalid"})
 
-        expect(response.status_code) == 403
+        expect(response.status_code) == 200
 
 
 def describe_logout():
