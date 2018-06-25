@@ -3,6 +3,7 @@ import logging
 from django.views import defaults
 from django.shortcuts import reverse, render, redirect
 from django.conf import settings
+from django.contrib import messages
 
 from .models import Account
 
@@ -22,16 +23,24 @@ def index(request):
 
 
 def login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        request.session['username'] = username
+        return redirect('index')
+
     token = request.GET.get('token')
+    if token:
+        account = Account.from_token(token)
+        if account:
+            request.session['username'] = account.username
+            return redirect('index')
+        else:
+            messages.warning(
+                request,
+                "Sorry, we were unable to fetch your username from Last.fm",
+            )
 
-    account = Account.from_token(token)
-    if account:
-        request.session['username'] = account.username
-    else:
-        exception = Exception("Last.fm token is invalid.")
-        return defaults.permission_denied(request, exception)
-
-    return redirect('index')
+    return render(request, 'login.html')
 
 
 def logout(request):
