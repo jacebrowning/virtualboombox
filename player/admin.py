@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.utils.html import format_html
 
 from .models import Account, Song
 
@@ -10,15 +11,13 @@ admin.site.site_header = "Virtual Boombox"
 class ClickableMixin:
 
     def clickable_lastfm_url(self, obj):  # pylint: disable=no-self-use
-        return f'<a href="{obj.lastfm_url}">{obj.lastfm_url}</a>'
+        return format_html('<a href="{url}">{url}</a>', url=obj.lastfm_url)
 
-    clickable_lastfm_url.allow_tags = True
     clickable_lastfm_url.short_description = 'Last.fm'
 
     def clickable_maps_url(self, obj):  # pylint: disable=no-self-use
-        return f'<a href="{obj.maps_url}">{obj.maps_url}</a>'
+        return format_html('<a href="{url}">{url}</a>', url=obj.maps_url)
 
-    clickable_maps_url.allow_tags = True
     clickable_maps_url.short_description = 'Location'
 
 
