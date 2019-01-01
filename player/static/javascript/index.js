@@ -207,17 +207,17 @@ function pauseVideo(init) {
 
 function showPlayButton() {
     document.location.hash = "paused";
-    $("#player-toggle").html('<span class="glyphicon glyphicon-play"></span>');
+    $("#player-toggle").html('&nbsp;<span class="glyphicon glyphicon-play"></span>&nbsp;');
 }
 
 function showResumeButton() {
     document.location.hash = "paused";
-    $("#player-toggle").html('<span class="glyphicon glyphicon-play"></span>');
+    $("#player-toggle").html('&nbsp;<span class="glyphicon glyphicon-play"></span>&nbsp;');
 }
 
 function showPauseButton() {
     document.location.hash = "playing";
-    $("#player-toggle").html('<span class="glyphicon glyphicon-pause"></span>');
+    $("#player-toggle").html('&nbsp;<span class="glyphicon glyphicon-pause"></span>&nbsp;');
 }
 
 $("#player-toggle").on("click", function() {
