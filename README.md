@@ -21,7 +21,6 @@ Run the app:
 
 ```
 $ make run
-$ make reload  # live reload server
 ```
 
 Run all checks:

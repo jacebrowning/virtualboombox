@@ -4,10 +4,24 @@ import os
 
 from .base import *
 
+###############################################################################
+# Core
+
 
 DEBUG = True
 ALLOWED_HOSTS = []
 SECRET_KEY = 'dev'
+
+INSTALLED_APPS += [
+    'livereload',
+]
+
+MIDDLEWARE += [
+    'livereload.middleware.LiveReloadScript',
+]
+
+###############################################################################
+# Databases
 
 DATABASES = {
     'default': {
@@ -15,5 +29,8 @@ DATABASES = {
         'NAME': 'virtualboombox_dev',
     }
 }
+
+###############################################################################
+# Google Analytics
 
 GOOGLE_ANALYTICS_ID = 'localhost'
