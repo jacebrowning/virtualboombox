@@ -14,12 +14,6 @@ MANAGE := pipenv run python manage.py
 
 # SYSTEM DEPENDENCIES ##########################################################
 
-.PHONY: setup
-setup:
-	pip install pipenv==3.5.0
-	pipenv lock
-	touch Pipfile
-
 .PHONY: doctor
 doctor:
 	bin/verchew
@@ -64,7 +58,7 @@ check: install
 
 .PHONY: test
 test: install
-	pipenv run py.test
+	pipenv run pytest
 
 .PHONY: watch
 watch: install
@@ -72,7 +66,7 @@ watch: install
 
 .PHONY: coverage
 coverage: install
-	pipenv run coverage.space jacebrowning/virtualboombox overall
+	pipenv run coveragespace jacebrowning/virtualboombox overall
 
 # SERVER TARGETS ###############################################################
 
