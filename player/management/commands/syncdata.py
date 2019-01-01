@@ -1,12 +1,10 @@
 import time
-import logging
 
 from django.core.management.base import BaseCommand
 
+import log
+
 from player.models import Account, Song
-
-
-log = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):

@@ -10,32 +10,44 @@ python_version = "3.6"
 
 [packages]
 
+# Django
 Django = "~=2.0.6"
 
+# Django REST Framework
 djangorestframework = "~=3.8.2"
 
+# Database
 dj-database-url = "==0.4.2"
 psycopg2-binary = "~=2.6"
 
+# Utilities
 google-api-python-client = "~=1.6.1"
+minilog = "*"
 pylast = "~=3.0"
 pytz = "*"
 
+# Server
 gunicorn = "~=19.6"
 whitenoise = "~=3.3"
 
-django-livereload-server = "*"
 
 [dev-packages]
 
+# Linters
 pycodestyle = "*"
 pylint = "~=1.7.0"
 
-pytest = "~=3.3"
+# Testing
+pytest = "~=3.8.2"
 pytest-cov = "*"
 pytest-describe = "*"
 pytest-django = "*"
 pytest-expecter = "*"
 pytest-watch = "*"
 
+# Reports
 coveragespace = "*"
+
+# Server
+honcho = "*"
+django-livereload-server = "*"

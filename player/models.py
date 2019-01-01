@@ -2,7 +2,6 @@ import re
 import time
 import uuid
 from datetime import datetime, timedelta
-import logging
 
 from django.db import models
 from django.conf import settings
@@ -11,11 +10,10 @@ from django.utils import timezone
 import pylast
 import pytz
 from apiclient.discovery import build  # pylint: disable=import-error
+import log
 
 
 DEFAULT_LOCATION = (-48.876667, -123.393333)  # Oceanic Pole of Inaccessibility
-
-log = logging.getLogger(__name__)
 
 
 class Location(models.Model):

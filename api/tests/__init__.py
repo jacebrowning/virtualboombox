@@ -3,7 +3,7 @@ import logging
 
 import expecter
 
-log = logging.getLogger(__name__)
+import log
 
 
 def contains_json(response, **kwargs):

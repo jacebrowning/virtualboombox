@@ -10,7 +10,8 @@ export PIPENV_VENV_IN_PROJECT=true
 ENV := .venv
 TMP := tmp
 
-MANAGE := pipenv run python manage.py
+RUN := pipenv run
+MANAGE := $(RUN) python manage.py
 
 # SYSTEM DEPENDENCIES ##########################################################
 
@@ -53,30 +54,26 @@ migrate: install
 
 .PHONY: check
 check: install
-	pipenv run pylint api player social virtualboombox --rcfile=.pylint.ini
-	pipenv run pycodestyle --config=.pycodestyle.ini
+	$(RUN) pylint api player social virtualboombox --rcfile=.pylint.ini
+	$(RUN) pycodestyle --config=.pycodestyle.ini
 
 .PHONY: test
 test: install
-	pipenv run pytest
+	$(RUN) pytest
 
 .PHONY: watch
 watch: install
-	pipenv run ptw
+	$(RUN) ptw
 
 .PHONY: coverage
 coverage: install
-	pipenv run coveragespace jacebrowning/virtualboombox overall
+	$(RUN) coveragespace jacebrowning/virtualboombox overall
 
 # SERVER TARGETS ###############################################################
 
 .PHONY: run
 run: .envrc install
-	$(MANAGE) runserver 5000
-
-.PHONY: reload
-reload: .envrc install
-	$(MANAGE) livereload
+	$(RUN) honcho start --procfile=Procfile.dev --port=$${PORT:-8000}
 
 .PHONY: run-prod
 run-prod: .envrc install

@@ -1,13 +1,8 @@
-import logging
-
 from django.shortcuts import reverse, render, redirect
 from django.conf import settings
 from django.contrib import messages
 
 from .models import Account
-
-
-log = logging.getLogger(__name__)
 
 
 def index(request):

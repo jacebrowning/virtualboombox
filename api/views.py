@@ -1,10 +1,10 @@
-import logging
-
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+
+import log
 
 from player.models import Account, Song
 from social.models import Reaction
@@ -13,9 +13,6 @@ from .permissions import AllowAnonCreate
 from .serializers import (AccountSerializer, SongSerializer, QueueSerializer,
                           ReactionSerializer)
 from .models import QueuedSong
-
-
-log = logging.getLogger(__name__)
 
 
 def get_username(request):
