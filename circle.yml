@@ -14,7 +14,7 @@ stages:
     steps:
       - type: checkout
       - type: shell
-        command: make setup
+        command: pip install pipenv
       - type: shell
         command: make doctor
       - type: shell
