@@ -18,7 +18,7 @@ dj-database-url = "==0.4.2"
 psycopg2-binary = "~=2.6"
 
 google-api-python-client = "~=1.6.1"
-pylast = "~=2.3.0"
+pylast = "~=3.0"
 pytz = "*"
 
 gunicorn = "~=19.6"
@@ -38,4 +38,4 @@ pytest-django = "*"
 pytest-expecter = "*"
 pytest-watch = "*"
 
-coverage-space = "*"
+coveragespace = "*"
