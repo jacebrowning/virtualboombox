@@ -193,7 +193,8 @@ class Song(Location):
 
         time.sleep(settings.YOUTUBE_API_DELAY)  # rate limit API calls
 
-        youtube = build('youtube', 'v3', developerKey=settings.YOUTUBE_API_KEY)
+        youtube = build('youtube', 'v3', developerKey=settings.YOUTUBE_API_KEY,
+                        cache_discovery=False)
 
         query = f"{self.artist} - {self.title}"
         response = youtube.search().list(

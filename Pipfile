@@ -21,7 +21,7 @@ dj-database-url = "==0.4.2"
 psycopg2-binary = "~=2.6"
 
 # Utilities
-google-api-python-client = "~=1.6.1"
+google-api-python-client = "~=1.7.7"
 minilog = "*"
 pylast = "~=3.0"
 pytz = "*"
@@ -29,7 +29,6 @@ pytz = "*"
 # Server
 gunicorn = "~=19.6"
 whitenoise = "~=3.3"
-
 
 [dev-packages]
 
