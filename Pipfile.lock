@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f9625a6d1934698e613144c027342413e195aca524e851ff235cc22a09136b37"
+            "sha256": "46891388cad011bf1dc9fd1aa30558cfe1f54c8c21ad07027b5377695eff7cfe"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -33,11 +33,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:25df265e1fdb74f7e7305a1de620a84681bcc9c05e84a3ed97e4a1a63024f18d",
-                "sha256:d6d94554abc82ca37e447c3d28958f5ac39bd7d4adaa285543ae97fb1129fd69"
+                "sha256:0292a7ad7d8ffc9cfc6a77f043d2e81f5bbc360c0c4a1686e130ef3432437d23",
+                "sha256:e89f613e3c1f7ff245ffee3560472f9fa9c07060b11f65e1de3cb763f8dcd4b9"
             ],
             "index": "pypi",
-            "version": "==2.0.9"
+            "version": "==2.0.10"
         },
         "djangorestframework": {
             "hashes": [
@@ -142,12 +142,8 @@
             "version": "==0.2.3"
         },
         "pylast": {
-            "hashes": [
-                "sha256:24051c52011ff18bdeaee9df084ecc90da6c627da86f3cdcfec4af2928e9bc56",
-                "sha256:6d75f51e72f0665d90cf32b2bd644cc8c81dac0f15e5a4d169c6b984b588a4dc"
-            ],
-            "index": "pypi",
-            "version": "==3.0.0"
+            "git": "https://github.com/jacebrowning/pylast",
+            "ref": "e77e0f9e35c04443d70045ff3bf3d42533b04525"
         },
         "pytz": {
             "hashes": [
@@ -299,11 +295,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:25df265e1fdb74f7e7305a1de620a84681bcc9c05e84a3ed97e4a1a63024f18d",
-                "sha256:d6d94554abc82ca37e447c3d28958f5ac39bd7d4adaa285543ae97fb1129fd69"
+                "sha256:0292a7ad7d8ffc9cfc6a77f043d2e81f5bbc360c0c4a1686e130ef3432437d23",
+                "sha256:e89f613e3c1f7ff245ffee3560472f9fa9c07060b11f65e1de3cb763f8dcd4b9"
             ],
             "index": "pypi",
-            "version": "==2.0.9"
+            "version": "==2.0.10"
         },
         "django-livereload-server": {
             "hashes": [
@@ -512,10 +508,10 @@
         },
         "soupsieve": {
             "hashes": [
-                "sha256:29bf6f6d4a641eb0a172c1a95bbc4466009cceaceb747a6e425efd7d0b5fbea2",
-                "sha256:7a89864492e82b92eac0097f966f30f5f96597ba1af3c3b5385b41bc92cebe55"
+                "sha256:638535780f7b966411123d56eb3b89cd1d2e42d707270c6d7d053c7720a238f3",
+                "sha256:cb61b59c55f9f6e91928a03fe4b500ac1fcef6f8e68082a630db098ab33e2126"
             ],
-            "version": "==1.6"
+            "version": "==1.6.2"
         },
         "tornado": {
             "hashes": [
