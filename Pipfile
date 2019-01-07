@@ -23,7 +23,7 @@ psycopg2-binary = "~=2.6"
 # Utilities
 google-api-python-client = "~=1.7.7"
 minilog = "*"
-pylast = { git = "https://github.com/jacebrowning/pylast", ref = "fix-blank-username" }
+pylast = { git = "https://github.com/pylast/pylast", ref = "1a31e4e0c38e504c426aabcf013daa95fc95d949" }
 pytz = "*"
 
 # Server

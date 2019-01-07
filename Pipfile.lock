@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "46891388cad011bf1dc9fd1aa30558cfe1f54c8c21ad07027b5377695eff7cfe"
+            "sha256": "3c389c51489a0e6e36a275a8d4f744fa53de0a9adae654d866cea8719cfe45ee"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -142,8 +142,8 @@
             "version": "==0.2.3"
         },
         "pylast": {
-            "git": "https://github.com/jacebrowning/pylast",
-            "ref": "e77e0f9e35c04443d70045ff3bf3d42533b04525"
+            "git": "https://github.com/pylast/pylast",
+            "ref": "1a31e4e0c38e504c426aabcf013daa95fc95d949"
         },
         "pytz": {
             "hashes": [
