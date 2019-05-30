@@ -11,7 +11,7 @@ python_version = "3.6"
 [packages]
 
 # Django
-Django = "~=2.0.6"
+Django = "~=2.2.1"
 
 # Django REST Framework
 djangorestframework = "~=3.8.2"
@@ -27,8 +27,8 @@ pylast = "~=3.1.0"
 pytz = "*"
 
 # Server
-gunicorn = "~=19.6"
-whitenoise = "~=3.3"
+gunicorn = "~=19.9.0"
+whitenoise = "~=4.1.2"
 
 [dev-packages]
 
