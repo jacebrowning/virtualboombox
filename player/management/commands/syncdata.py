@@ -5,6 +5,7 @@ from django.core.management.base import BaseCommand
 import log
 
 from player.models import Account, Song
+import pylast
 
 
 class Command(BaseCommand):
@@ -31,9 +32,13 @@ class Command(BaseCommand):
         start = time.time()
 
         for account in Account.objects.order_by('-date'):
-            song = Song.from_account(account)
-            if song and song.update():
-                song.save()
+            try:
+                song = Song.from_account(account)
+            except pylast.WSError as e:
+                log.error(str(e))
+            else:
+                if song and song.update():
+                    song.save()
 
             if time.time() - start > 60 * 4:
                 log.warning("Breaking early to cycle users")
