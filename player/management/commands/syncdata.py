@@ -1,3 +1,5 @@
+# pylint: disable=unused-argument
+
 import time
 
 from django.core.management.base import BaseCommand
@@ -5,7 +7,6 @@ from django.core.management.base import BaseCommand
 import log
 
 from player.models import Account, Song
-import pylast
 
 
 class Command(BaseCommand):
@@ -15,14 +16,15 @@ class Command(BaseCommand):
         parser.add_argument('--limit', type=int, default=None)
         parser.add_argument('--loop', action='store_true')
 
-    def handle(self, *args, **kwargs):  # pylint: disable=unused-argument
+    def handle(self, *args, **kwargs):
         limit = kwargs['limit']
         once = not kwargs['loop']
+
+        self.prune_songs(limit)
 
         while True:
             self.add_songs()
             self.update_songs()
-            self.prune_songs(limit)
 
             if once:
                 break
@@ -32,13 +34,10 @@ class Command(BaseCommand):
         start = time.time()
 
         for account in Account.objects.order_by('-date'):
-            try:
-                song = Song.from_account(account)
-            except pylast.WSError as e:
-                log.error(str(e))
-            else:
-                if song and song.update():
-                    song.save()
+
+            song = Song.from_account(account)
+            if song and song.update():
+                song.save()
 
             if time.time() - start > 60 * 4:
                 log.warning("Breaking early to cycle users")
