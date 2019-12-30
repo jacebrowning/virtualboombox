@@ -1,4 +1,4 @@
-# Virtual Voombox
+# Virtual Boombox
 
 A web app to discover music playing nearby powered by [Last.fm](https://www.last.fm/) APIs.
 
