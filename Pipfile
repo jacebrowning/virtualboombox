@@ -14,7 +14,7 @@ python_version = "3.6"
 Django = "~=2.2.1"
 
 # Django REST Framework
-djangorestframework = "~=3.8.2"
+djangorestframework = "~=3.9.1"
 
 # Database
 dj-database-url = "==0.4.2"
