@@ -4,7 +4,7 @@ executorType: docker
 
 containerInfo:
   - image: python:3.6.9
-  - image: postgres:9.6.1
+  - image: postgres:11
 
 stages:
   build:
