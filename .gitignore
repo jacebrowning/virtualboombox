@@ -9,7 +9,7 @@ __pycache__
 /.env*
 
 /.cache/
-/.coverage*
+/.coverage
 /htmlcov/
 
 /static/
