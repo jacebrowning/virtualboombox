@@ -68,12 +68,15 @@ blockquote {
 }
 
 .footer {
-    bottom: 0;
     width: 100%;
     height: 40px;
-    padding-top: 100px;
     padding-left: 20px;
     padding-right: 20px;
+}
+@media (max-width: 768px) {
+    .footer {
+        padding-top: 30px;
+    }
 }
 
 /* YouTube */
