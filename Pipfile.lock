@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "98176c6c79cffcd65ef2001cf5e207eacdd46e46b0b5329b1fd8cb8a50ebdf2a"
+            "sha256": "863a55692305c146696b0f8638dc6706b80a27a206a3e1a193303fb68da8218b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -33,11 +33,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:7460cfe3781d36d1625230267dad255deb33e9229e41f21e32b33b9d536d20cd",
-                "sha256:7d8b61b6e7031a3c1a4aef29e2701849af0837f4f2062bc203077a0b46d51c2c"
+                "sha256:db2214db1c99017cbd971e58824e6f424375154fe358afc30e976f5b99fc6060",
+                "sha256:e831105edb153af1324de44d06091ca75520a227456387dda4a47d2f1cc2731a"
             ],
             "index": "pypi",
-            "version": "==2.2.21"
+            "version": "==2.2.22"
         },
         "djangorestframework": {
             "hashes": [
@@ -57,10 +57,10 @@
         },
         "google-auth": {
             "hashes": [
-                "sha256:044d81b1e58012f8ebc71cc134e191c1fa312f543f1fbc99973afe28c25e3228",
-                "sha256:b3ca7a8ff9ab3bdefee3ad5aefb11fc6485423767eee016f5942d8e606ca23fb"
+                "sha256:9b235dbc876e49454cbedc52ae0abd540ef705ebccdf4fbe93553bb13f26b1a4",
+                "sha256:eb017521276a75492282c6ca4b718f26de112ed3bcbeaeeb02c1b82de425f909"
             ],
-            "version": "==1.30.1"
+            "version": "==1.30.2"
         },
         "google-auth-httplib2": {
             "hashes": [
@@ -333,11 +333,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:7460cfe3781d36d1625230267dad255deb33e9229e41f21e32b33b9d536d20cd",
-                "sha256:7d8b61b6e7031a3c1a4aef29e2701849af0837f4f2062bc203077a0b46d51c2c"
+                "sha256:db2214db1c99017cbd971e58824e6f424375154fe358afc30e976f5b99fc6060",
+                "sha256:e831105edb153af1324de44d06091ca75520a227456387dda4a47d2f1cc2731a"
             ],
             "index": "pypi",
-            "version": "==2.2.21"
+            "version": "==2.2.22"
         },
         "django-livereload-server": {
             "hashes": [

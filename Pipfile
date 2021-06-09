@@ -11,7 +11,7 @@ python_version = "3.6"
 [packages]
 
 # Django
-Django = "~=2.2.21"
+Django = "~=2.2.22"
 
 # Django REST Framework
 djangorestframework = "~=3.11.0"
