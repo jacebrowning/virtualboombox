@@ -8,4 +8,14 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt',
                                                content_type='text/plain')),
+    url(
+        r'^service-worker\.js$',
+        (
+            TemplateView.as_view(
+                template_name='service-worker.js',
+                content_type='application/javascript',
+            )
+        ),
+        name='service-worker.js',
+    ),
 ]
